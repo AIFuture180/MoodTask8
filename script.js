@@ -20,7 +20,16 @@ document.addEventListener('DOMContentLoaded', () => {
       const feeling = button.getAttribute('data-feeling');
       const activities = feelings[feeling];
       recommendationsContainer.innerHTML = activities
-        .map(activity => `<button class="activity-btn">${activity}</button>`)
+        .map(activity => {
+          if (activity === "Breathing Timer") {
+            return `
+              <div class="breathing-timer">
+                <p>Breathe In...</p>
+                <div class="circle"></div>
+              </div>`;
+          }
+          return `<button class="activity-btn">${activity}</button>`;
+        })
         .join('');
     });
   });
