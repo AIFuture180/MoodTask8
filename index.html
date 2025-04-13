@@ -7,9 +7,19 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
-    <h1>Welcome to Feelings & Mini-Games</h1>
-    <p>Choose a feeling to find the perfect activity.</p>
+  <header id="main-header">
+    <div class="logo">
+      <h1>Feelings & Mini-Games</h1>
+    </div>
+    <nav class="navbar">
+      <a href="#feelings-grid">Feelings</a>
+      <a href="#activity-recommendations">Activities</a>
+      <a href="#feedback">Feedback</a>
+    </nav>
+    <div class="search-bar">
+      <input type="text" placeholder="Search activities...">
+      <button>Search</button>
+    </div>
   </header>
 
   <main>
@@ -40,6 +50,19 @@
       </form>
     </section>
   </main>
+
+  <footer id="main-footer">
+    <div class="footer-content">
+      <p>Contact us: <a href="mailto:support@feelingsgames.com">support@feelingsgames.com</a></p>
+      <p>Follow us on:</p>
+      <div class="social-icons">
+        <a href="#">Facebook</a>
+        <a href="#">Twitter</a>
+        <a href="#">Instagram</a>
+      </div>
+      <p>&copy; 2025 Feelings & Mini-Games. All rights reserved.</p>
+    </div>
+  </footer>
 
   <script src="script.js"></script>
 </body>
