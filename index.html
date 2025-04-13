@@ -1,41 +1,150 @@
-<section id="activity-recommendations">
-  <h2>Recommended Activities</h2>
-  <div id="recommendations-container">
-    <a href="#" class="recommendation-btn tired">
-      <span class="icon">💤</span>
-      Breathing Exercise
-    </a>
-    <a href="#" class="recommendation-btn stressed">
-      <span class="icon">💌</span>
-      Gratitude Note
-    </a>
-    <a href="#" class="recommendation-btn bored">
-      <span class="icon">🎵</span>
-      Soundscape
-    </a>
-    <a href="#" class="recommendation-btn anxious">
-      <span class="icon">👊</span>
-      Punching Bag
-    </a>
-    <a href="#" class="recommendation-btn excited">
-      <span class="icon">🧘</span>
-      Stretch
-    </a>
-    <a href="#" class="recommendation-btn happy">
-      <span class="icon">✏️</span>
-      Doodle
-    </a>
-    <a href="#" class="recommendation-btn frustrated">
-      <span class="icon">💃</span>
-      Dance
-    </a>
-    <a href="#" class="recommendation-btn lonely">
-      <span class="icon">✂️</span>
-      Worry Shredder
-    </a>
-    <a href="#" class="recommendation-btn overwhelmed">
-      <span class="icon">🎨</span>
-      Color Focus
-    </a>
-  </div>
-</section>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoodTask</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f9;
+            color: #333;
+        }
+
+        header {
+            background: #4a90e2;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        #recommendations-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            justify-items: center;
+            margin: 20px;
+            padding: 20px;
+        }
+
+        .recommendation-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            width: 150px;
+            height: 150px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #4a90e2, #50e3c2);
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .recommendation-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .recommendation-btn .icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        /* Individual Button Colors */
+        .recommendation-btn.tired { background: linear-gradient(135deg, #90caf9, #64b5f6); }
+        .recommendation-btn.stressed { background: linear-gradient(135deg, #f48fb1, #f06292); }
+        .recommendation-btn.bored { background: linear-gradient(135deg, #ffcc80, #ffb74d); }
+        .recommendation-btn.anxious { background: linear-gradient(135deg, #ce93d8, #ba68c8); }
+        .recommendation-btn.excited { background: linear-gradient(135deg, #aed581, #81c784); }
+        .recommendation-btn.happy { background: linear-gradient(135deg, #ffb74d, #ff8a65); }
+        .recommendation-btn.frustrated { background: linear-gradient(135deg, #ef9a9a, #e57373); }
+        .recommendation-btn.lonely { background: linear-gradient(135deg, #9fa8da, #7986cb); }
+        .recommendation-btn.overwhelmed { background: linear-gradient(135deg, #e6ee9c, #dce775); }
+        .recommendation-btn.angry { background: linear-gradient(135deg, #ff8a65, #ff7043); }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to MoodTask</h1>
+        <p>Find the perfect activity for how you're feeling today!</p>
+    </header>
+
+    <main>
+        <section id="activity-recommendations">
+            <h2 style="text-align: center;">Recommended Activities</h2>
+            <div id="recommendations-container">
+                <a href="#" class="recommendation-btn tired">
+                    <span class="icon">💤</span>
+                    Breathing Exercise
+                </a>
+                <a href="#" class="recommendation-btn stressed">
+                    <span class="icon">💌</span>
+                    Gratitude Note
+                </a>
+                <a href="#" class="recommendation-btn bored">
+                    <span class="icon">🎵</span>
+                    Soundscape
+                </a>
+                <a href="#" class="recommendation-btn anxious">
+                    <span class="icon">👊</span>
+                    Punching Bag
+                </a>
+                <a href="#" class="recommendation-btn excited">
+                    <span class="icon">🧘</span>
+                    Stretch
+                </a>
+                <a href="#" class="recommendation-btn happy">
+                    <span class="icon">✏️</span>
+                    Doodle
+                </a>
+                <a href="#" class="recommendation-btn frustrated">
+                    <span class="icon">💃</span>
+                    Dance
+                </a>
+                <a href="#" class="recommendation-btn lonely">
+                    <span class="icon">✂️</span>
+                    Worry Shredder
+                </a>
+                <a href="#" class="recommendation-btn overwhelmed">
+                    <span class="icon">🎨</span>
+                    Color Focus
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 MoodTask. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
