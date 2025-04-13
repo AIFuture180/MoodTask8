@@ -51,9 +51,12 @@
             <button class="tool-button punching" onclick="openPopup('punching')"><i class="fas fa-fist-raised tool-icon"></i>Punching Bag</button>
             <button class="tool-button stretch" onclick="openPopup('stretch')"><i class="fas fa-child tool-icon"></i>Stretch</button>
             <button class="tool-button doodle" onclick="openPopup('doodle')"><i class="fas fa-pencil-alt tool-icon"></i>Doodle</button>
-            <button class="tool-button dance" onclick="openPopup('dance')"><i class="fas fa-music tool-icon"></i>Dance</button>
+            <button class="tool-button stressball" onclick="openPopup('stressball')"><i class="fas fa-hand-rock tool-icon"></i>Stress Ball</button>
             <button class="tool-button worry" onclick="openPopup('worry')"><i class="fas fa-cut tool-icon"></i>Worry Shredder</button>
             <button class="tool-button color" onclick="openPopup('color')"><i class="fas fa-palette tool-icon"></i>Color Focus</button>
+            <button class="tool-button sudoku" onclick="openPopup('sudoku')"><i class="fas fa-puzzle-piece tool-icon"></i>Sudoku</button>
+            <button class="tool-button moodflinger" onclick="openPopup('moodflinger')"><i class="fas fa-rocket tool-icon"></i>Mood Flinger</button>
+            <button class="tool-button asmr" onclick="openPopup('asmr')"><i class="fas fa-headphones tool-icon"></i>ASMR</button>
         </div>
     </div>
 
@@ -94,7 +97,7 @@
         </div>
     </footer>
 
-    <!-- Popups (unchanged) -->
+    <!-- Popups -->
     <div id="breathing-popup" class="popup">
         <div class="popup-content">
             <h4>Breathing Exercise</h4>
@@ -179,16 +182,16 @@
             <button class="close-button" onclick="closePopup('doodle')"><i class="fas fa-times"></i></button>
         </div>
     </div>
-    <div id="dance-popup" class="popup">
+    <div id="stressball-popup" class="popup">
         <div class="popup-content">
-            <h4>Dance</h4>
-            <div id="dance-animation"><i class="fas fa-child fa-4x bounce"></i></div>
-            <p id="dance-prompt">Dance prompt will appear here...</p>
+            <h4>Stress Ball</h4>
+            <p>Squeeze away stress! Click the ball to relax.</p>
+            <div id="stress-ball">0</div>
             <div class="progress-container">
-                <div id="dance-progress" class="progress-bar"></div>
+                <div id="stressball-progress" class="progress-bar"></div>
             </div>
-            <p id="dance-timer">Time remaining: 30s</p>
-            <button class="close-button" onclick="closePopup('dance')"><i class="fas fa-times"></i></button>
+            <p id="stressball-timer">Time remaining: 30s</p>
+            <button class="close-button" onclick="closePopup('stressball')"><i class="fas fa-times"></i></button>
         </div>
     </div>
     <div id="worry-popup" class="popup">
@@ -213,6 +216,51 @@
             <button class="close-button" onclick="closePopup('color')"><i class="fas fa-times"></i></button>
         </div>
     </div>
+    <div id="sudoku-popup" class="popup">
+        <div class="popup-content">
+            <h4>Sudoku</h4>
+            <p>Solve the puzzle by filling in the numbers!</p>
+            <div id="sudoku-grid"></div>
+            <div class="progress-container">
+                <div id="sudoku-progress" class="progress-bar"></div>
+            </div>
+            <p id="sudoku-timer">Time remaining: 90s</p>
+            <button class="close-button" onclick="closePopup('sudoku')"><i class="fas fa-times"></i></button>
+        </div>
+    </div>
+    <div id="moodflinger-popup" class="popup">
+        <div class="popup-content">
+            <h4>Mood Flinger</h4>
+            <p>Drag and release to fling your mood at the target!</p>
+            <canvas id="moodflinger-canvas" width="400" height="300"></canvas>
+            <p id="moodflinger-score">Score: 0</p>
+            <div class="progress-container">
+                <div id="moodflinger-progress" class="progress-bar"></div>
+            </div>
+            <p id="moodflinger-timer">Time remaining: 60s</p>
+            <button class="close-button" onclick="closePopup('moodflinger')"><i class="fas fa-times"></i></button>
+        </div>
+    </div>
+    <div id="asmr-popup" class="popup">
+        <div class="popup-content">
+            <h4>ASMR</h4>
+            <p>Relax with soothing ASMR sounds</p>
+            <select id="asmr-select" class="sound-select">
+                <option value="tapping">Tapping</option>
+                <option value="whispering">Whispering</option>
+                <option value="brushing">Brushing</option>
+            </select>
+            <div class="audio-controls">
+                <button id="asmr-play-btn" class="audio-btn"><i class="fas fa-play"></i></button>
+                <input type="range" id="asmr-volume-slider" min="0" max="1" step="0.1" value="0.7">
+            </div>
+            <div class="progress-container">
+                <div id="asmr-progress" class="progress-bar"></div>
+            </div>
+            <p id="asmr-timer">Time remaining: 90s</p>
+            <button class="close-button" onclick="closePopup('asmr')"><i class="fas fa-times"></i></button>
+        </div>
+    </div>
 
     <!-- Audio elements -->
     <audio id="click-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-simple-countdown-922.mp3"></audio>
@@ -222,6 +270,10 @@
     <audio id="nature-sound" src="https://raw.githubusercontent.com/AIFuture180/mood-task-matcher/main/Spring%20Day%20Forest.mp3" loop></audio>
     <audio id="rain-sound" src="https://raw.githubusercontent.com/AIFuture180/mood-task-matcher/main/Light%20Rain.mp3" loop></audio>
     <audio id="waves-sound" src="https://raw.githubusercontent.com/AIFuture180/mood-task-matcher/main/Waves%20Crashing%20on%20Rock%20Beach.mp3" loop></audio>
+    <!-- Placeholder ASMR sounds (replace with actual URLs) -->
+    <audio id="tapping-sound" src="https://example.com/tapping.mp3" loop></audio>
+    <audio id="whispering-sound" src="https://example.com/whispering.mp3" loop></audio>
+    <audio id="brushing-sound" src="https://example.com/brushing.mp3" loop></audio>
 
     <script src="script.js"></script>
     <script>
@@ -243,7 +295,6 @@
             ],
             excited: [
                 { task: "Share your excitement with a friend or write it down!", followUp: "Did sharing amplify your excitement?" },
-                { task: "Dance to a favorite song for a minute to celebrate!", followUp: "Did that feel good?" },
                 { task: "Set a small goal to channel your energy into something productive.", followUp: "Did that help you focus your excitement?" }
             ],
             sad: [
@@ -258,7 +309,6 @@
             ],
             happy: [
                 { task: "Share your happiness with someone by sending a kind message.", followUp: "Did that make you feel even happier?" },
-                { task: "Do a quick happy dance to celebrate your mood!", followUp: "Did that keep your energy up?" },
                 { task: "Write down this moment so you can remember it later.", followUp: "Did that help you savor the happiness?" }
             ],
             confused: [
@@ -315,6 +365,11 @@
             rain: document.getElementById('rain-sound'),
             waves: document.getElementById('waves-sound')
         };
+        const asmrSounds = {
+            tapping: document.getElementById('tapping-sound'),
+            whispering: document.getElementById('whispering-sound'),
+            brushing: document.getElementById('brushing-sound')
+        };
         let currentSound = null;
 
         function playSound(sound, volume = 0.5) {
@@ -332,8 +387,12 @@
             if (tool === 'punching') startPunching();
             if (tool === 'stretch') startStretch();
             if (tool === 'doodle') startDoodle();
-            if (tool === 'dance') startDance();
+            if (tool === 'stressball') startStressBall();
+            if (tool === 'worry') startWorry();
             if (tool === 'color') startColorFocus();
+            if (tool === 'sudoku') startSudoku();
+            if (tool === 'moodflinger') startMoodFlinger();
+            if (tool === 'asmr') startASMR();
         }
 
         function closePopup(tool) {
@@ -347,13 +406,19 @@
             if (tool === 'punching') clearInterval(window.punchingInterval);
             if (tool === 'stretch') clearInterval(window.stretchInterval);
             if (tool === 'doodle') clearInterval(window.doodleInterval);
-            if (tool === 'dance') clearInterval(window.danceInterval);
-            if (tool === 'color') clearInterval(window.colorInterval);
-            if (tool === 'gratitude') document.getElementById('gratitude-text').value = '';
+            if (tool === 'stressball') clearInterval(window.stressballInterval);
             if (tool === 'worry') {
                 document.getElementById('worry-text').value = '';
                 document.getElementById('paper-strips-container').innerHTML = '';
             }
+            if (tool === 'color') clearInterval(window.colorInterval);
+            if (tool === 'sudoku') clearInterval(window.sudokuInterval);
+            if (tool === 'moodflinger') clearInterval(window.moodflingerInterval);
+            if (tool === 'asmr') {
+                clearInterval(window.asmrInterval);
+                if (currentSound) currentSound.pause();
+            }
+            if (tool === 'gratitude') document.getElementById('gratitude-text').value = '';
         }
 
         function updateProgress(elementId, total, current) {
@@ -374,10 +439,8 @@
             const instructionElement = document.getElementById('breathing-instruction');
             const timerElement = document.getElementById('breathing-timer');
             const circle = document.getElementById('breathing-circle');
-            
             circle.className = '';
             updateProgress('breathing-progress', 60, 0);
-            
             function updateBreathing() {
                 if (time % 4 === 0) {
                     step = (step % 3);
@@ -533,7 +596,6 @@
             canvas.addEventListener('mousedown', () => drawing = true);
             canvas.addEventListener('mouseup', () => drawing = false);
             canvas.addEventListener('mousemove', (e) => {
-                if (!prehistoric .clientX = e.clientX;
                 if (!drawing) return;
                 const rect = canvas.getBoundingClientRect();
                 const x = e.clientX - rect.left;
@@ -571,53 +633,39 @@
             playSound(clickSound, 0.3);
         }
 
-        function startDance() {
+        function startStressBall() {
             let time = 30;
-            const prompts = [
-                "Spin around and let loose!",
-                "Do a little shimmy to the beat!",
-                "Jump up and down with joy!"
-            ];
-            const promptElement = document.getElementById('dance-prompt');
-            const timerElement = document.getElementById('dance-timer');
-            promptElement.textContent = prompts[Math.floor(Math.random() * prompts.length)];
-            updateProgress('dance-progress', 30, 0);
-            window.danceInterval = setInterval(() => {
+            let count = 0;
+            const ball = document.getElementById('stress-ball');
+            const timerElement = document.getElementById('stressball-timer');
+            ball.textContent = '0';
+            ball.style.transform = 'scale(1)';
+            updateProgress('stressball-progress', 30, 0);
+            ball.onclick = () => {
+                count++;
+                ball.textContent = count;
+                playSound(punchSound, 0.3);
+                ball.style.transform = 'scale(0.8)';
+                setTimeout(() => {
+                    ball.style.transform = 'scale(1)';
+                }, 150);
+            };
+            window.stressballInterval = setInterval(() => {
                 time--;
                 timerElement.textContent = `Time remaining: ${time}s`;
-                updateProgress('dance-progress', 30, time);
+                updateProgress('stressball-progress', 30, time);
                 if (time <= 0) {
-                    clearInterval(window.danceInterval);
+                    clearInterval(window.stressballInterval);
                     playSound(successSound, 0.4);
-                    setTimeout(() => closePopup('dance'), 1500);
+                    ball.innerHTML = `<span>Great job!</span><br>${count}`;
+                    setTimeout(() => closePopup('stressball'), 2000);
                 }
             }, 1000);
         }
 
-        function startColorFocus() {
-            let time = 60;
-            const colors = [
-                { name: "Blue to soothe", hex: "#1E90FF" },
-                { name: "Green to calm", hex: "#32CD32" },
-                { name: "Yellow to uplift", hex: "#FFD700" }
-            ];
-            const randomColor = colors[Math.floor(Math.random() * colors.length)];
-            const promptElement = document.getElementById('color-prompt');
-            const squareElement = document.getElementById('color-square');
-            const timerElement = document.getElementById('color-timer');
-            promptElement.textContent = `Focus on ${randomColor.name}`;
-            squareElement.style.backgroundColor = randomColor.hex;
-            updateProgress('color-progress', 60, 0);
-            window.colorInterval = setInterval(() => {
-                time--;
-                timerElement.textContent = `Time remaining: ${time}s`;
-                updateProgress('color-progress', 60, time);
-                if (time <= 0) {
-                    clearInterval(window.colorInterval);
-                    playSound(successSound, 0.4);
-                    setTimeout(() => closePopup('color'), 1500);
-                }
-            }, 1000);
+        function startWorry() {
+            document.getElementById('worry-text').value = '';
+            document.getElementById('paper-strips-container').innerHTML = '';
         }
 
         function shredWorry() {
@@ -649,6 +697,218 @@
                     playSound(successSound, 0.4);
                     closePopup('worry');
                 }, 1000);
+            }, 1000);
+        }
+
+        function startColorFocus() {
+            let time = 60;
+            const colors = [
+                { name: "Blue to soothe", hex: "#1E90FF" },
+                { name: "Green to calm", hex: "#32CD32" },
+                { name: "Yellow to uplift", hex: "#FFD700" }
+            ];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            const promptElement = document.getElementById('color-prompt');
+            const squareElement = document.getElementById('color-square');
+            const timerElement = document.getElementById('color-timer');
+            promptElement.textContent = `Focus on ${randomColor.name}`;
+            squareElement.style.backgroundColor = randomColor.hex;
+            updateProgress('color-progress', 60, 0);
+            window.colorInterval = setInterval(() => {
+                time--;
+                timerElement.textContent = `Time remaining: ${time}s`;
+                updateProgress('color-progress', 60, time);
+                if (time <= 0) {
+                    clearInterval(window.colorInterval);
+                    playSound(successSound, 0.4);
+                    setTimeout(() => closePopup('color'), 1500);
+                }
+            }, 1000);
+        }
+
+        function startSudoku() {
+            let time = 90;
+            const gridElement = document.getElementById('sudoku-grid');
+            const timerElement = document.getElementById('sudoku-timer');
+            const grid = [
+                [1, '', '', 4],
+                ['', 3, 4, ''],
+                ['', 4, 2, ''],
+                [4, '', '', 1]
+            ];
+            gridElement.innerHTML = '';
+            for (let i = 0; i < 4; i++) {
+                for (let j = 0; j < 4; j++) {
+                    const cell = document.createElement('input');
+                    cell.type = 'text';
+                    cell.maxLength = 1;
+                    cell.className = 'sudoku-cell';
+                    cell.value = grid[i][j] || '';
+                    cell.disabled = grid[i][j] !== '';
+                    cell.addEventListener('input', (e) => {
+                        if (!/^[1-4]?$/.test(e.target.value)) e.target.value = '';
+                    });
+                    gridElement.appendChild(cell);
+                }
+            }
+            updateProgress('sudoku-progress', 90, 0);
+            window.sudokuInterval = setInterval(() => {
+                time--;
+                timerElement.textContent = `Time remaining: ${time}s`;
+                updateProgress('sudoku-progress', 90, time);
+                if (time <= 0) {
+                    clearInterval(window.sudokuInterval);
+                    playSound(successSound, 0.4);
+                    setTimeout(() => closePopup('sudoku'), 1500);
+                }
+            }, 1000);
+        }
+
+        function startMoodFlinger() {
+            let time = 60;
+            let score = 0;
+            const canvas = document.getElementById('moodflinger-canvas');
+            const ctx = canvas.getContext('2d');
+            const scoreElement = document.getElementById('moodflinger-score');
+            const timerElement = document.getElementById('moodflinger-timer');
+            let dragging = false;
+            let startX, startY;
+            let ball = { x: 50, y: 250, vx: 0, vy: 0, radius: 10 };
+            let target = { x: 350, y: 50, radius: 20 };
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.beginPath();
+                ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+                ctx.fillStyle = '#e67e22';
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(target.x, target.y, target.radius, 0, Math.PI * 2);
+                ctx.fillStyle = '#28a745';
+                ctx.fill();
+                if (!dragging && (ball.vx || ball.vy)) {
+                    ball.x += ball.vx;
+                    ball.y += ball.vy;
+                    ball.vy += 0.5;
+                    ball.vx *= 0.99;
+                    ball.vy *= 0.99;
+                    if (ball.y > canvas.height - ball.radius) {
+                        ball.y = canvas.height - ball.radius;
+                        ball.vy = 0;
+                        ball.vx = 0;
+                        let distance = Math.hypot(ball.x - target.x, ball.y - target.y);
+                        let points = Math.max(0, 100 - Math.floor(distance));
+                        score += points;
+                        scoreElement.textContent = `Score: ${score}`;
+                        ball.x = 50;
+                        ball.y = 250;
+                    }
+                }
+            }
+            canvas.addEventListener('mousedown', (e) => {
+                const rect = canvas.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                if (Math.hypot(x - ball.x, y - ball.y) < ball.radius) {
+                    dragging = true;
+                    startX = x;
+                    startY = y;
+                }
+            });
+            canvas.addEventListener('mousemove', (e) => {
+                if (dragging) {
+                    const rect = canvas.getBoundingClientRect();
+                    ball.x = e.clientX - rect.left;
+                    ball.y = e.clientY - rect.top;
+                    draw();
+                }
+            });
+            canvas.addEventListener('mouseup', (e) => {
+                if (dragging) {
+                    const rect = canvas.getBoundingClientRect();
+                    const endX = e.clientX - rect.left;
+                    const endY = e.clientY - rect.top;
+                    ball.vx = (endX - startX) * 0.1;
+                    ball.vy = (endY - startY) * 0.1;
+                    dragging = false;
+                    playSound(clickSound, 0.3);
+                }
+            });
+            updateProgress('moodflinger-progress', 60, 0);
+            window.moodflingerInterval = setInterval(() => {
+                time--;
+                timerElement.textContent = `Time remaining: ${time}s`;
+                updateProgress('moodflinger-progress', 60, time);
+                draw();
+                if (time <= 0) {
+                    clearInterval(window.moodflingerInterval);
+                    playSound(successSound, 0.4);
+                    setTimeout(() => closePopup('moodflinger'), 1500);
+                }
+            }, 1000 / 60);
+        }
+
+        function startASMR() {
+            let time = 90;
+            const timerElement = document.getElementById('asmr-timer');
+            const selectElement = document.getElementById('asmr-select');
+            const playButton = document.getElementById('asmr-play-btn');
+            const volumeSlider = document.getElementById('asmr-volume-slider');
+            updateProgress('asmr-progress', 90, 0);
+            playButton.innerHTML = '<i class="fas fa-play"></i>';
+            selectElement.onchange = function() {
+                if (currentSound) {
+                    currentSound.pause();
+                    currentSound.currentTime = 0;
+                    playButton.innerHTML = '<i class="fas fa-play"></i>';
+                }
+            };
+            playButton.onclick = function() {
+                const soundType = selectElement.value;
+                if (currentSound && currentSound !== asmrSounds[soundType]) {
+                    currentSound.pause();
+                    currentSound.currentTime = 0;
+                }
+                currentSound = asmrSounds[soundType];
+                if (currentSound.paused) {
+                    const playPromise = currentSound.play();
+                    playPromise.then(() => {
+                        currentSound.volume = volumeSlider.value;
+                        playButton.innerHTML = '<i class="fas fa-pause"></i>';
+                    }).catch(err => {
+                        console.error(`Failed to play ${soundType} audio:`, err);
+                        playButton.innerHTML = '<i class="fas fa-play"></i>';
+                    });
+                } else {
+                    currentSound.pause();
+                    currentSound.currentTime = 0;
+                    playButton.innerHTML = '<i class="fas fa-play"></i>';
+                }
+            };
+            volumeSlider.oninput = function() {
+                if (currentSound) currentSound.volume = this.value;
+            };
+            window.asmrInterval = setInterval(() => {
+                time--;
+                timerElement.textContent = `Time remaining: ${time}s`;
+                updateProgress('asmr-progress', 90, time);
+                if (time <= 0) {
+                    clearInterval(window.asmrInterval);
+                    if (currentSound) {
+                        const fadeInterval = setInterval(() => {
+                            if (currentSound.volume > 0.1) {
+                                currentSound.volume -= 0.1;
+                            } else {
+                                currentSound.pause();
+                                clearInterval(fadeInterval);
+                                playSound(successSound, 0.4);
+                                setTimeout(() => closePopup('asmr'), 1500);
+                            }
+                        }, 100);
+                    } else {
+                        playSound(successSound, 0.4);
+                        setTimeout(() => closePopup('asmr'), 1500);
+                    }
+                }
             }, 1000);
         }
 
