@@ -43,7 +43,4 @@
 .recommendation-btn.anxious { background: linear-gradient(135deg, #ce93d8, #ba68c8); }
 .recommendation-btn.excited { background: linear-gradient(135deg, #aed581, #81c784); }
 .recommendation-btn.happy { background: linear-gradient(135deg, #ffb74d, #ff8a65); }
-.recommendation-btn.frustrated { background: linear-gradient(135deg, #ef9a9a, #e57373); }
-.recommendation-btn.lonely { background: linear-gradient(135deg, #9fa8da, #7986cb); }
-.recommendation-btn.overwhelmed { background: linear-gradient(135deg, #e6ee9c, #dce775); }
-.recommendation-btn.angry { background: linear-gradient(135deg, #ff8a65, #ff7043); }
+.recommendation-btn.frustrated { background: linear-gradient(135deg, #ef9a9a, #
