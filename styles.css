@@ -1,7 +1,7 @@
 /* General Styling */
 body {
   font-family: 'Nunito', sans-serif;
-  background-color: #f7f9fc;
+  background-color: #f3f7fb;
   color: #333;
   margin: 0;
   padding: 0;
@@ -19,12 +19,12 @@ body {
 
 #main-header .logo h1 {
   margin: 0;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
 }
 
 #main-header .navbar {
   display: flex;
-  gap: 20px;
+  gap: 15px;
 }
 
 #main-header .navbar a {
@@ -37,44 +37,113 @@ body {
   text-decoration: underline;
 }
 
-#main-header .search-bar {
-  display: flex;
-  gap: 10px;
+/* Intro Section */
+#intro {
+  text-align: center;
+  margin: 20px;
 }
 
-#main-header .search-bar input {
-  padding: 5px 10px;
-  border-radius: 4px;
-  border: none;
-}
-
-#main-header .search-bar button {
-  padding: 5px 10px;
-  background-color: white;
+#intro h2 {
+  font-size: 2rem;
   color: #4a90e2;
+}
+
+#intro p {
+  font-size: 1rem;
+  color: #555;
+}
+
+/* Feelings Buttons */
+#feelings-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto;
+}
+
+.buttons-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 15px;
+  max-width: 600px;
+}
+
+.feeling-btn {
+  padding: 15px 20px;
+  font-size: 1.2rem;
+  background-color: #e3f2fd;
+  color: #333;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.feeling-btn:hover {
+  background-color: #90caf9;
+  transform: scale(1.05);
+}
+
+/* Activity Recommendations */
+#activity-recommendations {
+  margin: 30px 0;
+  text-align: center;
+}
+
+#recommendations-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* Feedback Form */
+#feedback {
+  text-align: center;
+  margin: 40px 0;
+}
+
+#feedback form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+#feedback textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#feedback button {
+  padding: 10px 20px;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
 }
 
-#main-header .search-bar button:hover {
+#feedback button:hover {
   background-color: #357ab8;
-  color: white;
 }
 
 /* Footer Styling */
 #main-footer {
   background-color: #4a90e2;
   color: white;
-  padding: 20px 10px;
+  padding: 20px;
   text-align: center;
 }
 
-#main-footer .footer-content p,
 #main-footer .footer-content a {
-  margin: 5px 0;
   color: white;
-  font-size: 0.9rem;
   text-decoration: none;
 }
 
@@ -85,26 +154,22 @@ body {
 #main-footer .social-icons {
   display: flex;
   justify-content: center;
-  gap: 15px;
-}
-
-#main-footer .social-icons a {
-  font-size: 1rem;
+  gap: 10px;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  #feelings-grid .buttons-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   #main-header {
     flex-direction: column;
-    text-align: center;
+    align-items: center;
   }
 
   #main-header .navbar {
     flex-direction: column;
     gap: 10px;
-  }
-
-  #feelings-grid {
-    grid-template-columns: repeat(2, 1fr);
   }
 }
