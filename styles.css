@@ -106,6 +106,7 @@ nav.scrolled {
     gap: 10px;
     transition: background 0.3s, transform 0.2s;
     position: relative;
+    touch-action: manipulation;
 }
 
 #mood-buttons button:hover {
@@ -172,6 +173,7 @@ nav.scrolled {
     cursor: pointer;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
+    touch-action: manipulation;
 }
 
 .tool-button:hover {
@@ -224,7 +226,7 @@ nav.scrolled {
     border-radius: 15px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
     text-align: center;
-    animation    animation: popup-appear 0.3s ease-out;
+    animation: popup-appear 0.3s ease-out;
 }
 
 @keyframes popup-appear {
@@ -610,6 +612,21 @@ textarea {
     margin-bottom: 20px;
 }
 
+.affiliate-link {
+    display: inline-block;
+    background-color: #ff9900;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1em;
+    transition: background-color 0.3s;
+}
+
+.affiliate-link:hover {
+    background-color: #e68a00;
+}
+
 footer {
     background: #333;
     color: #fff;
@@ -653,9 +670,26 @@ footer {
     font-style: italic;
 }
 
+.affiliate-disclosure {
+    font-size: 0.9em;
+    color: #ccc;
+    margin: 10px 0;
+}
+
+.footer-links a {
+    color: #28a745;
+    text-decoration: none;
+    font-size: 0.9em;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
 .copyright {
     font-size: 0.9em;
     color: #ccc;
+    margin-top: 10px;
 }
 
 @media (max-width: 600px) {
@@ -672,6 +706,7 @@ footer {
     #mood-buttons button {
         padding: 10px 15px;
         font-size: 0.9em;
+        min-width: 120px;
     }
     .tools-container {
         padding: 10px;
