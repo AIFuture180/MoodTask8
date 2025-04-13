@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MoodTask</title>
-    <link rel="stylesheet" href="styles.css">
     <style>
         /* General Styles */
         body {
@@ -42,7 +41,7 @@
             font-size: 0.9rem;
         }
 
-        #recommendations-container {
+        #moods-container, #recommendations-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 20px;
@@ -51,7 +50,7 @@
             padding: 20px;
         }
 
-        .recommendation-btn {
+        .mood-btn, .recommendation-btn {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -61,7 +60,6 @@
             width: 150px;
             height: 150px;
             border-radius: 12px;
-            background: linear-gradient(135deg, #4a90e2, #50e3c2);
             color: white;
             text-decoration: none;
             font-size: 1.1rem;
@@ -70,76 +68,75 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .recommendation-btn:hover {
+        .mood-btn:hover, .recommendation-btn:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
         }
 
-        .recommendation-btn .icon {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
+        /* Mood Button Colors */
+        .mood-btn.tired { background: #90caf9; }
+        .mood-btn.stressed { background: #f48fb1; }
+        .mood-btn.bored { background: #ffcc80; }
+        .mood-btn.anxious { background: #ce93d8; }
+        .mood-btn.excited { background: #aed581; }
+        .mood-btn.happy { background: #ffb74d; }
+        .mood-btn.frustrated { background: #ef9a9a; }
+        .mood-btn.lonely { background: #9fa8da; }
+        .mood-btn.overwhelmed { background: #e6ee9c; }
+        .mood-btn.angry { background: #ff7043; }
+
+        /* Activity Button Colors */
+        .recommendation-btn { display: none; }
+        .recommendation-btn.tired, .recommendation-btn.stressed, 
+        .recommendation-btn.bored, .recommendation-btn.anxious,
+        .recommendation-btn.excited, .recommendation-btn.happy,
+        .recommendation-btn.frustrated, .recommendation-btn.lonely,
+        .recommendation-btn.overwhelmed, .recommendation-btn.angry {
+            display: none;
         }
 
-        /* Individual Button Colors */
-        .recommendation-btn.tired { background: linear-gradient(135deg, #90caf9, #64b5f6); }
-        .recommendation-btn.stressed { background: linear-gradient(135deg, #f48fb1, #f06292); }
-        .recommendation-btn.bored { background: linear-gradient(135deg, #ffcc80, #ffb74d); }
-        .recommendation-btn.anxious { background: linear-gradient(135deg, #ce93d8, #ba68c8); }
-        .recommendation-btn.excited { background: linear-gradient(135deg, #aed581, #81c784); }
-        .recommendation-btn.happy { background: linear-gradient(135deg, #ffb74d, #ff8a65); }
-        .recommendation-btn.frustrated { background: linear-gradient(135deg, #ef9a9a, #e57373); }
-        .recommendation-btn.lonely { background: linear-gradient(135deg, #9fa8da, #7986cb); }
-        .recommendation-btn.overwhelmed { background: linear-gradient(135deg, #e6ee9c, #dce775); }
-        .recommendation-btn.angry { background: linear-gradient(135deg, #ff8a65, #ff7043); }
+        .highlight { display: flex !important; }
     </style>
+    <script>
+        function showActivities(mood) {
+            // Hide all activities
+            document.querySelectorAll('.recommendation-btn').forEach(btn => btn.classList.remove('highlight'));
+
+            // Show activities matching the selected mood
+            document.querySelectorAll(`.recommendation-btn.${mood}`).forEach(btn => btn.classList.add('highlight'));
+        }
+    </script>
 </head>
 <body>
     <header>
         <h1>Welcome to MoodTask</h1>
-        <p>Find the perfect activity for how you're feeling today!</p>
+        <p>Select a mood to get started!</p>
     </header>
 
     <main>
-        <section id="activity-recommendations">
-            <h2 style="text-align: center;">Recommended Activities</h2>
-            <div id="recommendations-container">
-                <a href="#" class="recommendation-btn tired">
-                    <span class="icon">💤</span>
-                    Breathing Exercise
-                </a>
-                <a href="#" class="recommendation-btn stressed">
-                    <span class="icon">💌</span>
-                    Gratitude Note
-                </a>
-                <a href="#" class="recommendation-btn bored">
-                    <span class="icon">🎵</span>
-                    Soundscape
-                </a>
-                <a href="#" class="recommendation-btn anxious">
-                    <span class="icon">👊</span>
-                    Punching Bag
-                </a>
-                <a href="#" class="recommendation-btn excited">
-                    <span class="icon">🧘</span>
-                    Stretch
-                </a>
-                <a href="#" class="recommendation-btn happy">
-                    <span class="icon">✏️</span>
-                    Doodle
-                </a>
-                <a href="#" class="recommendation-btn frustrated">
-                    <span class="icon">💃</span>
-                    Dance
-                </a>
-                <a href="#" class="recommendation-btn lonely">
-                    <span class="icon">✂️</span>
-                    Worry Shredder
-                </a>
-                <a href="#" class="recommendation-btn overwhelmed">
-                    <span class="icon">🎨</span>
-                    Color Focus
-                </a>
-            </div>
+        <section id="moods-container">
+            <button class="mood-btn tired" onclick="showActivities('tired')">Tired</button>
+            <button class="mood-btn stressed" onclick="showActivities('stressed')">Stressed</button>
+            <button class="mood-btn bored" onclick="showActivities('bored')">Bored</button>
+            <button class="mood-btn anxious" onclick="showActivities('anxious')">Anxious</button>
+            <button class="mood-btn excited" onclick="showActivities('excited')">Excited</button>
+            <button class="mood-btn happy" onclick="showActivities('happy')">Happy</button>
+            <button class="mood-btn frustrated" onclick="showActivities('frustrated')">Frustrated</button>
+            <button class="mood-btn lonely" onclick="showActivities('lonely')">Lonely</button>
+            <button class="mood-btn overwhelmed" onclick="showActivities('overwhelmed')">Overwhelmed</button>
+            <button class="mood-btn angry" onclick="showActivities('angry')">Angry</button>
+        </section>
+
+        <section id="recommendations-container">
+            <a href="#" class="recommendation-btn tired">Breathing Exercise</a>
+            <a href="#" class="recommendation-btn stressed">Gratitude Note</a>
+            <a href="#" class="recommendation-btn bored">Soundscape</a>
+            <a href="#" class="recommendation-btn anxious">Punching Bag</a>
+            <a href="#" class="recommendation-btn excited">Stretch</a>
+            <a href="#" class="recommendation-btn happy">Doodle</a>
+            <a href="#" class="recommendation-btn frustrated">Dance</a>
+            <a href="#" class="recommendation-btn lonely">Worry Shredder</a>
+            <a href="#" class="recommendation-btn overwhelmed">Color Focus</a>
         </section>
     </main>
 
