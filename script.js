@@ -86,11 +86,6 @@ const natureSounds = {
     rain: document.getElementById('rain-sound'),
     waves: document.getElementById('waves-sound')
 };
-const asmrSounds = {
-    tapping: document.getElementById('tapping-sound'),
-    whispering: document.getElementById('whispering-sound'),
-    brushing: document.getElementById('brushing-sound')
-};
 let currentSound = null;
 
 function playSound(sound, volume = 0.5) {
@@ -271,45 +266,14 @@ function startPunching() {
 function startStretch() {
     let time = 60;
     const stretches = [
-        {
-            name: "Child's Pose (Balasana)",
-            instructions: "Kneel on the floor, sitting back on your heels. Stretch your arms forward, lowering your torso to rest on your thighs. Keep your forehead on the ground and breathe deeply.",
-            benefits: "Stretches the lower back, hips, and thighs while promoting relaxation."
-        },
-        {
-            name: "Cat-Cow Stretch",
-            instructions: "Get on your hands and knees, aligning your wrists under shoulders and knees under hips. Alternate between arching your back upward (Cat) and dipping it downward while lifting your head and tailbone (Cow). Move slowly and match your breath with each movement.",
-            benefits: "Eases tension in the spine, neck, and shoulders while improving flexibility."
-        },
-        {
-            name: "Neck Stretch",
-            instructions: "Sit or stand upright with your back straight. Gently tilt your head to one side, bringing your ear toward your shoulder. Hold for 15-30 seconds, then switch sides. For a deeper stretch, place your hand on the side of your head and apply light pressure.",
-            benefits: "Relieves neck and shoulder tension."
-        },
-        {
-            name: "Seated Forward Fold",
-            instructions: "Sit on the floor with your legs extended straight in front of you. Hinge at your hips and reach forward, aiming to touch your toes or as far as comfortable. Relax your head and neck, and hold for 20-30 seconds.",
-            benefits: "Stretches the lower back, hamstrings, and calves."
-        },
-        {
-            name: "Standing Side Stretch",
-            instructions: "Stand with your feet shoulder-width apart. Reach one arm overhead and bend sideways toward the opposite side, keeping your chest open. Hold for 15-30 seconds, then switch sides.",
-            benefits: "Loosens tension in the sides of the torso and shoulders."
-        },
-        {
-            name: "Butterfly Stretch",
-            instructions: "Sit on the floor with your feet together and knees bent outward. Hold your feet with your hands and gently press your knees toward the floor. Keep your back straight and hold for 20-30 seconds.",
-            benefits: "Opens up the hips and stretches the inner thighs."
-        }
+        "Reach up high for 10 seconds.",
+        "Touch your toes for 10 seconds.",
+        "Stretch your arms behind your back.",
+        "Rotate your shoulders slowly."
     ];
-    const stretchElement = document.getElementById('stretch-details');
+    const stretchElement = document.getElementById('stretch-prompt');
     const timerElement = document.getElementById('stretch-timer');
-    const randomStretch = stretches[Math.floor(Math.random() * stretches.length)];
-    stretchElement.innerHTML = `
-        <h3>${randomStretch.name}</h3>
-        <p><strong>How to Perform:</strong> ${randomStretch.instructions}</p>
-        <p><strong>Benefits:</strong> ${randomStretch.benefits}</p>
-    `;
+    stretchElement.textContent = stretches[Math.floor(Math.random() * stretches.length)];
     updateProgress('stretch-progress', 60, 0);
     window.stretchInterval = setInterval(() => {
         time--;
