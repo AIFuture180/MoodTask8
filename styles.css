@@ -311,22 +311,11 @@ footer a:hover {
     transition: transform 0.1s;
 }
 
-#stretch-details {
+#stretch-prompt {
+    font-size: 1.2em;
+    text-align: center;
     margin-bottom: 20px;
-}
-
-#stretch-details h3 {
-    margin: 0 0 10px;
     color: #333;
-}
-
-#stretch-details p {
-    margin: 5px 0;
-    line-height: 1.5;
-}
-
-#stretch-details strong {
-    color: #4caf50;
 }
 
 #doodle-canvas {
