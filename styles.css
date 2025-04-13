@@ -43,15 +43,13 @@ body {
     margin-top: 10px;
 }
 
-#breathing-progress, #soundscape-progress, #punching-progress, #stretch-progress,
-#doodle-progress, #stressball-progress, #worry-progress, #color-progress,
-#sudoku-progress, #gratitude-progress, #stressjar-progress, #moodquest-progress {
+#stressjar-progress, #moodquest-progress {
     height: 100%;
     background: #4caf50;
     transition: width 1s linear;
 }
 
-#stressjar-text, #quest-goal, #gratitude-text, #worry-text {
+#stressjar-text, #quest-goal {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
@@ -106,89 +104,6 @@ body {
     padding: 5px 10px;
     border-radius: 5px;
     cursor: pointer;
-}
-
-#stretch-details {
-    margin-bottom: 20px;
-}
-
-#stretch-details h3 {
-    margin: 0 0 10px;
-    color: #333;
-}
-
-#stretch-details p {
-    margin: 5px 0;
-    line-height: 1.5;
-}
-
-#stretch-details strong {
-    color: #4caf50;
-}
-
-.paper-strip {
-    position: absolute;
-    background: #ddd;
-    width: 10px;
-    height: 50px;
-    animation: shred 0.5s forwards;
-}
-
-@keyframes shred {
-    0% { transform: translateY(0); opacity: 1; }
-    100% { transform: translateY(100px); opacity: 0; }
-}
-
-#punching-bag, #stress-ball {
-    width: 100px;
-    height: 100px;
-    background: #ff6347;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-size: 24px;
-    margin: 20px auto;
-    cursor: pointer;
-}
-
-#breathing-circle {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    margin: 20px auto;
-    transition: all 0.5s;
-}
-
-.inhale { background: #4caf50; transform: scale(1.2); }
-.hold { background: #4682b4; transform: scale(1); }
-.exhale { background: #ff6347; transform: scale(0.8); }
-
-#sudoku-grid {
-    display: grid;
-    grid-template-columns: repeat(9, 30px);
-    gap: 2px;
-    margin: 20px auto;
-}
-
-#sudoku-grid input {
-    width: 30px;
-    height: 30px;
-    text-align: center;
-    border: 1px solid #ddd;
-    font-size: 16px;
-}
-
-#doodle-canvas {
-    border: 1px solid #ddd;
-    background: #fff;
-    margin: 20px auto;
-    display: block;
-}
-
-#color-box {
-    margin: 20px auto;
 }
 
 .coffee-link {
