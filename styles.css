@@ -1,197 +1,8 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
 body {
     font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
     background-color: #f0f0f0;
-    padding: 20px;
-    line-height: 1.6;
-}
-
-header {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-header h1 {
-    font-size: 2.5em;
-    color: #333;
-}
-
-header p {
-    font-size: 1.2em;
-    color: #666;
-}
-
-main {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-#mood-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 30px;
-}
-
-#mood-buttons button {
-    background: #fff;
-    border: 2px solid #ddd;
-    border-radius: 10px;
-    padding: 15px 20px;
-    font-size: 1.1em;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    transition: all 0.3s;
-}
-
-#mood-buttons button:hover {
-    background: #e0e0e0;
-}
-
-#mood-buttons button.selected {
-    background: #4caf50;
-    color: #fff;
-    border-color: #4caf50;
-}
-
-.mood-icon {
-    font-size: 1.5em;
-}
-
-#result {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-.chat-bubble {
-    background: #fff;
-    border-radius: 15px;
-    padding: 20px;
-    max-width: 600px;
-    margin: 0 auto;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.task-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
-}
-
-.mood-emoji {
-    font-size: 2em;
-}
-
-.task-text {
-    font-size: 1.2em;
-    margin-bottom: 10px;
-}
-
-.follow-up-question {
-    font-style: italic;
-    color: #666;
-    margin-bottom: 10px;
-}
-
-.task-buttons {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-}
-
-.favorite-button, .new-task-button {
-    background: #4caf50;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-.favorite-button:hover, .new-task-button:hover {
-    background: #45a049;
-}
-
-.favorite-button .heart-icon {
-    margin-right: 5px;
-}
-
-#tools {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-#tools h2 {
-    font-size: 1.8em;
-    margin-bottom: 20px;
-    color: #333;
-}
-
-.tool-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-}
-
-.tool-buttons button {
-    background: #4caf50;
-    color: #fff;
-    border: none;
-    padding: 15px 25px;
-    border-radius: 5px;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-.tool-buttons button:hover {
-    background: #45a049;
-}
-
-#support {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-.coffee-link {
-    color: #4caf50;
-    text-decoration: none;
-    font-size: 1.1em;
-    padding: 10px 20px;
-    border: 2px solid #4caf50;
-    border-radius: 5px;
-    transition: all 0.3s;
-}
-
-.coffee-link:hover {
-    background: #4caf50;
-    color: #fff;
-}
-
-footer {
-    text-align: center;
-    padding: 20px 0;
-    color: #666;
-}
-
-footer a {
-    color: #4caf50;
-    text-decoration: none;
-}
-
-footer a:hover {
-    text-decoration: underline;
 }
 
 .popup {
@@ -204,7 +15,6 @@ footer a:hover {
     background: rgba(0, 0, 0, 0.5);
     justify-content: center;
     align-items: center;
-    z-index: 1000;
 }
 
 .popup-content {
@@ -214,26 +24,14 @@ footer a:hover {
     max-width: 500px;
     width: 90%;
     position: relative;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .close {
     position: absolute;
     top: 10px;
     right: 15px;
-    font-size: 24px;
+    font-size: 20px;
     cursor: pointer;
-    color: #333;
-}
-
-.close:hover {
-    color: #ff4f41;
-}
-
-.popup-content h2 {
-    font-size: 1.8em;
-    margin-bottom: 15px;
-    color: #333;
 }
 
 .progress-bar {
@@ -242,7 +40,7 @@ footer a:hover {
     background: #ddd;
     border-radius: 5px;
     overflow: hidden;
-    margin-top: 15px;
+    margin-top: 10px;
 }
 
 #breathing-progress, #soundscape-progress, #punching-progress, #stretch-progress,
@@ -253,62 +51,61 @@ footer a:hover {
     transition: width 1s linear;
 }
 
-#breathing-circle {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    margin: 20px auto;
-    transition: all 0.5s;
-}
-
-.inhale { background: #4caf50; transform: scale(1.2); }
-.hold { background: #4682b4; transform: scale(1); }
-.exhale { background: #ff6347; transform: scale(0.8); }
-
-#breathing-step {
-    font-size: 1.5em;
-    text-align: center;
-    margin: 10px 0;
-}
-
-#breathing-instruction {
-    text-align: center;
-    color: #666;
-}
-
-#soundscape-select {
-    width: 150px;
+#stressjar-text, #quest-goal, #gratitude-text, #worry-text {
+    width: 100%;
     padding: 10px;
-    margin: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
     border-radius: 5px;
 }
 
-#play-btn {
-    background: #4682b4;
-    padding: 10px 20px;
-}
-
-#play-btn:hover {
-    background: #4169e1;
-}
-
-#volume-slider {
-    margin: 10px;
-}
-
-#punching-bag, #stress-ball {
-    width: 100px;
-    height: 100px;
-    background: #ff6347;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
+.sparkle {
     font-size: 24px;
-    margin: 20px auto;
+    animation: sparkle 1s ease-out;
+    text-align: center;
+}
+
+@keyframes sparkle {
+    0% { opacity: 0; transform: scale(0); }
+    50% { opacity: 1; transform: scale(1.5); }
+    100% { opacity: 0; transform: scale(0); }
+}
+
+.quest-step {
+    margin: 10px 0;
+}
+
+#quest-progress-map {
+    width: 100%;
+    height: 20px;
+    background: #ddd;
+    position: relative;
+    border-radius: 5px;
+    margin: 10px 0;
+}
+
+#progress-marker {
+    width: 20px;
+    height: 20px;
+    background: #4caf50;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    transition: left 0.5s ease;
+}
+
+.stress-item, .quest-item {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+.stress-item button, .quest-item button {
+    background: #ff4f41;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
     cursor: pointer;
-    transition: transform 0.1s;
 }
 
 #stretch-details {
@@ -329,19 +126,6 @@ footer a:hover {
     color: #4caf50;
 }
 
-#doodle-canvas {
-    border: 1px solid #ddd;
-    background: #fff;
-    margin: 20px auto;
-    display: block;
-}
-
-#paper-strips {
-    position: relative;
-    height: 100px;
-    margin: 20px 0;
-}
-
 .paper-strip {
     position: absolute;
     background: #ddd;
@@ -355,9 +139,31 @@ footer a:hover {
     100% { transform: translateY(100px); opacity: 0; }
 }
 
-#color-box {
+#punching-bag, #stress-ball {
+    width: 100px;
+    height: 100px;
+    background: #ff6347;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 24px;
     margin: 20px auto;
+    cursor: pointer;
 }
+
+#breathing-circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 20px auto;
+    transition: all 0.5s;
+}
+
+.inhale { background: #4caf50; transform: scale(1.2); }
+.hold { background: #4682b4; transform: scale(1); }
+.exhale { background: #ff6347; transform: scale(0.8); }
 
 #sudoku-grid {
     display: grid;
@@ -374,95 +180,25 @@ footer a:hover {
     font-size: 16px;
 }
 
-#gratitude-text, #worry-text, #stressjar-text {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
+#doodle-canvas {
     border: 1px solid #ddd;
-    border-radius: 5px;
-    resize: vertical;
+    background: #fff;
+    margin: 20px auto;
+    display: block;
 }
 
-#stressjar-container {
-    margin: 15px 0;
+#color-box {
+    margin: 20px auto;
 }
 
-.stress-item {
-    border-bottom: 1px solid #ddd;
-    padding: 10px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.coffee-link {
+    display: inline-block;
+    margin-top: 20px;
+    color: #4caf50;
+    text-decoration: none;
 }
 
-.stress-item button {
-    background: #ff4f41;
-    padding: 5px 10px;
-}
-
-.sparkle {
-    font-size: 24px;
-    animation: sparkle 1s ease-out;
-    text-align: center;
-}
-
-@keyframes sparkle {
-    0% { opacity: 0; transform: scale(0); }
-    50% { opacity: 1; transform: scale(1.5); }
-    100% { opacity: 0; transform: scale(0); }
-}
-
-#quest-goal {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-.quest-step {
-    margin: 10px 0;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-#quest-progress-map {
-    width: 100%;
-    height: 20px;
-    background: #ddd;
-    position: relative;
-    border-radius: 5px;
-    margin: 15px 0;
-}
-
-#progress-marker {
-    width: 20px;
-    height: 20px;
-    background: #4caf50;
-    border-radius: 50%;
-    position: absolute;
-    top: 0;
-    transition: left 0.5s ease;
-}
-
-#quest-badges {
-    margin: 10px 0;
-    font-style: italic;
-    color: #666;
-}
-
-.quest-item {
-    border-bottom: 1px solid #ddd;
-    padding: 10px 0;
-}
-
-.quest-item button {
-    background: #ff4f41;
-    padding: 5px 10px;
-}
-
-.popup-content button {
+button {
     background: #4caf50;
     color: #fff;
     border: none;
@@ -470,43 +206,8 @@ footer a:hover {
     margin: 5px;
     border-radius: 5px;
     cursor: pointer;
-    transition: background 0.3s;
 }
 
-.popup-content button:hover {
+button:hover {
     background: #45a049;
-}
-
-#breathing-timer, #soundscape-timer, #punching-timer, #stretch-timer,
-#doodle-timer, #stressball-timer, #worry-timer, #color-timer,
-#sudoku-timer, #gratitude-timer, #stressjar-timer, #moodquest-timer {
-    text-align: center;
-    margin: 10px 0;
-    color: #333;
-}
-
-@media (max-width: 600px) {
-    header h1 {
-        font-size: 2em;
-    }
-
-    #mood-buttons button {
-        padding: 10px 15px;
-        font-size: 1em;
-    }
-
-    .tool-buttons button {
-        padding: 10px 20px;
-        font-size: 0.9em;
-    }
-
-    .popup-content {
-        padding: 15px;
-        width: 95%;
-    }
-
-    #doodle-canvas {
-        width: 300px;
-        height: 200px;
-    }
 }
