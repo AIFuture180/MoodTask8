@@ -86,6 +86,11 @@ const natureSounds = {
     rain: document.getElementById('rain-sound'),
     waves: document.getElementById('waves-sound')
 };
+const asmrSounds = {
+    tapping: document.getElementById('tapping-sound'),
+    whispering: document.getElementById('whispering-sound'),
+    brushing: document.getElementById('brushing-sound')
+};
 let currentSound = null;
 
 function playSound(sound, volume = 0.5) {
@@ -107,6 +112,8 @@ function openPopup(tool) {
     if (tool === 'worry') startWorry();
     if (tool === 'color') startColorFocus();
     if (tool === 'sudoku') startSudoku();
+    if (tool === 'moodflinger') startMoodFlinger();
+    if (tool === 'asmr') startASMR();
     if (tool === 'gratitude') startGratitude();
     if (tool === 'stressjar') startStressJar();
     if (tool === 'moodquest') startMoodQuest();
@@ -127,10 +134,15 @@ function closePopup(tool) {
     if (tool === 'stressball') clearInterval(window.stressballInterval);
     if (tool === 'worry') {
         document.getElementById('worry-text').value = '';
-        document.getElementById('paper-strips').innerHTML = '';
+        document.getElementById('paper-strips-container').innerHTML = '';
     }
     if (tool === 'color') clearInterval(window.colorInterval);
     if (tool === 'sudoku') clearInterval(window.sudokuInterval);
+    if (tool === 'moodflinger') clearInterval(window.moodflingerInterval);
+    if (tool === 'asmr') {
+        clearInterval(window.asmrInterval);
+        if (currentSound) currentSound.pause();
+    }
     if (tool === 'gratitude') document.getElementById('gratitude-text').value = '';
     if (tool === 'stressjar') {
         clearInterval(window.stressjarInterval);
@@ -188,7 +200,7 @@ function startBreathing() {
 
 function startSoundscape() {
     let time = 90;
-    const timerElement = document.getElementById('soundscape-timer');
+    const timerElement =  document.getElementById('soundscape-timer');
     const selectElement = document.getElementById('soundscape-select');
     const playButton = document.getElementById('play-btn');
     const volumeSlider = document.getElementById('volume-slider');
@@ -495,7 +507,7 @@ function startStressJar() {
     window.stressjarInterval = setInterval(() => {
         time--;
         timerElement.textContent = `Time remaining: ${time}s`;
-        updateProgress('stressjar-progress', 30, time);
+        updateProgress('stressjar-progress', bres30, time);
         if (time <= 0) {
             clearInterval(window.stressjarInterval);
             playSound(successSound, 0.4);
