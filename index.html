@@ -3,37 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Feelings & Mini-Games</title>
+  <title>MoodTask: Feel Better, One Click at a Time</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header id="main-header">
     <div class="logo">
-      <h1>Feelings & Mini-Games</h1>
+      <h1>MoodTask</h1>
     </div>
     <nav class="navbar">
       <a href="#feelings-grid">Feelings</a>
       <a href="#activity-recommendations">Activities</a>
       <a href="#feedback">Feedback</a>
     </nav>
-    <div class="search-bar">
-      <input type="text" placeholder="Search activities...">
-      <button>Search</button>
-    </div>
   </header>
 
   <main>
+    <section id="intro">
+      <h2>Welcome to MoodTask</h2>
+      <p>Discover activities tailored to how you feel. Select a mood and start feeling better today.</p>
+    </section>
+
     <section id="feelings-grid">
-      <button class="feeling-btn" data-feeling="tired">Tired</button>
-      <button class="feeling-btn" data-feeling="stressed">Stressed</button>
-      <button class="feeling-btn" data-feeling="bored">Bored</button>
-      <button class="feeling-btn" data-feeling="anxious">Anxious</button>
-      <button class="feeling-btn" data-feeling="excited">Excited</button>
-      <button class="feeling-btn" data-feeling="happy">Happy</button>
-      <button class="feeling-btn" data-feeling="frustrated">Frustrated</button>
-      <button class="feeling-btn" data-feeling="lonely">Lonely</button>
-      <button class="feeling-btn" data-feeling="overwhelmed">Overwhelmed</button>
-      <button class="feeling-btn" data-feeling="angry">Angry</button>
+      <div class="buttons-container">
+        <button class="feeling-btn" data-feeling="tired">Tired</button>
+        <button class="feeling-btn" data-feeling="stressed">Stressed</button>
+        <button class="feeling-btn" data-feeling="bored">Bored</button>
+        <button class="feeling-btn" data-feeling="anxious">Anxious</button>
+        <button class="feeling-btn" data-feeling="excited">Excited</button>
+        <button class="feeling-btn" data-feeling="happy">Happy</button>
+        <button class="feeling-btn" data-feeling="frustrated">Frustrated</button>
+        <button class="feeling-btn" data-feeling="lonely">Lonely</button>
+        <button class="feeling-btn" data-feeling="overwhelmed">Overwhelmed</button>
+        <button class="feeling-btn" data-feeling="angry">Angry</button>
+      </div>
     </section>
 
     <section id="activity-recommendations">
@@ -42,7 +45,7 @@
     </section>
 
     <section id="feedback">
-      <h2>We’d Love Your Feedback!</h2>
+      <h2>We Value Your Feedback</h2>
       <form action="https://formspree.io/f/your-form-id" method="POST">
         <label for="message">Your Thoughts:</label>
         <textarea id="message" name="message" rows="4"></textarea>
@@ -53,14 +56,14 @@
 
   <footer id="main-footer">
     <div class="footer-content">
-      <p>Contact us: <a href="mailto:support@feelingsgames.com">support@feelingsgames.com</a></p>
-      <p>Follow us on:</p>
+      <p>Contact us at: <a href="mailto:support@moodtask.org">support@moodtask.org</a></p>
+      <p>Follow us:</p>
       <div class="social-icons">
         <a href="#">Facebook</a>
         <a href="#">Twitter</a>
         <a href="#">Instagram</a>
       </div>
-      <p>&copy; 2025 Feelings & Mini-Games. All rights reserved.</p>
+      <p>&copy; 2025 MoodTask. All rights reserved.</p>
     </div>
   </footer>
 
