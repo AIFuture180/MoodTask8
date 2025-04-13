@@ -1,175 +1,49 @@
-/* General Styling */
-body {
-  font-family: 'Nunito', sans-serif;
-  background-color: #f3f7fb;
-  color: #333;
-  margin: 0;
-  padding: 0;
-}
-
-/* Header Styling */
-#main-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  background-color: #4a90e2;
-  color: white;
-}
-
-#main-header .logo h1 {
-  margin: 0;
-  font-size: 1.8rem;
-}
-
-#main-header .navbar {
-  display: flex;
-  gap: 15px;
-}
-
-#main-header .navbar a {
-  color: white;
-  text-decoration: none;
-  font-size: 1rem;
-}
-
-#main-header .navbar a:hover {
-  text-decoration: underline;
-}
-
-/* Intro Section */
-#intro {
-  text-align: center;
-  margin: 20px;
-}
-
-#intro h2 {
-  font-size: 2rem;
-  color: #4a90e2;
-}
-
-#intro p {
-  font-size: 1rem;
-  color: #555;
-}
-
-/* Feelings Buttons */
-#feelings-grid {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 20px auto;
-}
-
-.buttons-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 15px;
-  max-width: 600px;
-}
-
-.feeling-btn {
-  padding: 15px 20px;
-  font-size: 1.2rem;
-  background-color: #e3f2fd;
-  color: #333;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  text-align: center;
-  transition: all 0.3s ease;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.feeling-btn:hover {
-  background-color: #90caf9;
-  transform: scale(1.05);
-}
-
-/* Activity Recommendations */
-#activity-recommendations {
-  margin: 30px 0;
-  text-align: center;
-}
-
+/* Recommended Activity Buttons */
 #recommendations-container {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+  justify-items: center;
   margin-top: 20px;
 }
 
-/* Feedback Form */
-#feedback {
-  text-align: center;
-  margin: 40px 0;
-}
-
-#feedback form {
+.recommendation-btn {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
-  max-width: 400px;
-  margin: 0 auto;
-}
-
-#feedback textarea {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-#feedback button {
-  padding: 10px 20px;
-  background-color: #4a90e2;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-#feedback button:hover {
-  background-color: #357ab8;
-}
-
-/* Footer Styling */
-#main-footer {
-  background-color: #4a90e2;
-  color: white;
-  padding: 20px;
+  justify-content: center;
   text-align: center;
-}
-
-#main-footer .footer-content a {
+  padding: 20px;
+  width: 150px;
+  height: 150px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #4a90e2, #50e3c2);
   color: white;
   text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 600;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-#main-footer .footer-content a:hover {
-  text-decoration: underline;
+.recommendation-btn:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
-#main-footer .social-icons {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
+.recommendation-btn .icon {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  #feelings-grid .buttons-container {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  #main-header {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  #main-header .navbar {
-    flex-direction: column;
-    gap: 10px;
-  }
-}
+/* Individual Button Colors */
+.recommendation-btn.tired { background: linear-gradient(135deg, #90caf9, #64b5f6); }
+.recommendation-btn.stressed { background: linear-gradient(135deg, #f48fb1, #f06292); }
+.recommendation-btn.bored { background: linear-gradient(135deg, #ffcc80, #ffb74d); }
+.recommendation-btn.anxious { background: linear-gradient(135deg, #ce93d8, #ba68c8); }
+.recommendation-btn.excited { background: linear-gradient(135deg, #aed581, #81c784); }
+.recommendation-btn.happy { background: linear-gradient(135deg, #ffb74d, #ff8a65); }
+.recommendation-btn.frustrated { background: linear-gradient(135deg, #ef9a9a, #e57373); }
+.recommendation-btn.lonely { background: linear-gradient(135deg, #9fa8da, #7986cb); }
+.recommendation-btn.overwhelmed { background: linear-gradient(135deg, #e6ee9c, #dce775); }
+.recommendation-btn.angry { background: linear-gradient(135deg, #ff8a65, #ff7043); }
