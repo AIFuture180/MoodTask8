@@ -1,72 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MoodTask: Feel Better, One Click at a Time</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <header id="main-header">
-    <div class="logo">
-      <h1>MoodTask</h1>
-    </div>
-    <nav class="navbar">
-      <a href="#feelings-grid">Feelings</a>
-      <a href="#activity-recommendations">Activities</a>
-      <a href="#feedback">Feedback</a>
-    </nav>
-  </header>
-
-  <main>
-    <section id="intro">
-      <h2>Welcome to MoodTask</h2>
-      <p>Discover activities tailored to how you feel. Select a mood and start feeling better today.</p>
-    </section>
-
-    <section id="feelings-grid">
-      <div class="buttons-container">
-        <button class="feeling-btn" data-feeling="tired">Tired</button>
-        <button class="feeling-btn" data-feeling="stressed">Stressed</button>
-        <button class="feeling-btn" data-feeling="bored">Bored</button>
-        <button class="feeling-btn" data-feeling="anxious">Anxious</button>
-        <button class="feeling-btn" data-feeling="excited">Excited</button>
-        <button class="feeling-btn" data-feeling="happy">Happy</button>
-        <button class="feeling-btn" data-feeling="frustrated">Frustrated</button>
-        <button class="feeling-btn" data-feeling="lonely">Lonely</button>
-        <button class="feeling-btn" data-feeling="overwhelmed">Overwhelmed</button>
-        <button class="feeling-btn" data-feeling="angry">Angry</button>
-      </div>
-    </section>
-
-    <section id="activity-recommendations">
-      <h2>Recommended Activities</h2>
-      <div id="recommendations-container"></div>
-    </section>
-
-    <section id="feedback">
-      <h2>We Value Your Feedback</h2>
-      <form action="https://formspree.io/f/your-form-id" method="POST">
-        <label for="message">Your Thoughts:</label>
-        <textarea id="message" name="message" rows="4"></textarea>
-        <button type="submit">Submit</button>
-      </form>
-    </section>
-  </main>
-
-  <footer id="main-footer">
-    <div class="footer-content">
-      <p>Contact us at: <a href="mailto:support@moodtask.org">support@moodtask.org</a></p>
-      <p>Follow us:</p>
-      <div class="social-icons">
-        <a href="#">Facebook</a>
-        <a href="#">Twitter</a>
-        <a href="#">Instagram</a>
-      </div>
-      <p>&copy; 2025 MoodTask. All rights reserved.</p>
-    </div>
-  </footer>
-
-  <script src="script.js"></script>
-</body>
-</html>
+<section id="activity-recommendations">
+  <h2>Recommended Activities</h2>
+  <div id="recommendations-container">
+    <a href="#" class="recommendation-btn tired">
+      <span class="icon">💤</span>
+      Breathing Exercise
+    </a>
+    <a href="#" class="recommendation-btn stressed">
+      <span class="icon">💌</span>
+      Gratitude Note
+    </a>
+    <a href="#" class="recommendation-btn bored">
+      <span class="icon">🎵</span>
+      Soundscape
+    </a>
+    <a href="#" class="recommendation-btn anxious">
+      <span class="icon">👊</span>
+      Punching Bag
+    </a>
+    <a href="#" class="recommendation-btn excited">
+      <span class="icon">🧘</span>
+      Stretch
+    </a>
+    <a href="#" class="recommendation-btn happy">
+      <span class="icon">✏️</span>
+      Doodle
+    </a>
+    <a href="#" class="recommendation-btn frustrated">
+      <span class="icon">💃</span>
+      Dance
+    </a>
+    <a href="#" class="recommendation-btn lonely">
+      <span class="icon">✂️</span>
+      Worry Shredder
+    </a>
+    <a href="#" class="recommendation-btn overwhelmed">
+      <span class="icon">🎨</span>
+      Color Focus
+    </a>
+  </div>
+</section>
