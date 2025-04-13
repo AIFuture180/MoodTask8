@@ -3,315 +3,205 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Boost your mood in seconds with fun, science-backed tasks tailored to how you feel. Try Mood to Task now!">
-    <meta name="keywords" content="mood boost, quick tasks, mental health, emotional well-being">
-    <meta name="robots" content="index, follow">
-    <title>Mood to Task | Boost Your Mood Instantly</title>
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <script defer src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1511837633001567" crossorigin="anonymous" data-ad-init-load="300"></script>
-    <script defer src="https://www.googletagmanager.com/gtag/js?id=G-4985X51W1J"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-4985X51W1J');
-    </script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <meta name="description" content="Mood to Task helps you manage your emotions with personalized tasks and tools like Stress Jar and Mood Quest Builder.">
+    <title>Mood to Task</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
-    <nav id="nav">
-        <div class="logo">Mood<span>Task</span></div>
-    </nav>
-
-    <div class="hero-section">
-        <h1>Boost Your Mood in Seconds</h1>
-        <h2>Fun, Quick Tasks Tailored to How You Feel</h2>
-        <button class="hero-cta pulse-animation" onclick="document.getElementById('mood-prompt').scrollIntoView({ behavior: 'smooth' })">Get Started</button>
-    </div>
-
-    <div id="mood-prompt">
-        <div id="instruction">How are you feeling right now?</div>
-        <div id="mood-buttons">
-            <button onclick="selectMood('tired'); gtag('event', 'Mood Selection', { 'event_category': 'Mood', 'event_label': 'Tired' });" data-tooltip="Feeling low-energy or sleepy?"><span class="mood-icon">😴</span>Tired</button>
-            <button onclick="selectMood('stressed'); gtag('event', 'Mood Selection', { 'event_category': 'Mood', 'event_label': 'Stressed' });" data-tooltip="Feeling overwhelmed or tense?"><span class="mood-icon">😓</span>Stressed</button>
-            <button onclick="selectMood('bored'); gtag('event', 'Mood Selection', { 'event_category': 'Mood', 'event_label': 'Bored' });" data-tooltip="Feeling uninspired or restless?"><span class="mood-icon">🥱</span>Bored</button>
-            <button onclick="selectMood('excited'); gtag('event', 'Mood Selection', { 'event_category': 'Mood', 'event_label': 'Excited' });" data-tooltip="Feeling energized or thrilled?"><span class="mood-icon">🤩</span>Excited</button>
-            <button onclick="selectMood('sad'); gtag('event', 'Mood Selection', { 'event_category': 'Mood', 'event_label': 'Sad' });" data-tooltip="Feeling down or blue?"><span class="mood-icon">😢</span>Sad</button>
-            <button onclick="selectMood('angry'); gtag('event', 'Mood Selection', { 'event_category': 'Mood', 'event_label': 'Angry' });" data-tooltip="Feeling frustrated or upset?"><span class="mood-icon">😡</span>Angry</button>
-            <button onclick="selectMood('happy'); gtag('event', 'Mood Selection', { 'event_category': 'Mood', 'event_label': 'Happy' });" data-tooltip="Feeling cheerful or content?"><span class="mood-icon">😊</span>Happy</button>
-            <button onclick="selectMood('confused'); gtag('event', 'Mood Selection', { 'event_category': 'Mood', 'event_label': 'Confused' });" data-tooltip="Feeling uncertain or puzzled?"><span class="mood-icon">🤔</span>Confused</button>
-        </div>
-        <div id="result"></div>
-        <div class="tools-container">
-            <button class="tool-button breathing" onclick="openPopup('breathing')"><i class="fas fa-wind tool-icon"></i>Breathing Exercise</button>
-            <button class="tool-button gratitude" onclick="openPopup('gratitude')"><i class="fas fa-heart tool-icon"></i>Gratitude Note</button>
-            <button class="tool-button soundscape" onclick="openPopup('soundscape')"><i class="fas fa-volume-up tool-icon"></i>Soundscape</button>
-            <button class="tool-button punching" onclick="openPopup('punching')"><i class="fas fa-fist-raised tool-icon"></i>Punching Bag</button>
-            <button class="tool-button stretch" onclick="openPopup('stretch')"><i class="fas fa-child tool-icon"></i>Stretch</button>
-            <button class="tool-button doodle" onclick="openPopup('doodle')"><i class="fas fa-pencil-alt tool-icon"></i>Doodle</button>
-            <button class="tool-button stressball" onclick="openPopup('stressball')"><i class="fas fa-hand-rock tool-icon"></i>Stress Ball</button>
-            <button class="tool-button worry" onclick="openPopup('worry')"><i class="fas fa-cut tool-icon"></i>Worry Shredder</button>
-            <button class="tool-button color" onclick="openPopup('color')"><i class="fas fa-palette tool-icon"></i>Color Focus</button>
-            <button class="tool-button sudoku" onclick="openPopup('sudoku')"><i class="fas fa-puzzle-piece tool-icon"></i>Sudoku</button>
-            <button class="tool-button moodflinger" onclick="openPopup('moodflinger')"><i class="fas fa-rocket tool-icon"></i>Mood Flinger</button>
-            <button class="tool-button asmr" onclick="openPopup('asmr')"><i class="fas fa-headphones tool-icon"></i>ASMR</button>
-            <button class="tool-button stressjar" onclick="openPopup('stressjar')"><i class="fas fa-jar tool-icon"></i>Stress Jar</button>
-            <button class="tool-button moodquest" onclick="openPopup('moodquest')"><i class="fas fa-map-signs tool-icon"></i>Mood Quest</button>
-        </div>
-    </div>
-
-    <div id="intro-content">
-        <h2 class="section-heading">Why Mood to Task?</h2>
-        <div class="feature-cards">
-            <div class="feature-card">
-                <span class="feature-icon">⚡</span>
-                <h3>Instant Mood Boost</h3>
-                <p>Quick, fun tasks to shift your mood in under a minute.</p>
+    <header>
+        <h1>Mood to Task</h1>
+        <p>Find tasks and tools to match your mood</p>
+    </header>
+    <main>
+        <section id="mood-buttons">
+            <button onclick="selectMood('happy')"><span class="mood-icon">😊</span> Happy</button>
+            <button onclick="selectMood('sad')"><span class="mood-icon">😢</span> Sad</button>
+            <button onclick="selectMood('angry')"><span class="mood-icon">😣</span> Angry</button>
+            <button onclick="selectMood('tired')"><span class="mood-icon">😴</span> Tired</button>
+            <button onclick="selectMood('stressed')"><span class="mood-icon">😓</span> Stressed</button>
+            <button onclick="selectMood('bored')"><span class="mood-icon">😑</span> Bored</button>
+            <button onclick="selectMood('excited')"><span class="mood-icon">😃</span> Excited</button>
+            <button onclick="selectMood('confused')"><span class="mood-icon">😕</span> Confused</button>
+        </section>
+        <section id="result"></section>
+        <section id="tools">
+            <h2>Tools</h2>
+            <div class="tool-buttons">
+                <button onclick="openPopup('breathing')">Breathing</button>
+                <button onclick="openPopup('soundscape')">Soundscape</button>
+                <button onclick="openPopup('punching')">Punching Bag</button>
+                <button onclick="openPopup('stretch')">Stretch</button>
+                <button onclick="openPopup('doodle')">Doodle</button>
+                <button onclick="openPopup('stressball')">Stress Ball</button>
+                <button onclick="openPopup('worry')">Worry Shredder</button>
+                <button onclick="openPopup('color')">Color Focus</button>
+                <button onclick="openPopup('sudoku')">Sudoku</button>
+                <button onclick="openPopup('gratitude')">Gratitude</button>
+                <button onclick="openPopup('stressjar')">Stress Jar</button>
+                <button onclick="openPopup('moodquest')">Mood Quest</button>
             </div>
-            <div class="feature-card">
-                <span class="feature-icon">🧠</span>
-                <h3>Science-Backed</h3>
-                <p>Activities rooted in psychology and neuroscience.</p>
-            </div>
-        </div>
-    </div>
-
-    <div id="donate">
-        <h3>Support Us</h3>
-        <p>Support Mood to Task by using our affiliate link or buying us a coffee—thank you!</p>
-        <a href="https://amzn.to/42ImpbI" target="_blank" rel="noopener noreferrer" class="affiliate-link">Shop Stress Balls on Amazon</a>
-        <a href="https://www.buymeacoffee.com/moodtask" target="_blank" rel="noopener noreferrer" class="coffee-link">Buy Me a Coffee</a>
-    </div>
-
+        </section>
+        <section id="support">
+            <a href="https://www.buymeacoffee.com/moodtask" target="_blank" rel="noopener noreferrer" class="coffee-link">Buy Me a Coffee</a>
+        </section>
+    </main>
     <footer>
-        <div class="footer-content">
-            <button id="share" class="share-button" aria-label="Share this page on X">
-                <svg class="share-logo" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                </svg>
-                <span>Share on X</span>
-            </button>
-            <p class="disclaimer"><em>Mood to Task is for informational purposes only and not a substitute for professional medical advice.</em></p>
-            <p class="affiliate-disclosure">Mood to Task is a participant in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for sites to earn advertising fees by advertising and linking to Amazon.com.</p>
-            <p class="footer-links">
-                <a href="privacy.html" target="_blank">Privacy Policy</a>
-            </p>
-            <p class="copyright">© 2025 Mood to Task. All rights reserved.</p>
-        </div>
+        <p>© 2025 Mood to Task. <a href="privacy.html">Privacy Policy</a></p>
     </footer>
 
     <!-- Popups -->
     <div id="breathing-popup" class="popup">
         <div class="popup-content">
-            <h4>Breathing Exercise</h4>
-            <div id="breathing-circle">
-                <span id="breathing-step">Inhale</span>
-            </div>
-            <p id="breathing-instruction">Breathe in deeply...</p>
-            <div class="progress-container">
-                <div id="breathing-progress" class="progress-bar"></div>
-            </div>
-            <p id="breathing-timer">Time remaining: 60s</p>
-            <button class="close-button" onclick="closePopup('breathing')"><i class="fas fa-times"></i></button>
-        </div>
-    </div>
-    <div id="gratitude-popup" class="popup">
-        <div class="popup-content">
-            <h4>Gratitude Note</h4>
-            <p>Write down something you're grateful for:</p>
-            <textarea id="gratitude-text" rows="3" placeholder="Today I'm grateful for..."></textarea>
-            <button class="action-button" onclick="saveGratitude()"><i class="fas fa-save"></i> Save Gratitude</button>
-            <button class="close-button" onclick="closePopup('gratitude')"><i class="fas fa-times"></i></button>
-        </div>
-    </div>
-    <div id="soundscape-popup" class="popup">
-        <div class="popup-content">
-            <h4>Soundscape</h4>
-            <p>Relax with a calming soundscape</p>
-            <select id="soundscape-select" class="sound-select">
-                <option value="nature">Forest Sounds</option>
-                <option value="rain">Gentle Rain</option>
-                <option value="waves">Ocean Waves</option>
-            </select>
-            <div class="audio-controls">
-                <button id="play-btn" class="audio-btn"><i class="fas fa-play"></i></button>
-                <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="0.7">
-            </div>
-            <div class="progress-container">
-                <div id="soundscape-progress" class="progress-bar"></div>
-            </div>
-            <p id="soundscape-timer">Time remaining: 90s</p>
-            <button class="close-button" onclick="closePopup('soundscape')"><i class="fas fa-times"></i></button>
-        </div>
-    </div>
-    <div id="punching-popup" class="popup">
-        <div class="popup-content">
-            <h4>Punching Bag</h4>
-            <p>Release your stress! Tap or click the bag to punch.</p>
-            <div id="punching-bag">0</div>
-            <div class="progress-container">
-                <div id="punching-progress" class="progress-bar"></div>
-            </div>
-            <p id="punching-timer">Time remaining: 30s</p>
-            <button class="close-button" onclick="closePopup('punching')"><i class="fas fa-times"></i></button>
-        </div>
-    </div>
-    <div id="stretch-popup" class="popup">
-        <div class="popup-content">
-            <h4>Stretch</h4>
-            <p id="stretch-prompt">Stretch prompt will appear here...</p>
-            <div class="progress-container">
-                <div id="stretch-progress" class="progress-bar"></div>
-            </div>
-            <p id="stretch-timer">Time remaining: 60s</p>
-            <button class="close-button" onclick="closePopup('stretch')"><i class="fas fa-times"></i></button>
-        </div>
-    </div>
-    <div id="doodle-popup" class="popup">
-        <div class="popup-content">
-            <h4>Doodle</h4>
-            <p>Let your creativity flow! Draw for 90 seconds.</p>
-            <div class="drawing-tools">
-                <input type="color" id="color-picker" value="#000000">
-                <input type="range" id="brush-size" min="1" max="20" value="5">
-            </div>
-            <canvas id="doodle-canvas" width="400" height="300"></canvas>
-            <div class="progress-container">
-                <div id="doodle-progress" class="progress-bar"></div>
-            </div>
-            <p id="doodle-timer">Time remaining: 90s</p>
-            <button class="action-button" onclick="saveDoodle()"><i class="fas fa-download"></i> Save Doodle</button>
-            <button class="action-button" onclick="clearCanvas()"><i class="fas fa-trash"></i> Clear</button>
-            <button class="close-button" onclick="closePopup('doodle')"><i class="fas fa-times"></i></button>
-        </div>
-    </div>
-    <div id="stressball-popup" class="popup">
-        <div class="popup-content">
-            <h4>Stress Ball</h4>
-            <p>Squeeze away stress! Click the ball to relax.</p>
-            <div id="stress-ball">0</div>
-            <div class="progress-container">
-                <div id="stressball-progress" class="progress-bar"></div>
-            </div>
-            <p id="stressball-timer">Time remaining: 30s</p>
-            <button class="close-button" onclick="closePopup('stressball')"><i class="fas fa-times"></i></button>
-        </div>
-    </div>
-    <div id="worry-popup" class="popup">
-        <div class="popup-content">
-            <h4>Worry Shredder</h4>
-            <p>Write down a worry, then watch it get shredded away!</p>
-            <textarea id="worry-text" rows="3" placeholder="I'm worried about..."></textarea>
-            <div id="paper-strips-container"></div>
-            <button class="action-button" onclick="shredWorry()"><i class="fas fa-cut"></i> Shred Worry</button>
-            <button class="close-button" onclick="closePopup('worry')"><i class="fas fa-times"></i></button>
-        </div>
-    </div>
-    <div id="color-popup" class="popup">
-        <div class="popup-content">
-            <h4>Color Focus</h4>
-            <p id="color-prompt">Focus on a color...</p>
-            <div id="color-square"></div>
-            <div class="progress-container">
-                <div id="color-progress" class="progress-bar"></div>
-            </div>
-            <p id="color-timer">Time remaining: 60s</p>
-            <button class="close-button" onclick="closePopup('color')"><i class="fas fa-times"></i></button>
-        </div>
-    </div>
-    <div id="sudoku-popup" class="popup">
-        <div class="popup-content">
-            <h4>Sudoku</h4>
-            <p>Solve the puzzle by filling in the numbers!</p>
-            <div id="sudoku-grid"></div>
-            <div class="progress-container">
-                <div id="sudoku-progress" class="progress-bar"></div>
-            </div>
-            <p id="sudoku-timer">Time remaining: 90s</p>
-            <button class="close-button" onclick="closePopup('sudoku')"><i class="fas fa-times"></i></button>
-        </div>
-    </div>
-    <div id="moodflinger-popup" class="popup">
-        <div class="popup-content">
-            <h4>Mood Flinger</h4>
-            <p>Drag and release to fling your mood at the target!</p>
-            <canvas id="moodflinger-canvas" width="400" height="300"></canvas>
-            <p id="moodflinger-score">Score: 0</p>
-            <div class="progress-container">
-                <div id="moodflinger-progress" class="progress-bar"></div>
-            </div>
-            <p id="moodflinger-timer">Time remaining: 60s</p>
-            <button class="close-button" onclick="closePopup('moodflinger')"><i class="fas fa-times"></i></button>
-        </div>
-    </div>
-    <div id="asmr-popup" class="popup">
-        <div class="popup-content">
-            <h4>ASMR</h4>
-            <p>Relax with soothing ASMR sounds</p>
-            <select id="asmr-select" class="sound-select">
-                <option value="tapping">Tapping</option>
-                <option value="whispering">Whispering</option>
-                <option value="brushing">Brushing</option>
-            </select>
-            <div class="audio-controls">
-                <button id="asmr-play-btn" class="audio-btn"><i class="fas fa-play"></i></button>
-                <input type="range" id="asmr-volume-slider" min="0" max="1" step="0.1" value="0.7">
-            </div>
-            <div class="progress-container">
-                <div id="asmr-progress" class="progress-bar"></div>
-            </div>
-            <p id="asmr-timer">Time remaining: 90s</p>
-            <button class="close-button" onclick="closePopup('asmr')"><i class="fas fa-times"></i></button>
-        </div>
-    </div>
-    <div id="stressjar-popup" class="popup">
-        <div class="popup-content">
-            <h4>Stress Jar</h4>
-            <p>Write a worry or stressor, then seal it away!</p>
-            <textarea id="stressjar-text" rows="3" placeholder="I'm stressed about..."></textarea>
-            <div id="stressjar-container"></div>
-            <button class="action-button" onclick="sealStress()"><i class="fas fa-lock"></i> Seal Stress</button>
-            <button class="action-button" onclick="viewStresses()"><i class="fas fa-eye"></i> View Saved</button>
-            <div class="progress-container">
-                <div id="stressjar-progress" class="progress-bar"></div>
-            </div>
-            <p id="stressjar-timer">Time remaining: 30s</p>
-            <button class="close-button" onclick="closePopup('stressjar')"><i class="fas fa-times"></i></button>
-        </div>
-    </div>
-    <div id="moodquest-popup" class="popup">
-        <div class="popup-content">
-            <h4>Mood Quest</h4>
-            <p>Create a quest to tackle a task or boost your mood!</p>
-            <input type="text" id="quest-goal" placeholder="Enter your goal (e.g., finish homework)">
-            <button class="action-button" onclick="generateQuest()"><i class="fas fa-map"></i> Start Quest</button>
-            <div id="quest-steps"></div>
-            <div id="quest-progress-map"></div>
-            <p id="quest-xp">XP: 0</p>
-            <p id="quest-badges">Badges: None</p>
-            <div class="progress-container">
-                <div id="moodquest-progress" class="progress-bar"></div>
-            </div>
-            <p id="moodquest-timer">Time remaining: 90s</p>
-            <button class="action-button" onclick="viewQuests()"><i class="fas fa-history"></i> View Past Quests</button>
-            <button class="close-button" onclick="closePopup('moodquest')"><i class="fas fa-times"></i></button>
+            <span class="close" onclick="closePopup('breathing')">×</span>
+            <h2>Breathing Exercise</h2>
+            <div id="breathing-circle"></div>
+            <h3 id="breathing-step"></h3>
+            <p id="breathing-instruction"></p>
+            <div id="breathing-timer">Time remaining: 60s</div>
+            <div class="progress-bar"><div id="breathing-progress"></div></div>
         </div>
     </div>
 
-    <!-- Audio elements -->
-    <audio id="click-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-simple-countdown-922.mp3"></audio>
-    <audio id="success-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-achievement-bell-600.mp3"></audio>
-    <audio id="punch-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-punch-with-a-hard-whistle-2054.mp3"></audio>
-    <audio id="shred-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-paper-ripping-1376.mp3"></audio>
-    <audio id="nature-sound" src="https://raw.githubusercontent.com/AIFuture180/mood-task-matcher/main/Spring%20Day%20Forest.mp3" loop></audio>
-    <audio id="rain-sound" src="https://raw.githubusercontent.com/AIFuture180/mood-task-matcher/main/Light%20Rain.mp3" loop></audio>
-    <audio id="waves-sound" src="https://raw.githubusercontent.com/AIFuture180/mood-task-matcher/main/Waves%20Crashing%20on%20Rock%20Beach.mp3" loop></audio>
-    <!-- Placeholder ASMR sounds -->
-    <audio id="tapping-sound" src="https://example.com/tapping.mp3" loop></audio>
-    <audio id="whispering-sound" src="https://example.com/whispering.mp3" loop></audio>
-    <audio id="brushing-sound" src="https://example.com/brushing.mp3" loop></audio>
+    <div id="soundscape-popup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup('soundscape')">×</span>
+            <h2>Soundscape</h2>
+            <select id="soundscape-select">
+                <option value="nature">Nature</option>
+                <option value="rain">Rain</option>
+                <option value="waves">Waves</option>
+            </select>
+            <button id="play-btn"><i class="fas fa-play"></i></button>
+            <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="0.5">
+            <div id="soundscape-timer">Time remaining: 90s</div>
+            <div class="progress-bar"><div id="soundscape-progress"></div></div>
+        </div>
+    </div>
+
+    <div id="punching-popup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup('punching')">×</span>
+            <h2>Punching Bag</h2>
+            <div id="punching-bag">0</div>
+            <div id="punching-timer">Time remaining: 30s</div>
+            <div class="progress-bar"><div id="punching-progress"></div></div>
+        </div>
+    </div>
+
+    <div id="stretch-popup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup('stretch')">×</span>
+            <h2>Stretch</h2>
+            <div id="stretch-details"></div>
+            <div id="stretch-timer">Time remaining: 60s</div>
+            <div class="progress-bar"><div id="stretch-progress"></div></div>
+        </div>
+    </div>
+
+    <div id="doodle-popup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup('doodle')">×</span>
+            <h2>Doodle</h2>
+            <canvas id="doodle-canvas" width="400" height="300"></canvas>
+            <button onclick="clearDoodle()">Clear</button>
+            <div id="doodle-timer">Time remaining: 90s</div>
+            <div class="progress-bar"><div id="doodle-progress"></div></div>
+        </div>
+    </div>
+
+    <div id="stressball-popup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup('stressball')">×</span>
+            <h2>Stress Ball</h2>
+            <div id="stress-ball">0</div>
+            <div id="stressball-timer">Time remaining: 30s</div>
+            <div class="progress-bar"><div id="stressball-progress"></div></div>
+        </div>
+    </div>
+
+    <div id="worry-popup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup('worry')">×</span>
+            <h2>Worry Shredder</h2>
+            <textarea id="worry-text" placeholder="Write your worry..."></textarea>
+            <button onclick="shredWorry()">Shred It</button>
+            <div id="paper-strips"></div>
+            <div id="worry-timer">Time remaining: 30s</div>
+            <div class="progress-bar"><div id="worry-progress"></div></div>
+        </div>
+    </div>
+
+    <div id="color-popup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup('color')">×</span>
+            <h2>Color Focus</h2>
+            <div id="color-box" style="width: 100px; height: 100px;"></div>
+            <div id="color-timer">Time remaining: 60s</div>
+            <div class="progress-bar"><div id="color-progress"></div></div>
+        </div>
+    </div>
+
+    <div id="sudoku-popup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup('sudoku')">×</span>
+            <h2>Sudoku</h2>
+            <div id="sudoku-grid"></div>
+            <div id="sudoku-timer">Time remaining: 90s</div>
+            <div class="progress-bar"><div id="sudoku-progress"></div></div>
+        </div>
+    </div>
+
+    <div id="gratitude-popup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup('gratitude')">×</span>
+            <h2>Gratitude Journal</h2>
+            <textarea id="gratitude-text" placeholder="What are you grateful for?"></textarea>
+            <button onclick="saveGratitude()">Save</button>
+            <div id="gratitude-timer">Time remaining: 30s</div>
+            <div class="progress-bar"><div id="gratitude-progress"></div></div>
+        </div>
+    </div>
+
+    <div id="stressjar-popup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup('stressjar')">×</span>
+            <h2>Stress Jar</h2>
+            <textarea id="stressjar-text" placeholder="Write your stress..."></textarea>
+            <div id="stressjar-container"></div>
+            <button onclick="sealStress()">Seal Stress</button>
+            <button onclick="viewStresses()">View Saved</button>
+            <div id="stressjar-timer">Time remaining: 30s</div>
+            <div class="progress-bar"><div id="stressjar-progress"></div></div>
+        </div>
+    </div>
+
+    <div id="moodquest-popup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup('moodquest')">×</span>
+            <h2>Mood Quest Builder</h2>
+            <input id="quest-goal" type="text" placeholder="Enter your quest goal...">
+            <button onclick="generateQuest()">Start Quest</button>
+            <div id="quest-steps"></div>
+            <div id="quest-progress-map"></div>
+            <div id="quest-badges">Badges: None</div>
+            <button onclick="viewQuests()">View Past Quests</button>
+            <div id="moodquest-timer">Time remaining: 90s</div>
+            <div class="progress-bar"><div id="moodquest-progress"></div></div>
+        </div>
+    </div>
+
+    <!-- Audio Elements -->
+    <audio id="click-sound" src="click.mp3"></audio>
+    <audio id="success-sound" src="success.mp3"></audio>
+    <audio id="punch-sound" src="punch.mp3"></audio>
+    <audio id="shred-sound" src="shred.mp3"></audio>
+    <audio id="nature-sound" src="nature.mp3"></audio>
+    <audio id="rain-sound" src="rain.mp3"></audio>
+    <audio id="waves-sound" src="waves.mp3"></audio>
+    <audio id="tapping-sound" src="tapping.mp3"></audio>
+    <audio id="whispering-sound" src="whispering.mp3"></audio>
+    <audio id="brushing-sound" src="brushing.mp3"></audio>
 
     <script src="script.js"></script>
 </body>
