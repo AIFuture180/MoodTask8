@@ -278,26 +278,31 @@ nav.scrolled {
     justify-content: center;
     color: white;
     font-size: 18px;
-    transition: transform 4s ease;
+    transition: transform 0.3s ease;
 }
 
 .inhale { animation: expand 4s ease-in-out; }
 .hold { animation: pulse 4s ease-in-out; }
 .exhale { animation: contract 4s ease-in-out; }
+.pause { animation: pause 1s ease-in-out; }
 
 @keyframes expand {
     from { transform: scale(1); }
-    to { transform: scale(1.5); }
+    to { transform: scale(1.3); }
 }
 
 @keyframes pulse {
-    0%, 100% { transform: scale(1.5); }
-    50% { transform: scale(1.5) translateY(-5px); }
+    0%, 100% { transform: scale(1.3); }
+    50% { transform: scale(1.3) translateY(-5px); }
 }
 
 @keyframes contract {
-    from { transform: scale(1.5); }
+    from { transform: scale(1.3); }
     to { transform: scale(1); }
+}
+
+@keyframes pause {
+    0%, 100% { transform: scale(1); }
 }
 
 textarea, input[type="text"] {
