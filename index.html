@@ -76,7 +76,7 @@
 
     <div id="donate">
         <h3>Support Us</h3>
-        <p>Support Mood to Task by using our affiliate link or buying us a coffee—thank you!</p>
+        <p>Support Mood to Task by using our affiliate link or buying us a coffee—きた!</p>
         <a href="https://amzn.to/42ImpbI" target="_blank" rel="noopener noreferrer" class="affiliate-link">Shop Stress Balls on Amazon</a>
         <a href="https://www.buymeacoffee.com/moodtask" target="_blank" rel="noopener noreferrer" class="coffee-link">Buy Me a Coffee</a>
     </div>
@@ -161,7 +161,7 @@
             <div class="progress-container">
                 <div id="stretch-progress" class="progress-bar"></div>
             </div>
-            <p id="stretch-timer">Time remaining: 60s</p>
+            <p id="stretch-timer">Time remaining: 30s</p>
             <button class="close-button" onclick="closePopup('stretch')"><i class="fas fa-times"></i></button>
         </div>
     </div>
@@ -208,12 +208,18 @@
     <div id="sudoku-popup" class="popup">
         <div class="popup-content">
             <h4>Sudoku</h4>
-            <p>Solve the puzzle by filling in the numbers!</p>
-            <div id="sudoku-grid"></div>
-            <div class="progress-container">
-                <div id="sudoku-progress" class="progress-bar"></div>
-            </div>
-            <p id="sudoku-timer">Time remaining: 90s</p>
+            <p>Select puzzle size and difficulty, then fill in the grid.</p>
+            <select id="sudoku-size" class="sound-select">
+                <option value="four">4x4</option>
+                <option value="nine">9x9</option>
+            </select>
+            <select id="sudoku-difficulty" class="sound-select">
+                <option value="easy">Easy</option>
+                <option value="intermediate">Intermediate</option>
+                <option value="hard">Hard</option>
+            </select>
+            <div id="sudoku-grid" class="four"></div>
+            <button id="sudoku-finish" class="action-button"><i class="fas fa-check"></i> Finish</button>
             <button class="close-button" onclick="closePopup('sudoku')"><i class="fas fa-times"></i></button>
         </div>
     </div>
@@ -233,7 +239,7 @@
             <div class="progress-container">
                 <div id="asmr-progress" class="progress-bar"></div>
             </div>
-            <p id="sudoku-timer">Time remaining: 90s</p>
+            <p id="asmr-timer">Time remaining: 90s</p>
             <button class="close-button" onclick="closePopup('asmr')"><i class="fas fa-times"></i></button>
         </div>
     </div>
