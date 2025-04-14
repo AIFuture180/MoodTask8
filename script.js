@@ -148,8 +148,8 @@ function updateProgress(elementId, total, current) {
 
 function startBreathing() {
     let time = 60;
-    let cycleTime = 0; // Tracks time within a cycle (0 to 12 seconds)
-    const cycleDuration = 13; // 4s inhale + 4s hold + 4s exhale + 1s pause
+    let cycleTime = 0;
+    const cycleDuration = 13;
     const steps = [
         { text: "Inhale", instruction: "Breathe in slowly through your nose...", class: "inhale", duration: 4 },
         { text: "Hold", instruction: "Hold your breath...", class: "hold", duration: 4 },
@@ -164,21 +164,15 @@ function startBreathing() {
     updateProgress('breathing-progress', 60, 0);
 
     function updateBreathing() {
-        const currentStepIndex = Math.floor(cycleTime / 4) % 4; // Determines step based on cycle time
+        const currentStepIndex = Math.floor(cycleTime / 4) % 4;
         const currentStep = steps[currentStepIndex];
-
-        // Update text, instruction, and animation class
         stepElement.textContent = currentStep.text;
         instructionElement.textContent = currentStep.instruction;
         circle.className = currentStep.class;
-
-        // Increment timers
-        cycleTime = (cycleTime + 1) % cycleDuration; // Reset cycleTime after 13 seconds
+        cycleTime = (cycleTime + 1) % cycleDuration;
         time--;
         timerElement.textContent = `Time remaining: ${time}s`;
         updateProgress('breathing-progress', 60, time);
-
-        // End after 60 seconds
         if (time <= 0) {
             clearInterval(window.breathingInterval);
             playSound(successSound, 0.4);
@@ -186,7 +180,7 @@ function startBreathing() {
         }
     }
 
-    updateBreathing(); // Initial call to set starting state
+    updateBreathing();
     window.breathingInterval = setInterval(updateBreathing, 1000);
 }
 
@@ -268,21 +262,22 @@ function startPunching() {
 }
 
 function startStretch() {
-    let time = 60;
+    let time = 30;
     const stretches = [
-        "Reach up high for 10 seconds.",
-        "Touch your toes for 10 seconds.",
-        "Stretch your arms behind your back.",
-        "Rotate your shoulders slowly."
+        "Roll your head in a gentle circle, left to right, then right to left, for 3 full circles (about 30 seconds). Relieves tension in your neck and shoulders.",
+        "Lift your shoulders toward your ears, hold for 2 seconds, then release. Repeat 8 times (about 30 seconds). Reduces tightness in your upper back and shoulders.",
+        "Sit upright and twist your torso gently to the right, hold for 15 seconds, then to the left for 15 seconds (30 seconds total). Eases lower back stiffness and promotes spinal flexibility.",
+        "Extend your arms out and make small forward circles for 15 seconds, then reverse for 15 seconds. Loosens shoulder joints and improves upper body mobility.",
+        "Raise your right arm and lean gently to the left, hold for 15 seconds, then switch sides (30 seconds total). Stretches side muscles and calms your mind with deep breaths."
     ];
     const stretchElement = document.getElementById('stretch-prompt');
     const timerElement = document.getElementById('stretch-timer');
     stretchElement.textContent = stretches[Math.floor(Math.random() * stretches.length)];
-    updateProgress('stretch-progress', 60, 0);
+    updateProgress('stretch-progress', 30, 0);
     window.stretchInterval = setInterval(() => {
         time--;
         timerElement.textContent = `Time remaining: ${time}s`;
-        updateProgress('stretch-progress', 60, time);
+        updateProgress('stretch-progress', 30, time);
         if (time <= 0) {
             clearInterval(window.stretchInterval);
             playSound(successSound, 0.4);
@@ -387,45 +382,127 @@ function startColorFocus() {
 }
 
 function startSudoku() {
-    let time = 90;
     const gridElement = document.getElementById('sudoku-grid');
     const timerElement = document.getElementById('sudoku-timer');
+    const progressContainer = document.querySelector('#sudoku-popup .progress-container');
     gridElement.innerHTML = '';
-    const puzzle = [
-        [5, 3, '', '', 7, '', '', '', ''],
-        [6, '', '', 1, 9, 5, '', '', ''],
-        ['', 9, 8, '', '', '', '', 6, ''],
-        [8, '', '', '', 6, '', '', '', 3],
-        [4, '', '', 8, '', 3, '', '', 1],
-        ['', '', '', '', 2, '', '', '', 6],
-        ['', 6, '', '', '', '', 2, 8, ''],
-        ['', '', '', 4, 1, 9, '', '', 5],
-        ['', '', '', '', 8, '', '', 7, 9]
-    ];
-    for (let i = 0; i < 9; i++) {
-        for (let j = 0; j < 9; j++) {
-            const input = document.createElement('input');
-            input.type = 'text';
-            input.maxLength = 1;
-            input.value = puzzle[i][j] || '';
-            input.disabled = !!puzzle[i][j];
-            input.oninput = () => {
-                if (!/^[1-9]?$/.test(input.value)) input.value = '';
-            };
-            gridElement.appendChild(input);
+    timerElement.style.display = 'none';
+    progressContainer.style.display = 'none';
+
+    const puzzles = {
+        easy: {
+            grid: [
+                [1, 2, '', ''],
+                ['', '', 4, ''],
+                ['', 4, '', ''],
+                ['', '', 3, 1]
+            ],
+            solution: [
+                [1, 2, 3, 4],
+                [3, 1, 4, 2],
+                [2, 4, 1, 3],
+                [4, 3, 2, 1]
+            ]
+        },
+        medium: {
+            grid: [
+                ['', 1, '', ''],
+                ['', '', 3, ''],
+                ['', 2, '', ''],
+                ['', '', 4, '']
+            ],
+            solution: [
+                [4, 1, 2, 3],
+                [2, 4, 3, 1],
+                [3, 2, 1, 4],
+                [1, 3, 4, 2]
+            ]
+        },
+        hard: {
+            grid: [
+                ['', '', '', 1],
+                ['', 2, '', ''],
+                ['', '', 3, ''],
+                [4, '', '', '']
+            ],
+            solution: [
+                [3, 4, 2, 1],
+                [1, 2, 4, 3],
+                [2, 1, 3, 4],
+                [4, 3, 1, 2]
+            ]
         }
-    }
-    updateProgress('sudoku-progress', 90, 0);
-    window.sudokuInterval = setInterval(() => {
-        time--;
-        timerElement.textContent = `Time remaining: ${time}s`;
-        updateProgress('sudoku-progress', 90, time);
-        if (time <= 0) {
-            clearInterval(window.sudokuInterval);
-            playSound(successSound, 0.4);
-            setTimeout(() => closePopup('sudoku'), 1500);
+    };
+
+    const select = document.createElement('select');
+    select.className = 'sound-select';
+    ['easy', 'medium', 'hard'].forEach(level => {
+        const option = document.createElement('option');
+        option.value = level;
+        option.textContent = level.charAt(0).toUpperCase() + level.slice(1);
+        select.appendChild(option);
+    });
+
+    const loadPuzzle = () => {
+        const level = select.value;
+        const puzzle = puzzles[level].grid;
+        const solution = puzzles[level].solution;
+        gridElement.innerHTML = '';
+
+        for (let i = 0; i < 4; i++) {
+            for (let j = 0; j < 4; j++) {
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.maxLength = 1;
+                input.value = puzzle[i][j] || '';
+                input.disabled = !!puzzle[i][j];
+                input.className = 'sudoku-cell';
+                input.oninput = () => {
+                    if (!/^[1-4]?$/.test(input.value)) input.value = '';
+                };
+                gridElement.appendChild(input);
+            }
         }
-    }, 1000);
+
+        const finishButton = document.createElement('button');
+        finishButton.className = 'action-button';
+        finishButton.innerHTML = '<i class="fas fa-check"></i> Finish';
+        finishButton.onclick = () => {
+            const inputs = gridElement.querySelectorAll('input');
+            let userGrid = [];
+            for (let i = 0; i < 4; i++) {
+                userGrid[i] = [];
+                for (let j = 0; j < 4; j++) {
+                    userGrid[i][j] = inputs[i * 4 + j].value || '';
+                }
+            }
+            let isCorrect = true;
+            for (let i = 0; i < 4; i++) {
+                for (let j = 0; j < 4; j++) {
+                    if (userGrid[i][j] !== '' && parseInt(userGrid[i][j]) !== solution[i][j]) {
+                        isCorrect = false;
+                        break;
+                    }
+                }
+                if (!isCorrect) break;
+            }
+            if (isCorrect && userGrid.every(row => row.every(cell => cell !== ''))) {
+                playSound(successSound, 0.4);
+                alert('Congratulations! You solved the puzzle correctly!');
+                setTimeout(() => closePopup('sudoku'), 1500);
+            } else {
+                alert('The puzzle is not correct or incomplete. Please try again.');
+            }
+        };
+
+        if (!gridElement.querySelector('button')) {
+            gridElement.appendChild(finishButton);
+        }
+    };
+
+    select.onchange = loadPuzzle;
+    gridElement.appendChild(select);
+    loadPuzzle();
 }
 
 function startGratitude() {
