@@ -161,7 +161,7 @@
             <div class="progress-container">
                 <div id="stretch-progress" class="progress-bar"></div>
             </div>
-            <p id="stretch-timer">Time remaining: 30s</p>
+            <p id="stretch-timer">Time remaining: 60s</p>
             <button class="close-button" onclick="closePopup('stretch')"><i class="fas fa-times"></i></button>
         </div>
     </div>
@@ -208,18 +208,12 @@
     <div id="sudoku-popup" class="popup">
         <div class="popup-content">
             <h4>Sudoku</h4>
-            <p>Select puzzle size and difficulty, then fill in the grid.</p>
-            <select id="sudoku-size" class="sound-select">
-                <option value="four">4x4</option>
-                <option value="nine">9x9</option>
-            </select>
-            <select id="sudoku-difficulty" class="sound-select">
-                <option value="easy">Easy</option>
-                <option value="intermediate">Intermediate</option>
-                <option value="hard">Hard</option>
-            </select>
-            <div id="sudoku-grid" class="four"></div>
-            <button id="sudoku-finish" class="action-button"><i class="fas fa-check"></i> Finish</button>
+            <p>Solve the puzzle by filling in the numbers!</p>
+            <div id="sudoku-grid"></div>
+            <div class="progress-container">
+                <div id="sudoku-progress" class="progress-bar"></div>
+            </div>
+            <p id="sudoku-timer">Time remaining: 90s</p>
             <button class="close-button" onclick="closePopup('sudoku')"><i class="fas fa-times"></i></button>
         </div>
     </div>
@@ -249,12 +243,13 @@
     <audio id="success-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-achievement-bell-600.mp3"></audio>
     <audio id="punch-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-punch-with-a-hard-whistle-2054.mp3"></audio>
     <audio id="shred-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-paper-ripping-1376.mp3"></audio>
-    <audio id="nature-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-forest-birds-chirping-1206.mp3" loop></audio>
-    <audio id="rain-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-light-rain-loop-1253.mp3" loop></audio>
-    <audio id="waves-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-ocean-waves-loop-1204.mp3" loop></audio>
-    <audio id="tapping-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-tape-cassette-insertion-1380.mp3" loop></audio>
-    <audio id="whispering-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-whispering-wind-1188.mp3" loop></audio>
-    <audio id="brushing-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-brushing-teeth-3067.mp3" loop></audio>
+    <audio id="nature-sound" src="https://raw.githubusercontent.com/AIFuture180/mood-task-matcher/main/Spring%20Day%20Forest.mp3" loop></audio>
+    <audio id="rain-sound" src="https://raw.githubusercontent.com/AIFuture180/mood-task-matcher/main/Light%20Rain.mp3" loop></audio>
+    <audio id="waves-sound" src="https://raw.githubusercontent.com/AIFuture180/mood-task-matcher/main/Waves%20Crashing%20on%20Rock%20Beach.mp3" loop></audio>
+    <!-- Placeholder ASMR sounds -->
+    <audio id="tapping-sound" src="https://example.com/tapping.mp3" loop></audio>
+    <audio id="whispering-sound" src="https://example.com/whispering.mp3" loop></audio>
+    <audio id="brushing-sound" src="https://example.com/brushing.mp3" loop></audio>
 
     <script src="script.js"></script>
 </body>
