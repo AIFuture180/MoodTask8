@@ -51,14 +51,10 @@
             <button class="tool-button punching" onclick="openPopup('punching')"><i class="fas fa-fist-raised tool-icon"></i>Punching Bag</button>
             <button class="tool-button stretch" onclick="openPopup('stretch')"><i class="fas fa-child tool-icon"></i>Stretch</button>
             <button class="tool-button doodle" onclick="openPopup('doodle')"><i class="fas fa-pencil-alt tool-icon"></i>Doodle</button>
-            <button class="tool-button stressball" onclick="openPopup('stressball')"><i class="fas fa-hand-rock tool-icon"></i>Stress Ball</button>
             <button class="tool-button worry" onclick="openPopup('worry')"><i class="fas fa-cut tool-icon"></i>Worry Shredder</button>
             <button class="tool-button color" onclick="openPopup('color')"><i class="fas fa-palette tool-icon"></i>Color Focus</button>
             <button class="tool-button sudoku" onclick="openPopup('sudoku')"><i class="fas fa-puzzle-piece tool-icon"></i>Sudoku</button>
-            <button class="tool-button moodflinger" onclick="openPopup('moodflinger')"><i class="fas fa-rocket tool-icon"></i>Mood Flinger</button>
             <button class="tool-button asmr" onclick="openPopup('asmr')"><i class="fas fa-headphones tool-icon"></i>ASMR</button>
-            <button class="tool-button stressjar" onclick="openPopup('stressjar')"><i class="fas fa-jar tool-icon"></i>Stress Jar</button>
-            <button class="tool-button moodquest" onclick="openPopup('moodquest')"><i class="fas fa-map-signs tool-icon"></i>Mood Quest</button>
         </div>
     </div>
 
@@ -187,18 +183,6 @@
             <button class="close-button" onclick="closePopup('doodle')"><i class="fas fa-times"></i></button>
         </div>
     </div>
-    <div id="stressball-popup" class="popup">
-        <div class="popup-content">
-            <h4>Stress Ball</h4>
-            <p>Squeeze away stress! Click the ball to relax.</p>
-            <div id="stress-ball">0</div>
-            <div class="progress-container">
-                <div id="stressball-progress" class="progress-bar"></div>
-            </div>
-            <p id="stressball-timer">Time remaining: 30s</p>
-            <button class="close-button" onclick="closePopup('stressball')"><i class="fas fa-times"></i></button>
-        </div>
-    </div>
     <div id="worry-popup" class="popup">
         <div class="popup-content">
             <h4>Worry Shredder</h4>
@@ -233,19 +217,6 @@
             <button class="close-button" onclick="closePopup('sudoku')"><i class="fas fa-times"></i></button>
         </div>
     </div>
-    <div id="moodflinger-popup" class="popup">
-        <div class="popup-content">
-            <h4>Mood Flinger</h4>
-            <p>Drag and release to fling your mood at the target!</p>
-            <canvas id="moodflinger-canvas" width="400" height="300"></canvas>
-            <p id="moodflinger-score">Score: 0</p>
-            <div class="progress-container">
-                <div id="moodflinger-progress" class="progress-bar"></div>
-            </div>
-            <p id="moodflinger-timer">Time remaining: 60s</p>
-            <button class="close-button" onclick="closePopup('moodflinger')"><i class="fas fa-times"></i></button>
-        </div>
-    </div>
     <div id="asmr-popup" class="popup">
         <div class="popup-content">
             <h4>ASMR</h4>
@@ -264,39 +235,6 @@
             </div>
             <p id="asmr-timer">Time remaining: 90s</p>
             <button class="close-button" onclick="closePopup('asmr')"><i class="fas fa-times"></i></button>
-        </div>
-    </div>
-    <div id="stressjar-popup" class="popup">
-        <div class="popup-content">
-            <h4>Stress Jar</h4>
-            <p>Write a worry or stressor, then seal it away!</p>
-            <textarea id="stressjar-text" rows="3" placeholder="I'm stressed about..."></textarea>
-            <div id="stressjar-container"></div>
-            <button class="action-button" onclick="sealStress()"><i class="fas fa-lock"></i> Seal Stress</button>
-            <button class="action-button" onclick="viewStresses()"><i class="fas fa-eye"></i> View Saved</button>
-            <div class="progress-container">
-                <div id="stressjar-progress" class="progress-bar"></div>
-            </div>
-            <p id="stressjar-timer">Time remaining: 30s</p>
-            <button class="close-button" onclick="closePopup('stressjar')"><i class="fas fa-times"></i></button>
-        </div>
-    </div>
-    <div id="moodquest-popup" class="popup">
-        <div class="popup-content">
-            <h4>Mood Quest</h4>
-            <p>Create a quest to tackle a task or boost your mood!</p>
-            <input type="text" id="quest-goal" placeholder="Enter your goal (e.g., finish homework)">
-            <button class="action-button" onclick="generateQuest()"><i class="fas fa-map"></i> Start Quest</button>
-            <div id="quest-steps"></div>
-            <div id="quest-progress-map"></div>
-            <p id="quest-xp">XP: 0</p>
-            <p id="quest-badges">Badges: None</p>
-            <div class="progress-container">
-                <div id="moodquest-progress" class="progress-bar"></div>
-            </div>
-            <p id="moodquest-timer">Time remaining: 90s</p>
-            <button class="action-button" onclick="viewQuests()"><i class="fas fa-history"></i> View Past Quests</button>
-            <button class="close-button" onclick="closePopup('moodquest')"><i class="fas fa-times"></i></button>
         </div>
     </div>
 
