@@ -1,525 +1,618 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-}
-
-body {
-    background: #f0f2f5;
-    color: #333;
-    line-height: 1.6;
-}
-
-nav {
-    background: #fff;
-    padding: 15px 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.logo {
-    font-size: 24px;
-    font-weight: 600;
-}
-
-.logo span {
-    color: #2ecc71;
-}
-
-.hero-section {
-    text-align: center;
-    padding: 50px 20px;
-    background: linear-gradient(135deg, #3498db, #2ecc71);
-    color: #fff;
-}
-
-.hero-section h1 {
-    font-size: 36px;
-    margin-bottom: 10px;
-}
-
-.hero-section h2 {
-    font-size: 20px;
-    margin-bottom: 20px;
-}
-
-.hero-cta {
-    background: #fff;
-    color: #333;
-    border: none;
-    padding: 12px 30px;
-    border-radius: 5px;
-    font-size: 18px;
-    cursor: pointer;
-    transition: transform 0.2s;
-}
-
-.hero-cta:hover {
-    transform: scale(1.05);
-}
-
-.pulse-animation {
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
-}
-
-#mood-prompt {
-    padding: 40px 20px;
-    text-align: center;
-}
-
-#instruction {
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
-#mood-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-}
-
-#mood-buttons button {
-    background: #fff;
-    border: 1px solid #ccc;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    position: relative;
-    transition: background 0.2s;
-}
-
-#mood-buttons button:hover {
-    background: #f0f0f0;
-}
-
-.mood-icon {
-    font-size: 20px;
-}
-
-[data-tooltip]:hover:after {
-    content: attr(data-tooltip);
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #333;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 3px;
-    font-size: 12px;
-    white-space: nowrap;
-    z-index: 10;
-}
-
-#result {
-    margin: 20px 0;
-    font-size: 18px;
-}
-
-.tools-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-    margin: 20px 0;
-}
-
-.tool-button {
-    padding: 15px;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: #fff;
-    transition: transform 0.2s;
-}
-
-.tool-button.breathing { background: linear-gradient(45deg, #3498db, #2980b9); }
-.tool-button.gratitude { background: linear-gradient(45deg, #e74c3c, #c0392b); }
-.tool-button.soundscape { background: linear-gradient(45deg, #2ecc71, #27ae60); }
-.tool-button.punching { background: linear-gradient(45deg, #e67e22, #d35400); }
-.tool-button.stretch { background: linear-gradient(45deg, #f1c40f, #f39c12); }
-.tool-button.doodle { background: linear-gradient(45deg, #9b59b6, #8e44ad); }
-.tool-button.worry { background: linear-gradient(45deg, #34495e, #2c3e50); }
-.tool-button.color { background: linear-gradient(45deg, #1abc9c, #16a085); }
-.tool-button.sudoku { background: linear-gradient(45deg, #3498db, #2980b9); }
-.tool-button.asmr { background: linear-gradient(45deg, #95a5a6, #7f8c8d); }
-
-.tool-button:hover {
-    transform: scale(1.05);
-}
-
-.tool-icon {
-    font-size: 18px;
-}
-
-.popup {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-}
-
-.popup-content {
-    background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    max-width: 90%;
-    max-height: 90%;
-    overflow-y: auto;
-    position: relative;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.close-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-    color: #333;
-}
-
-.action-button {
-    background: #2ecc71;
-    color: #fff;
-    border: none;
-    padding: 12px 30px;
-    border-radius: 5px;
-    font-size: 18px;
-    cursor: pointer;
-    margin: 10px 5px;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.action-button:hover {
-    background: #27ae60;
-}
-
-.progress-container {
-    width: 100%;
-    height: 10px;
-    background: #e0e0e0;
-    border-radius: 5px;
-    margin: 10px 0;
-}
-
-.progress-bar {
-    height: 100%;
-    background: #2ecc71;
-    border-radius: 5px;
-    transition: width 1s linear;
-}
-
-#breathing-circle {
-    width: 100px;
-    height: 100px;
-    background: #3498db;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-size: 16px;
-    margin: 20px auto;
-}
-
-@keyframes expand {
-    0% { transform: scale(1); }
-    100% { transform: scale(1.5); }
-}
-
-@keyframes contract {
-    0% { transform: scale(1.5); }
-    100% { transform: scale(1); }
-}
-
-#punching-bag {
-    width: 100px;
-    height: 150px;
-    background: #e74c3c;
-    border-radius: 20px;
-    margin: 20px auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-size: 24px;
-    cursor: pointer;
-}
-
-#punching-bag.punch {
-    transform: rotate(10deg);
-}
-
-#doodle-canvas {
-    border: 1px solid #ccc;
-    display: block;
-    margin: 10px auto;
-}
-
-.drawing-tools {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 10px;
-}
-
-#color-square {
-    width: 100px;
-    height: 100px;
-    margin: 20px auto;
-}
-
-.sound-select {
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    font-size: 16px;
-}
-
-.audio-controls {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    margin: 10px 0;
-}
-
-.audio-btn {
-    background: #2ecc71;
-    color: #fff;
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.audio-btn:hover {
-    background: #27ae60;
-}
-
-#volume-slider {
-    width: 100px;
-}
-
-.paper-strip {
-    position: absolute;
-    width: 10%;
-    height: 100px;
-    background: #fff;
-    border: 1px solid #ccc;
-    animation: shred 2s forwards;
-}
-
-@keyframes shred {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(200px); }
-}
-
-.sudoku-grid {
-    display: grid;
-    gap: 2px;
-    background: #ccc;
-    padding: 2px;
-    margin: 10px auto;
-}
-
-.sudoku-grid.four {
-    grid-template-columns: repeat(4, 50px);
-    grid-template-rows: repeat(4, 50px);
-}
-
-.sudoku-grid.nine {
-    grid-template-columns: repeat(9, 40px);
-    grid-template-rows: repeat(9, 40px);
-}
-
-.sudoku-cell {
-    width: 100%;
-    height: 100%;
-    border: none;
-    text-align: center;
-    font-family: 'Poppins', sans-serif;
-    background: #fff;
-}
-
-.sudoku-cell.four {
-    font-size: 20px;
-}
-
-.sudoku-cell.nine {
-    font-size: 16px;
-}
-
-.sudoku-cell:disabled {
-    background: #e0e0e0;
-    color: #333;
-}
-
-#intro-content {
-    padding: 40px 20px;
-    text-align: center;
-}
-
-.section-heading {
-    font-size: 28px;
-    margin-bottom: 20px;
-}
-
-.feature-cards {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-}
-
-.feature-card {
-    background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    width: 300px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.feature-icon {
-    font-size: 30px;
-    display: block;
-    margin-bottom: 10px;
-}
-
-#donate {
-    padding: 40px 20px;
-    text-align: center;
-    background: #f9f9f9;
-}
-
-#donate h3 {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-.affiliate-link, .coffee-link {
-    display: inline-block;
-    padding: 10px 20px;
-    margin: 10px;
-    background: #2ecc71;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-}
-
-.affiliate-link:hover, .coffee-link:hover {
-    background: #27ae60;
-}
-
-footer {
-    background: #333;
-    color: #fff;
-    padding: 20px;
-    text-align: center;
-}
-
-.footer-content {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.share-button {
-    background: #fff;
-    color: #333;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 10px;
-}
-
-.share-logo {
-    width: 16px;
-    height: 16px;
-}
-
-.disclaimer, .affiliate-disclosure {
-    font-size: 12px;
-    margin: 10px 0;
-}
-
-.footer-links a {
-    color: #2ecc71;
-    text-decoration: none;
-    margin: 0 10px;
-}
-
-.copyright {
-    font-size: 12px;
-    margin-top: 10px;
-}
-
-@media (max-width: 600px) {
-    .hero-section h1 {
-        font-size: 28px;
+const clickSound = document.getElementById('click-sound');
+const successSound = document.getElementById('success-sound');
+const punchSound = document.getElementById('punch-sound');
+const shredSound = document.getElementById('shred-sound');
+const natureSounds = {
+    nature: document.getElementById('nature-sound'),
+    rain: document.getElementById('rain-sound'),
+    waves: document.getElementById('waves-sound'),
+    tapping: document.getElementById('tapping-sound'),
+    whispering: document.getElementById('whispering-sound'),
+    brushing: document.getElementById('brushing-sound')
+};
+let currentSound = null;
+
+function playSound(sound, volume = 1.0) {
+    sound.currentTime = 0;
+    sound.volume = volume;
+    sound.play().catch(err => console.error('Sound play error:', err));
+}
+
+function openPopup(tool) {
+    document.querySelectorAll('.popup').forEach(p => p.style.display = 'none');
+    const popup = document.getElementById(`${tool}-popup`);
+    if (popup) {
+        popup.style.display = 'flex';
+        playSound(clickSound, 0.3);
+        gtag('event', 'Tool Opened', { 'event_category': 'Tool', 'event_label': tool });
+        if (tool === 'breathing') startBreathing();
+        if (tool === 'soundscape') startSoundscape();
+        if (tool === 'punching') startPunching();
+        if (tool === 'stretch') startStretch();
+        if (tool === 'doodle') startDoodle();
+        if (tool === 'color') startColor();
+        if (tool === 'sudoku') startSudoku();
+        if (tool === 'asmr') startASMR();
+    }
+}
+
+function closePopup(tool) {
+    const popup = document.getElementById(`${tool}-popup`);
+    if (popup) {
+        popup.style.display = 'none';
+        clearInterval(window[`${tool}Interval`]);
+        if (currentSound) {
+            currentSound.pause();
+            currentSound.currentTime = 0;
+        }
+        if (tool === 'punching') document.getElementById('punching-bag').textContent = '0';
+        if (tool === 'doodle') clearCanvas();
+        if (tool === 'worry') document.getElementById('paper-strips-container').innerHTML = '';
+    }
+}
+
+function updateProgress(progressId, totalTime, timeLeft) {
+    const progressBar = document.getElementById(progressId);
+    if (progressBar) {
+        const progress = ((totalTime - timeLeft) / totalTime) * 100;
+        progressBar.style.width = `${progress}%`;
+    }
+}
+
+function selectMood(mood) {
+    const tasks = {
+        tired: ['breathing', 'stretch', 'soundscape'],
+        stressed: ['breathing', 'punching', 'worry'],
+        bored: ['doodle', 'sudoku', 'color'],
+        excited: ['doodle', 'stretch', 'color'],
+        sad: ['gratitude', 'breathing', 'soundscape'],
+        angry: ['punching', 'worry', 'breathing'],
+        happy: ['gratitude', 'doodle', 'stretch'],
+        confused: ['sudoku', 'color', 'breathing']
+    };
+    const task = tasks[mood][Math.floor(Math.random() * tasks[mood].length)];
+    document.getElementById('result').innerHTML = `Try this: <a href="#" onclick="openPopup('${task}')">${task.charAt(0).toUpperCase() + task.slice(1)}</a>`;
+    playSound(clickSound, 0.3);
+}
+
+function startBreathing() {
+    let time = 60;
+    let stepTime = 0;
+    const steps = ['Inhale', 'Hold', 'Exhale', 'Hold'];
+    let currentStep = 0;
+    const stepDurations = [4, 4, 4, 4];
+    const circle = document.getElementById('breathing-circle');
+    const instruction = document.getElementById('breathing-instruction');
+    const timer = document.getElementById('breathing-timer');
+    updateProgress('breathing-progress', 60, 0);
+    window.breathingInterval = setInterval(() => {
+        time--;
+        stepTime++;
+        if (stepTime >= stepDurations[currentStep]) {
+            stepTime = 0;
+            currentStep = (currentStep + 1) % steps.length;
+            instruction.textContent = `${steps[currentStep]}...`;
+            circle.style.animation = 'none';
+            void circle.offsetWidth;
+            circle.style.animation = currentStep === 0 ? 'expand 4s linear' : currentStep === 2 ? 'contract 4s linear' : 'none';
+        }
+        timer.textContent = `Time remaining: ${time}s`;
+        updateProgress('breathing-progress', 60, time);
+        if (time <= 0) {
+            clearInterval(window.breathingInterval);
+            playSound(successSound, 0.4);
+            setTimeout(() => closePopup('breathing'), 1500);
+        }
+    }, 1000);
+}
+
+function startSoundscape() {
+    let time = 90;
+    const timerElement = document.getElementById('soundscape-timer');
+    const selectElement = document.getElementById('soundscape-select');
+    const playButton = document.getElementById('play-btn');
+    const volumeSlider = document.getElementById('volume-slider');
+    updateProgress('soundscape-progress', 90, 0);
+    playButton.innerHTML = '<i class="fas fa-play"></i>';
+    selectElement.onchange = function() {
+        if (currentSound) {
+            currentSound.pause();
+            currentSound.currentTime = 0;
+            playButton.innerHTML = '<i class="fas fa-play"></i>';
+        }
+    };
+    playButton.onclick = function() {
+        const soundType = selectElement.value;
+        if (currentSound && currentSound !== natureSounds[soundType]) {
+            currentSound.pause();
+            currentSound.currentTime = 0;
+        }
+        currentSound = natureSounds[soundType];
+        if (currentSound.paused) {
+            currentSound.play().catch(err => console.error('Sound play error:', err));
+            currentSound.volume = volumeSlider.value;
+            playButton.innerHTML = '<i class="fas fa-pause"></i>';
+        } else {
+            currentSound.pause();
+            currentSound.currentTime = 0;
+            playButton.innerHTML = '<i class="fas fa-play"></i>';
+        }
+    };
+    volumeSlider.oninput = function() {
+        if (currentSound) currentSound.volume = this.value;
+    };
+    window.soundscapeInterval = setInterval(() => {
+        time--;
+        timerElement.textContent = `Time remaining: ${time}s`;
+        updateProgress('soundscape-progress', 90, time);
+        if (time <= 0) {
+            clearInterval(window.soundscapeInterval);
+            if (currentSound) currentSound.pause();
+            playSound(successSound, 0.4);
+            setTimeout(() => closePopup('soundscape'), 1500);
+        }
+    }, 1000);
+}
+
+function startPunching() {
+    let time = 30;
+    let punchCount = 0;
+    const bag = document.getElementById('punching-bag');
+    const timer = document.getElementById('punching-timer');
+    updateProgress('punching-progress', 30, 0);
+    bag.textContent = punchCount;
+    bag.onclick = () => {
+        punchCount++;
+        bag.textContent = punchCount;
+        playSound(punchSound, 0.5);
+        bag.classList.add('punch');
+        setTimeout(() => bag.classList.remove('punch'), 100);
+    };
+    window.punchingInterval = setInterval(() => {
+        time--;
+        timer.textContent = `Time remaining: ${time}s`;
+        updateProgress('punching-progress', 30, time);
+        if (time <= 0) {
+            clearInterval(window.punchingInterval);
+            playSound(successSound, 0.4);
+            setTimeout(() => closePopup('punching'), 1500);
+        }
+    }, 1000);
+}
+
+function startStretch() {
+    let time = 30;
+    const stretches = [
+        'Reach up high and stretch your arms towards the sky.',
+        'Bend to the side, stretching your torso gently.',
+        'Touch your toes, feeling the stretch in your hamstrings.',
+        'Rotate your shoulders backward in a circular motion.',
+        'Extend one arm across your body, holding it with the other.'
+    ];
+    const prompt = document.getElementById('stretch-prompt');
+    const timer = document.getElementById('stretch-timer');
+    prompt.textContent = stretches[Math.floor(Math.random() * stretches.length)];
+    updateProgress('stretch-progress', 30, 0);
+    window.stretchInterval = setInterval(() => {
+        time--;
+        timer.textContent = `Time remaining: ${time}s`;
+        updateProgress('stretch-progress', 30, time);
+        if (time <= 0) {
+            clearInterval(window.stretchInterval);
+            playSound(successSound, 0.4);
+            setTimeout(() => closePopup('stretch'), 1500);
+        }
+    }, 1000);
+}
+
+function startDoodle() {
+    let time = 90;
+    const canvas = document.getElementById('doodle-canvas');
+    const ctx = canvas.getContext('2d');
+    const colorPicker = document.getElementById('color-picker');
+    const brushSize = document.getElementById('brush-size');
+    const timer = document.getElementById('doodle-timer');
+    let isDrawing = false;
+    ctx.lineCap = 'round';
+    updateProgress('doodle-progress', 90, 0);
+    canvas.onmousedown = () => isDrawing = true;
+    canvas.onmouseup = () => isDrawing = false;
+    canvas.onmouseout = () => isDrawing = false;
+    canvas.onmousemove = (e) => {
+        if (!isDrawing) return;
+        const rect = canvas.getBoundingClientRect();
+        ctx.strokeStyle = colorPicker.value;
+        ctx.lineWidth = brushSize.value;
+        ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+    };
+    window.doodleInterval = setInterval(() => {
+        time--;
+        timer.textContent = `Time remaining: ${time}s`;
+        updateProgress('doodle-progress', 90, time);
+        if (time <= 0) {
+            clearInterval(window.doodleInterval);
+            playSound(successSound, 0.4);
+            setTimeout(() => closePopup('doodle'), 1500);
+        }
+    }, 1000);
+}
+
+function saveDoodle() {
+    const canvas = document.getElementById('doodle-canvas');
+    const link = document.createElement('a');
+    link.download = 'doodle.png';
+    link.href = canvas.toDataURL();
+    link.click();
+}
+
+function clearCanvas() {
+    const canvas = document.getElementById('doodle-canvas');
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.beginPath();
+}
+
+function saveGratitude() {
+    const text = document.getElementById('gratitude-text').value;
+    if (text.trim()) {
+        const blob = new Blob([text], { type: 'text/plain' });
+        const link = document.createElement('a');
+        link.download = 'gratitude.txt';
+        link.href = URL.createObjectURL(blob);
+        link.click();
+        document.getElementById('gratitude-text').value = '';
+        playSound(successSound, 0.4);
+        setTimeout(() => closePopup('gratitude'), 1500);
+    } else {
+        alert('Please write something you are grateful for!');
+    }
+}
+
+function shredWorry() {
+    const text = document.getElementById('worry-text').value;
+    const container = document.getElementById('paper-strips-container');
+    if (text.trim()) {
+        container.innerHTML = '';
+        for (let i = 0; i < 10; i++) {
+            const strip = document.createElement('div');
+            strip.className = 'paper-strip';
+            strip.style.left = `${i * 10}%`;
+            strip.style.animationDelay = `${i * 0.1}s`;
+            container.appendChild(strip);
+        }
+        playSound(shredSound, 0.5);
+        document.getElementById('worry-text').value = '';
+        setTimeout(() => {
+            container.innerHTML = '';
+            playSound(successSound, 0.4);
+            setTimeout(() => closePopup('worry'), 1500);
+        }, 2000);
+    } else {
+        alert('Please write a worry to shred!');
+    }
+}
+
+function startColor() {
+    let time = 60;
+    const colors = ['#e74c3c', '#3498db', '#2ecc71', '#f1c40f', '#9b59b6'];
+    const prompts = ['Red', 'Blue', 'Green', 'Yellow', 'Purple'];
+    const index = Math.floor(Math.random() * colors.length);
+    const square = document.getElementById('color-square');
+    const prompt = document.getElementById('color-prompt');
+    const timer = document.getElementById('color-timer');
+    square.style.backgroundColor = colors[index];
+    prompt.textContent = `Focus on ${prompts[index]}...`;
+    updateProgress('color-progress', 60, 0);
+    window.colorInterval = setInterval(() => {
+        time--;
+        timer.textContent = `Time remaining: ${time}s`;
+        updateProgress('color-progress', 60, time);
+        if (time <= 0) {
+            clearInterval(window.colorInterval);
+            playSound(successSound, 0.4);
+            setTimeout(() => closePopup('color'), 1500);
+        }
+    }, 1000);
+}
+
+function startSudoku() {
+    const gridElement = document.getElementById('sudoku-grid');
+    const difficultySelect = document.getElementById('sudoku-difficulty');
+    const sizeSelect = document.getElementById('sudoku-size');
+    const puzzles = {
+        four: {
+            easy: [
+                { grid: [['1','2','',''],['','4','1',''],['','4','',''],['','3','1','2']], solution: [['1','2','3','4'],['3','4','1','2'],['2','4','3','1'],['4','3','2','1']] },
+                { grid: [['3','','','4'],['','2','1',''],['','3','4',''],['2','','','1']], solution: [['3','1','2','4'],['4','2','1','3'],['1','3','4','2'],['2','4','3','1']] },
+                { grid: [['','','2','3'],['4','','','1'],['1','','','2'],['3','4','','']], solution: [['1','3','2','4'],['4','2','3','1'],['2','1','4','3'],['3','4','1','2']] }
+            ],
+            intermediate: [
+                { grid: [['2','','',''],['','1','','3'],['','4','2',''],['','2','','1']], solution: [['2','3','1','4'],['4','1','2','3'],['3','4','2','1'],['1','2','3','4']] },
+                { grid: [['','','1','2'],['','3','',''],['','4','3',''],['2','','','4']], solution: [['3','4','1','2'],['1','3','2','4'],['4','2','3','1'],['2','1','4','3']] },
+                { grid: [['','1','','3'],['','3',''],['','2','1',''],['','3','2','4']], solution: [['4','1','2','3'],['2','3','4','1'],['3','2','1','4'],['1','4','3','2']] }
+            ],
+            hard: [
+                { grid: [['','','','1'],['','2','3',''],['','4',''],['3','','','2']], solution: [['4','3','2','1'],['1','2','4','3'],['2','1','3','4'],['3','4','1','2']] },
+                { grid: [['','1','',''],['','1','2',''],['','2','4',''],['','3','1','2']], solution: [['4','1','3','2'],['3','1','2','4'],['2','4','3','1'],['1','2','4','3']] },
+                { grid: [['1','','','3'],['','2','',''],['','4','3',''],['','3','2','']], solution: [['1','3','2','4'],['3','2','4','1'],['2','4','1','3'],['4','1','3','2']] }
+            ]
+        },
+        nine: {
+            easy: [
+                { grid: [
+                    ['5','3','','7','','','','',''],
+                    ['6','','','1','9','5','','',''],
+                    ['','9','8','','','','','6',''],
+                    ['8','','','','6','','','','3'],
+                    ['4','','','8','','','3','','1'],
+                    ['7','','','','2','','','','6'],
+                    ['','6','','','','','2','8',''],
+                    ['','','','4','1','9','','','5'],
+                    ['','','','8','','','','7','9']
+                ], solution: [
+                    ['5','3','4','6','7','8','9','1','2'],
+                    ['6','7','2','1','9','5','3','4','8'],
+                    ['1','9','8','3','4','2','5','6','7'],
+                    ['8','5','9','7','6','1','4','2','3'],
+                    ['4','2','6','8','5','3','7','9','1'],
+                    ['7','1','3','9','2','4','8','5','6'],
+                    ['9','6','1','5','3','7','2','8','4'],
+                    ['2','8','7','4','1','9','6','3','5'],
+                    ['3','4','5','2','8','6','1','7','9']
+                ] },
+                { grid: [
+                    ['','4','5','3','','','','',''],
+                    ['7','','','9','','','','',''],
+                    ['','2','6','','8','','','',''],
+                    ['8','','','','7','6','','',''],
+                    ['','6','7','','','8','9','',''],
+                    ['9','','','4','2','','','','6'],
+                    ['','3','','','9','7','1','',''],
+                    ['','8','1','2','','','4','6',''],
+                    ['','5','9','','','4','2','8','']
+                ], solution: [
+                    ['1','4','5','3','6','2','7','8','9'],
+                    ['7','9','3','1','4','5','6','2','8'],
+                    ['8','2','6','7','9','8','5','4','3'],
+                    ['3','5','4','9','7','6','8','1','2'],
+                    ['2','6','7','5','1','8','9','3','4'],
+                    ['9','1','8','4','2','3','5','7','6'],
+                    ['4','3','2','6','9','7','1','5','8'],
+                    ['5','8','1','2','3','9','4','6','7'],
+                    ['6','7','9','8','5','4','2','3','1']
+                ] }
+            ],
+            intermediate: [
+                { grid: [
+                    ['','','','7','','','','',''],
+                    ['','','8','3','','','','',''],
+                    ['9','','','','4','','','',''],
+                    ['2','','','','','','','9',''],
+                    ['7','','','','6','','','','4'],
+                    ['8','','','','','','','3',''],
+                    ['5','','','','','6','','',''],
+                    ['','','9','2','','','','',''],
+                    ['','','5','','','','','','']
+                ], solution: [
+                    ['4','3','6','7','8','9','5','1','2'],
+                    ['1','5','8','3','2','6','9','7','4'],
+                    ['9','7','2','1','5','4','6','8','3'],
+                    ['2','6','3','5','7','8','1','9','4'],
+                    ['7','9','5','4','6','1','3','2','8'],
+                    ['8','4','1','9','3','2','7','5','6'],
+                    ['5','8','7','6','9','3','4','1','2'],
+                    ['3','1','9','2','4','5','8','6','7'],
+                    ['6','2','4','8','1','7','5','3','9']
+                ] },
+                { grid: [
+                    ['6','','','','','','','',''],
+                    ['','7','','','9','','','',''],
+                    ['','','4','5','','8','','',''],
+                    ['','','','7','3','','','',''],
+                    ['5','','2','','','6','','',''],
+                    ['','','','4','8','','','',''],
+                    ['','','','1','6','7','','',''],
+                    ['','','','9','4','5','2','',''],
+                    ['8','3','','','','','1','','']
+                ], solution: [
+                    ['6','8','5','2','1','4','3','9','7'],
+                    ['3','7','1','6','9','8','5','4','2'],
+                    ['2','9','4','5','7','3','8','1','6'],
+                    ['4','6','9','7','5','2','1','8','3'],
+                    ['5','1','8','3','4','6','9','2','7'],
+                    ['7','2','3','8','9','1','4','6','5'],
+                    ['9','5','2','1','6','7','8','3','4'],
+                    ['1','4','6','9','3','5','2','7','8'],
+                    ['8','3','7','4','2','9','6','5','1']
+                ] }
+            ],
+            hard: [
+                { grid: [
+                    ['8','','','','','','','',''],
+                    ['','3','6','','','','','',''],
+                    ['','7','','','2','','','',''],
+                    ['','','5','','','7','','',''],
+                    ['','','','1','','5','','',''],
+                    ['9','','','4','','','','',''],
+                    ['','5','','','8','1','','',''],
+                    ['','','','3','6','','','7',''],
+                    ['','','4','9','','','','','']
+                ], solution: [
+                    ['8','1','2','7','5','3','6','4','9'],
+                    ['9','4','3','6','8','2','1','7','5'],
+                    ['6','7','5','4','9','1','2','8','3'],
+                    ['1','5','4','2','3','7','8','9','6'],
+                    ['3','6','9','8','4','5','7','2','1'],
+                    ['2','8','7','1','9','6','4','5','3'],
+                    ['5','2','1','9','7','4','3','6','8'],
+                    ['4','3','8','5','2','1','9','6','7'],
+                    ['7','9','6','3','4','8','5','1','2']
+                ] },
+                { grid: [
+                    ['3','','','','','','','',''],
+                    ['','5','7','','','','','',''],
+                    ['','','','6','9','','','',''],
+                    ['','','','8','4','5','','',''],
+                    ['7','','','2','6','','','',''],
+                    ['','','','9','3','','','',''],
+                    ['','','','5','7','2','','',''],
+                    ['','6','1','','','','','',''],
+                    ['8','','','','','','','4','']
+                ], solution: [
+                    ['3','8','4','7','2','1','5','9','6'],
+                    ['6','5','7','3','8','9','4','2','1'],
+                    ['9','2','1','6','5','4','8','7','3'],
+                    ['2','9','6','8','4','5','3','1','7'],
+                    ['7','1','3','2','6','9','8','5','4'],
+                    ['5','4','8','9','3','7','2','6','1'],
+                    ['4','3','9','5','7','2','1','8','6'],
+                    ['1','6','2','4','9','8','7','3','5'],
+                    ['8','7','5','1','3','6','9','4','2']
+                ] }
+            ]
+        }
+    };
+
+    function isValidGrid(grid, size) {
+        const n = size === 'four' ? 4 : 9;
+        const subgridSize = size === 'four' ? 2 : 3;
+        for (let row = 0; row < n; row++) {
+            let rowSet = new Set();
+            for (let col = 0; col < n; col++) {
+                if (grid[row][col] && rowSet.has(grid[row][col])) return false;
+                if (grid[row][col]) rowSet.add(grid[row][col]);
+            }
+        }
+        for (let col = 0; col < n; col++) {
+            let colSet = new Set();
+            for (let row = 0; row < n; row++) {
+                if (grid[row][col] && colSet.has(grid[row][col])) return false;
+                if (grid[row][col]) colSet.add(grid[row][col]);
+            }
+        }
+        for (let subgridRow = 0; subgridRow < n; subgridRow += subgridSize) {
+            for (let subgridCol = 0; subgridCol < n; subgridCol += subgridSize) {
+                let subgridSet = new Set();
+                for (let r = 0; r < subgridSize; r++) {
+                    for (let c = 0; c < subgridSize; c++) {
+                        let value = grid[subgridRow + r][subgridCol + c];
+                        if (value && subgridSet.has(value)) return false;
+                        if (value) subgridSet.add(value);
+                    }
+                }
+            }
+        }
+        return true;
     }
 
-    .hero-section h2 {
-        font-size: 16px;
+    function checkSolution(grid, solution, size) {
+        const n = size === 'four' ? 4 : 9;
+        for (let row = 0; row < n; row++) {
+            for (let col = 0; col < n; col++) {
+                if (grid[row][col] && grid[row][col] !== solution[row][col]) return false;
+                if (!grid[row][col] && solution[row][col]) return false;
+            }
+        }
+        return isValidGrid(grid, size);
     }
 
-    #mood-buttons button {
-        font-size: 14px;
-        padding: 8px 16px;
+    function loadPuzzle() {
+        const size = sizeSelect.value;
+        const difficulty = difficultySelect.value;
+        const puzzleList = puzzles[size][difficulty];
+        const puzzle = puzzleList[Math.floor(Math.random() * puzzleList.length)];
+        const n = size === 'four' ? 4 : 9;
+        gridElement.className = `sudoku-grid ${size}`;
+        gridElement.innerHTML = '';
+        for (let row = 0; row < n; row++) {
+            for (let col = 0; col < n; col++) {
+                const cell = document.createElement('input');
+                cell.type = 'text';
+                cell.className = `sudoku-cell ${size}`;
+                cell.maxLength = 1;
+                cell.value = puzzle.grid[row][col] || '';
+                if (puzzle.grid[row][col]) cell.disabled = true;
+                cell.addEventListener('input', () => {
+                    if (size === 'four' && cell.value && !['1','2','3','4'].includes(cell.value)) {
+                        cell.value = '';
+                    } else if (size === 'nine' && cell.value && !['1','2','3','4','5','6','7','8','9'].includes(cell.value)) {
+                        cell.value = '';
+                    }
+                });
+                gridElement.appendChild(cell);
+            }
+        }
+        document.getElementById('sudoku-finish').onclick = () => {
+            const currentGrid = [];
+            const cells = gridElement.querySelectorAll('.sudoku-cell');
+            for (let row = 0; row < n; row++) {
+                currentGrid[row] = [];
+                for (let col = 0; col < n; col++) {
+                    currentGrid[row][col] = cells[row * n + col].value || '';
+                }
+            }
+            if (checkSolution(currentGrid, puzzle.solution, size)) {
+                playSound(successSound, 0.4);
+                alert('Congratulations! You solved the puzzle!');
+                setTimeout(() => closePopup('sudoku'), 1500);
+            } else {
+                alert('The puzzle is not correct. Keep trying!');
+            }
+        };
     }
 
-    .tool-button {
-        font-size: 14px;
-        padding: 10px;
-    }
+    sizeSelect.onchange = loadPuzzle;
+    difficultySelect.onchange = loadPuzzle;
+    loadPuzzle();
+}
 
-    .sudoku-grid.four {
-        grid-template-columns: repeat(4, 40px);
-        grid-template-rows: repeat(4, 40px);
-    }
-
-    .sudoku-grid.nine {
-        grid-template-columns: repeat(9, 30px);
-        grid-template-rows: repeat(9, 30px);
-    }
-
-    .sudoku-cell.four {
-        font-size: 16px;
-    }
-
-    .sudoku-cell.nine {
-        font-size: 14px;
-    }
-
-    .feature-card {
-        width: 100%;
-    }
+function startASMR() {
+    let time = 90;
+    const timerElement = document.getElementById('asmr-timer');
+    const selectElement = document.getElementById('asmr-select');
+    const playButton = document.getElementById('asmr-play-btn');
+    const volumeSlider = document.getElementById('asmr-volume-slider');
+    updateProgress('asmr-progress', 90, 0);
+    playButton.innerHTML = '<i class="fas fa-play"></i>';
+    selectElement.onchange = function() {
+        if (currentSound) {
+            currentSound.pause();
+            currentSound.currentTime = 0;
+            playButton.innerHTML = '<i class="fas fa-play"></i>';
+        }
+    };
+    playButton.onclick = function() {
+        const soundType = selectElement.value;
+        if (currentSound && currentSound !== natureSounds[soundType]) {
+            currentSound.pause();
+            currentSound.currentTime = 0;
+        }
+        currentSound = natureSounds[soundType];
+        if (currentSound.paused) {
+            currentSound.play().catch(err => console.error('ASMR play error:', err));
+            currentSound.volume = volumeSlider.value;
+            playButton.innerHTML = '<i class="fas fa-pause"></i>';
+        } else {
+            currentSound.pause();
+            currentSound.currentTime = 0;
+            playButton.innerHTML = '<i class="fas fa-play"></i>';
+        }
+    };
+    volumeSlider.oninput = function() {
+        if (currentSound) currentSound.volume = this.value;
+    };
+    window.asmrInterval = setInterval(() => {
+        time--;
+        timerElement.textContent = `Time remaining: ${time}s`;
+        updateProgress('asmr-progress', 90, time);
+        if (time <= 0) {
+            clearInterval(window.asmrInterval);
+            if (currentSound) currentSound.pause();
+            playSound(successSound, 0.4);
+            setTimeout(() => closePopup('asmr'), 1500);
+        }
+    }, 1000);
 }
