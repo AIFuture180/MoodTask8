@@ -395,6 +395,333 @@ function startColorFocus() {
     }, 1000);
 }
 
+function startSudoku() {
+    const gridElement = document.getElementById('sudoku-grid');
+    const difficultySelect = document.getElementById('sudoku-difficulty');
+    const sizeSelect = document.createElement('select');
+    sizeSelect.id = 'sudoku-size';
+    sizeSelect.className = 'sound-select';
+    sizeSelect.innerHTML = `
+        <option value="four">4x4</option>
+        <option value="nine">9x9</option>
+    `;
+    const controls = document.querySelector('#sudoku-popup .popup-content');
+    const existingSizeSelect = document.getElementById('sudoku-size');
+    if (!existingSizeSelect) {
+        controls.insertBefore(sizeSelect, difficultySelect);
+    }
+
+    // Puzzle pools
+    const puzzles = {
+        four: {
+            easy: [
+                { grid: [['1','2','',''],['','4',''],[,'4','',''],['','3','1']], solution: [['1','2','3','4'],['3','1','4','2'],['2','4','1','3'],['4','3','2','1']] },
+                { grid: [['3','','','4'],['','2','1',''],['','3','4',''],['2','','','1']], solution: [['3','1','2','4'],['4','2','1','3'],['1','3','4','2'],['2','4','3','1']] },
+                { grid: [['','','2','3'],['4','','','1'],['1','','','2'],['3','4','','']], solution: [['1','3','2','4'],['4','2','3','1'],['2','1','4','3'],['3','4','1','2']] }
+            ],
+            intermediate: [
+                { grid: [['2','','',''],['','1','','3'],['','4',''],['','2','','']], solution: [['2','3','1','4'],['4','1','2','3'],['3','4','2','1'],['1','2','3','4']] },
+                { grid: [['','','1',''],['','3','',''],['','4',''],['2','','','']], solution: [['3','4','1','2'],['1','3','2','4'],['4','2','3','1'],['2','1','4','3']] },
+                { grid: [['','1','',''],['','3',''],['','2','',''],['','','','4']], solution: [['4','1','2','3'],['2','4','3','1'],['3','2','1','4'],['1','3','4','2']] }
+            ],
+            hard: [
+                { grid: [['','','','1'],['','2','',''],['','4',''],['3','','','']], solution: [['4','3','2','1'],['1','2','4','3'],['2','1','3','4'],['3','4','1','2']] },
+                { grid: [['','','',''],['','1','',''],['','2',''],['','','','3']], solution: [['4','3','1','2'],['2','1','4','3'],['3','4','2','1'],['1','2','3','4']] },
+                { grid: [['1','','',''],['','','','2'],['','4','',''],['','3','']], solution: [['1','3','2','4'],['3','4','1','2'],['2','1','4','3'],['4','2','3','1']] }
+            ]
+        },
+        nine: {
+            easy: [
+                { grid: [
+                    ['5','3','','7','','','',''],
+                    ['6','','','1','9','5','','',''],
+                    ['','9','8','','','','6',''],
+                    ['8','','','','6','','','3'],
+                    ['4','','','8','','3','','1'],
+                    ['7','','','','2','','','6'],
+                    ['','6','','','','2','8',''],
+                    ['','','','4','1','9','','5'],
+                    ['','','','8','','','7','9']
+                ], solution: [
+                    ['5','3','4','6','7','8','9','1','2'],
+                    ['6','7','2','1','9','5','3','4','8'],
+                    ['1','9','8','3','4','2','5','6','7'],
+                    ['8','5','9','7','6','1','4','2','3'],
+                    ['4','2','6','8','5','3','7','9','1'],
+                    ['7','1','3','9','2','4','8','5','6'],
+                    ['9','6','1','5','3','7','2','8','4'],
+                    ['2','8','7','4','1','9','6','3','5'],
+                    ['3','4','5','2','8','6','1','7','9']
+                ] },
+                { grid: [
+                    ['','','','','','6','5','9'],
+                    ['','','','8','4','',''],
+                    ['','2','9','5','','',''],
+                    ['4','','','','','9',''],
+                    ['6','','','5','','','8'],
+                    ['9','','','','','2',''],
+                    ['','6','9','5','','',''],
+                    ['5','3','','','',''],
+                    ['7','8','9','','','','']
+                ], solution: [
+                    ['1','3','4','2','7','8','6','5','9'],
+                    ['5','6','9','1','8','3','4','7','2'],
+                    ['8','7','2','9','4','5','1','3','6'],
+                    ['2','4','8','3','6','7','9','1','5'],
+                    ['6','5','3','4','5','9','2','8','7'],
+                    ['7','9','1','8','5','2','3','6','4'],
+                    ['4','2','7','6','9','1','5','8','3'],
+                    ['9','1','5','7','3','8','2','4','6'],
+                    ['7','8','9','5','2','4','6','9','1']
+                ] },
+                { grid: [
+                    ['2','','','','','8',''],
+                    ['1','','','','3','',''],
+                    ['','9','6','5','7','',''],
+                    ['7','9','','','6'],
+                    ['','8','4','',''],
+                    ['9','','3','2','',''],
+                    ['6','3','9','5','',''],
+                    ['4','','','','7'],
+                    ['5','','','','1','']
+                ], solution: [
+                    ['6','2','5','7','4','3','9','8','1'],
+                    ['1','7','8','9','2','8','3','6','5'],
+                    ['4','3','9','6','1','5','7','2','8'],
+                    ['5','4','7','2','9','1','8','3','6'],
+                    ['2','6','3','8','5','4','1','7','9'],
+                    ['9','8','1','5','3','7','2','4','6'],
+                    ['7','1','6','3','8','9','5','4','2'],
+                    ['8','9','4','1','6','2','5','9','7'],
+                    ['3','5','2','4','7','6','8','1','9']
+                ] }
+            ],
+            intermediate: [
+                { grid: [
+                    ['','','','7','','','',''],
+                    ['','','8','3','','',''],
+                    ['9','','','','4','',''],
+                    ['2','','','','','9'],
+                    ['7','','','6','','','4'],
+                    ['8','','','','','3'],
+                    ['5','','','','6',''],
+                    ['','9','2','','',''],
+                    ['','5','','','','']
+                ], solution: [
+                    ['4','3','8','2','7','9','5','1','6'],
+                    ['5','2','6','8','1','3','9','7','4'],
+                    ['1','9','7','5','4','6','2','8','3'],
+                    ['2','6','4','3','5','7','1','9','8'],
+                    ['7','5','9','1','6','8','3','4','2'],
+                    ['8','1','3','4','9','2','6','5','7'],
+                    ['9','7','5','6','2','4','8','3','1'],
+                    ['3','8','2','9','4','1','7','6','5'],
+                    ['6','4','1','7','5','3','4','2','9']
+                ] },
+                { grid: [
+                    ['','','','','7','',''],
+                    ['8','','9','','',''],
+                    ['5','7','','','6',''],
+                    ['9','','','8','',''],
+                    ['6','','4','','','2'],
+                    ['4','','','9','',''],
+                    ['6','7','2',''],
+                    ['7','6','5','','',''],
+                    ['3','','','','','']
+                ], solution: [
+                    ['9','4','6','2','5','8','7','3','1'],
+                    ['7','3','8','4','6','9','2','5','4'],
+                    ['2','5','1','7','3','1','4','6','8'],
+                    ['3','2','9','5','1','6','8','4','7'],
+                    ['6','8','7','9','4','3','1','5','2'],
+                    ['5','1','4','8','7','2','9','6','3'],
+                    ['8','6','5','3','9','7','4','2','1'],
+                    ['4','9','2','6','8','5','3','7','4'],
+                    ['1','7','3','4','2','5','6','9','8']
+                ] },
+                { grid: [
+                    ['','','','','9',''],
+                    ['8','','','3','',''],
+                    ['6','','5','','',''],
+                    ['2','8','','',''],
+                    ['7','4','','',''],
+                    ['9','6','','',''],
+                    ['3','2','7'],
+                    ['5','4','','',''],
+                    ['3','','','','','']
+                ], solution: [
+                    ['5','4','3','8','7','2','1','9','6'],
+                    ['2','8','7','4','9','6','3','5','1'],
+                    ['6','9','1','3','5','1','4','7','8'],
+                    ['9','5','2','6','3','8','7','1','4'],
+                    ['8','6','9','7','1','4','5','3','2'],
+                    ['7','1','4','9','5','5','6','8','9'],
+                    ['4','9','8','5','2','3','9','6','7'],
+                    ['1','7','5','9','6','9','8','4','3'],
+                    ['3','2','6','1','4','7','9','5','8']
+                ] }
+            ],
+            hard: [
+                { grid: [
+                    ['','','','','4',''],
+                    ['5','','','8','',''],
+                    ['7','','9','','',''],
+                    ['','8','','','',''],
+                    ['','6','2','','',''],
+                    ['','3','','','',''],
+                    ['5','','','9',''],
+                    ['2','','','7','',''],
+                    ['6','','','','','']
+                ], solution: [
+                    ['9','8','6','7','2','5','3','4','1'],
+                    ['3','2','5','4','6','1','8','7','9'],
+                    ['4','7','1','3','9','8','2','5','6'],
+                    ['7','9','4','8','5','6','1','3','2'],
+                    ['5','3','8','6','1','2','9','4','7'],
+                    ['6','1','2','9','3','4','5','8','6'],
+                    ['8','4','3','5','7','9','6','2','1'],
+                    ['1','5','2','6','4','3','7','9','8'],
+                    ['2','6','9','1','8','7','4','5','3']
+                ] },
+                { grid: [
+                    ['','','','','','',''],
+                    ['4','','','9','',''],
+                    ['6','','8','','',''],
+                    ['','7','','','',''],
+                    ['6','3','','',''],
+                    ['','2','','','',''],
+                    ['9','','','5',''],
+                    ['7','','','2','',''],
+                    ['','','','','','']
+                ], solution: [
+                    ['8','9','5','7','4','2','6','3','1'],
+                    ['3','2','4','5','6','1','9','8','7'],
+                    ['7','6','1','3','9','8','5','4','2'],
+                    ['4','7','9','8','5','6','3','2','1'],
+                    ['2','5','8','6','1','3','4','7','9'],
+                    ['6','1','3','4','2','9','8','5','6'],
+                    ['9','4','2','9','7','5','1','6','8'],
+                    ['5','8','7','1','3','4','2','9','6'],
+                    ['1','3','6','2','8','9','7','5','4']
+                ] },
+                { grid: [
+                    ['','','','','','',''],
+                    ['3','','','6','',''],
+                    ['5','','7','','',''],
+                    ['','9','','','',''],
+                    ['8','4','','',''],
+                    ['','3','','','',''],
+                    ['6','','','2',''],
+                    ['9','','','4','',''],
+                    ['','','','','','']
+                ], solution: [
+                    ['7','9','4','2','5','8','3','6','1'],
+                    ['8','2','3','4','1','6','5','9','7'],
+                    ['6','5','1','3','9','7','2','4','8'],
+                    ['4','7','8','6','2','9','1','3','5'],
+                    ['9','3','6','8','7','4','5','1','2'],
+                    ['5','1','2','5','3','9','6','8','4'],
+                    ['3','4','5','9','6','1','8','2','7'],
+                    ['2','8','9','7','4','5','6','1','3'],
+                    ['1','6','7','5','8','2','4','9','6']
+                ] }
+            ]
+        }
+    };
+
+    function isValidGrid(grid, size) {
+        const n = size === 'four' ? 4 : 9;
+        const subgridSize = size === 'four' ? 2 : 3;
+        for (let row = 0; row < n; row++) {
+            let rowSet = new Set();
+            for (let col = 0; col < n; col++) {
+                if (grid[row][col] && rowSet.has(grid[row][col])) return false;
+                if (grid[row][col]) rowSet.add(grid[row][col]);
+            }
+        }
+        for (let col = 0; col < n; col++) {
+            let colSet = new Set();
+            for (let row = 0; row < n; row++) {
+                if (grid[row][col] && colSet.has(grid[row][col])) return false;
+                if (grid[row][col]) colSet.add(grid[row][col]);
+            }
+        }
+        for (let subgridRow = 0; subgridRow < n; subgridRow += subgridSize) {
+            for (let subgridCol = 0; subgridCol < n; subgridCol += subgridSize) {
+                let subgridSet = new Set();
+                for (let r = 0; r < subgridSize; r++) {
+                    for (let c = 0; c < subgridSize; c++) {
+                        let value = grid[subgridRow + r][subgridCol + c];
+                        if (value && subgridSet.has(value)) return false;
+                        if (value) subgridSet.add(value);
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    function checkSolution(grid, solution, size) {
+        const n = size === 'four' ? 4 : 9;
+        for (let row = 0; row < n; row++) {
+            for (let col = 0; col < n; col++) {
+                if (grid[row][col] && grid[row][col] !== solution[row][col]) return false;
+                if (!grid[row][col] && !solution[row][col]) return false;
+            }
+        }
+        return isValidGrid(solution, size);
+    }
+
+    function loadPuzzle() {
+        const size = sizeSelect.value;
+        const difficulty = difficultySelect.value;
+        const puzzleList = puzzles[size][difficulty];
+        const puzzle = puzzleList[Math.floor(Math.random() * puzzleList.length)];
+        const n = size === 'four' ? 4 : 9;
+        gridElement.className = `four ${size}`;
+        gridElement.innerHTML = '';
+        for (let row = 0; row < n; row++) {
+            for (let col = 0; col < n; col++) {
+                const cell = document.createElement('input');
+                cell.type = 'text';
+                cell.className = `sudoku-cell ${size}`;
+                cell.maxLength = 1;
+                cell.value = puzzle.grid[row][col] || '';
+                if (puzzle.grid[row][col]) cell.disabled = true;
+                cell.addEventListener('input', () => {
+                    if (size === 'four' && cell.value && !['1','2','3','4'].includes(cell.value)) {
+                        cell.value = '';
+                    } else if (size === 'nine' && cell.value && !['1','2','3','4','5','6','7','8','9'].includes(cell.value)) {
+                        cell.value = '';
+                    }
+                });
+                gridElement.appendChild(cell);
+            }
+        }
+        document.getElementById('sudoku-finish').onclick = () => {
+            const currentGrid = [];
+            const cells = gridElement.querySelectorAll('.sudoku-cell');
+            for (let row = 0; row < n; row++) {
+                currentGrid[row] = [];
+                for (let col = 0; col < n; col++) {
+                    currentGrid[row][col] = cells[row * n + col].value || '';
+                }
+            }
+            if (checkSolution(currentGrid, puzzle.solution, size)) {
+                playSound(successSound, 0.4);
+                alert('Congratulations! You solved the puzzle!');
+                setTimeout(() => closePopup('sudoku'), 1500);
+            } else {
+                alert('The puzzle is not correct. Keep trying!');
+            }
+        };
+    }
+
+    sizeSelect.onchange = loadPuzzle;
+    difficultySelect.onchange = loadPuzzle;
+    loadPuzzle();
+}
+
 function startASMR() {
     let time = 90;
     const timerElement = document.getElementById('asmr-timer');
@@ -584,322 +911,8 @@ function startMoodQuest() {
 }
 
 function completeQuestStep(index) {
-    const stepsElement = document.getElementById('quest-steps');
-    const step = stepsElement.children[index];
-    if (step) {
-        step.style.backgroundColor = '#e0f7fa';
-        playSound(successSound, 0.3);
-        let xp = parseInt(document.getElementById('quest-xp').textContent.split(': ')[1]) || 0;
-        xp += 10;
-        document.getElementById('quest-xp').textContent = `XP: ${xp}`;
-    }
-}
-
-function startSudoku() {
-    const gridElement = document.getElementById('sudoku-grid');
-    const popupContent = document.getElementById('sudoku-popup').querySelector('.popup-content');
-    gridElement.innerHTML = '';
-    popupContent.querySelectorAll('select, button').forEach(el => el.remove());
-
-    // Puzzle pools
-    const easyPuzzles = [
-        {
-            grid: [
-                [1, 2, '', ''],
-                ['', '', 4, ''],
-                ['', 4, '', ''],
-                ['', '', 3, 1]
-            ],
-            solution: [
-                [1, 2, 3, 4],
-                [3, 1, 4, 2],
-                [2, 4, 1, 3],
-                [4, 3, 2, 1]
-            ]
-        },
-        {
-            grid: [
-                [3, '', '', 4],
-                ['', 2, 1, ''],
-                ['', 3, 4, ''],
-                [2, '', '', 1]
-            ],
-            solution: [
-                [3, 1, 2, 4],
-                [4, 2, 1, 3],
-                [1, 3, 4, 2],
-                [2, 4, 3, 1]
-            ]
-        },
-        {
-            grid: [
-                ['', '', 2, 3],
-                [4, '', '', 1],
-                [1, '', '', 2],
-                [3, 4, '', '']
-            ],
-            solution: [
-                [1, 3, 2, 4],
-                [4, 2, 3, 1],
-                [2, 1, 4, 3],
-                [3, 4, 1, 2]
-            ]
-        }
-    ];
-    const intermediatePuzzles = [
-        {
-            grid: [
-                ['', 1, '', ''],
-                ['', '', 3, ''],
-                ['', 2, '', ''],
-                ['', '', 4, '']
-            ],
-            solution: [
-                [4, 1, 2, 3],
-                [2, 4, 3, 1],
-                [3, 2, 1, 4],
-                [1, 3, 4, 2]
-            ]
-        },
-        {
-            grid: [
-                [2, '', '', ''],
-                ['', 1, '', 3],
-                ['', '', 4, ''],
-                ['', 2, '', '']
-            ],
-            solution: [
-                [2, 3, 1, 4],
-                [4, 1, 2, 3],
-                [3, 4, 2, 1],
-                [1, 2, 3, 4]
-            ]
-        },
-        {
-            grid: [
-                ['', '', 1, ''],
-                ['', 3, '', ''],
-                ['', '', 4, ''],
-                [2, '', '', '']
-            ],
-            solution: [
-                [3, 4, 1, 2],
-                [1, 3, 2, 4],
-                [4, 2, 3, 1],
-                [2, 1, 4, 3]
-            ]
-        }
-    ];
-    const hardPuzzles = [
-        {
-            grid: [
-                ['', '', '', 1],
-                ['', 2, '', ''],
-                ['', '', 3, ''],
-                [4, '', '', '']
-            ],
-            solution: [
-                [3, 4, 2, 1],
-                [1, 2, 4, 3],
-                [2, 1, 3, 4],
-                [4, 3, 1, 2]
-            ]
-        },
-        {
-            grid: [
-                ['', '', '', ''],
-                ['', 1, '', ''],
-                ['', '', 2, ''],
-                ['', '', '', 3]
-            ],
-            solution: [
-                [4, 3, 1, 2],
-                [2, 1, 4, 3],
-                [3, 4, 2, 1],
-                [1, 2, 3, 4]
-            ]
-        },
-        {
-            grid: [
-                [1, '', '', ''],
-                ['', '', '', 2],
-                ['', 3, '', ''],
-                ['', '', 4, '']
-            ],
-            solution: [
-                [1, 4, 2, 3],
-                [3, 1, 4, 2],
-                [4, 2, 3, 1],
-                [2, 3, 1, 4]
-            ]
-        }
-    ];
-
-    // Difficulty selection
-    const select = document.createElement('select');
-    select.className = 'sound-select';
-    ['Easy', 'Intermediate', 'Hard'].forEach(level => {
-        const option = document.createElement('option');
-        option.value = level.toLowerCase();
-        option.textContent = level;
-        select.appendChild(option);
-    });
-    popupContent.insertBefore(select, gridElement);
-
-    // Puzzle validation
-    function isValidPlacement(grid, row, col, num) {
-        // Check row
-        for (let x = 0; x < 4; x++) {
-            if (grid[row][x] === num) return false;
-        }
-        // Check column
-        for (let x = 0; x < 4; x++) {
-            if (grid[x][col] === num) return false;
-        }
-        // Check 2x2 subgrid
-        const startRow = Math.floor(row / 2) * 2;
-        const startCol = Math.floor(col / 2) * 2;
-        for (let i = 0; i < 2; i++) {
-            for (let j = 0; j < 2; j++) {
-                if (grid[startRow + i][startCol + j] === num) return false;
-            }
-        }
-        return true;
-    }
-
-    function solveSudoku(grid, solutions = []) {
-        const tempGrid = grid.map(row => [...row]);
-        function solve() {
-            for (let row = 0; row < 4; row++) {
-                for (let col = 0; col < 4; col++) {
-                    if (tempGrid[row][col] === '') {
-                        for (let num = 1; num <= 4; num++) {
-                            if (isValidPlacement(tempGrid, row, col, num)) {
-                                tempGrid[row][col] = num;
-                                if (solve()) return true;
-                                tempGrid[row][col] = '';
-                            }
-                        }
-                        return false;
-                    }
-                }
-            }
-            solutions.push(tempGrid.map(row => [...row]));
-            return true;
-        }
-        solve();
-        return solutions;
-    }
-
-    function validatePuzzle(grid, solution) {
-        // Check clue consistency
-        for (let row = 0; row < 4; row++) {
-            const rowNums = grid[row].filter(x => x !== '');
-            if (new Set(rowNums).size !== rowNums.length) return false;
-        }
-        for (let col = 0; col < 4; col++) {
-            const colNums = grid.map(row => row[col]).filter(x => x !== '');
-            if (new Set(colNums).size !== colNums.length) return false;
-        }
-        const subgrids = [
-            [0, 0], [0, 2], [2, 0], [2, 2]
-        ];
-        for (let [startRow, startCol] of subgrids) {
-            const subNums = [];
-            for (let i = 0; i < 2; i++) {
-                for (let j = 0; j < 2; j++) {
-                    const val = grid[startRow + i][startCol + j];
-                    if (val !== '') subNums.push(val);
-                }
-            }
-            if (new Set(subNums).size !== subNums.length) return false;
-        }
-        // Check solvability
-        const solutions = solveSudoku(grid);
-        if (solutions.length !== 1) return false;
-        // Check solution match
-        return solutions[0].every((row, i) => row.every((val, j) => val === solution[i][j]));
-    }
-
-    // Load puzzle
-    function loadPuzzle() {
-        gridElement.innerHTML = '';
-        const level = select.value;
-        const puzzles = {
-            easy: easyPuzzles,
-            intermediate: intermediatePuzzles,
-            hard: hardPuzzles
-        }[level];
-        const puzzle = puzzles[Math.floor(Math.random() * puzzles.length)];
-        if (!validatePuzzle(puzzle.grid, puzzle.solution)) {
-            console.error('Invalid puzzle detected:', puzzle);
-            alert('Error: Invalid puzzle. Please try again.');
-            return;
-        }
-        const grid = puzzle.grid;
-        const solution = puzzle.solution;
-
-        // Create grid
-        for (let i = 0; i < 4; i++) {
-            for (let j = 0; j < 4; j++) {
-                const input = document.createElement('input');
-                input.type = 'text';
-                input.className = 'sudoku-cell';
-                input.value = grid[i][j] || '';
-                input.disabled = !!grid[i][j];
-                input.addEventListener('input', (e) => {
-                    const val = e.target.value;
-                    if (val && !/^[1-4]$/.test(val)) {
-                        e.target.value = '';
-                    }
-                });
-                gridElement.appendChild(input);
-            }
-        }
-
-        // Finish button
-        const finishButton = document.createElement('button');
-        finishButton.className = 'action-button';
-        finishButton.innerHTML = '<i class="fas fa-check"></i> Finish';
-        finishButton.onclick = () => {
-            const inputs = gridElement.querySelectorAll('.sudoku-cell');
-            let userGrid = [];
-            let row = [];
-            inputs.forEach((input, index) => {
-                row.push(input.value ? parseInt(input.value) : '');
-                if ((index + 1) % 4 === 0) {
-                    userGrid.push(row);
-                    row = [];
-                }
-            });
-            let isComplete = true;
-            let isCorrect = true;
-            for (let i = 0; i < 4; i++) {
-                for (let j = 0; j < 4; j++) {
-                    if (userGrid[i][j] === '') {
-                        isComplete = false;
-                    } else if (userGrid[i][j] !== solution[i][j]) {
-                        isCorrect = false;
-                    }
-                }
-            }
-            if (!isComplete || !isCorrect) {
-                alert('Please try again!');
-            } else {
-                playSound(successSound, 0.4);
-                alert('Congratulations! You solved the puzzle!');
-                setTimeout(() => closePopup('sudoku'), 1500);
-            }
-        };
-        popupContent.appendChild(finishButton);
-    }
-
-    select.onchange = loadPuzzle;
-    loadPuzzle();
-
-    // Hide timer and progress
-    const timerElement = document.getElementById('sudoku-timer');
-    const progressContainer = document.getElementById('sudoku-progress-container');
-    if (timerElement) timerElement.style.display = 'none';
-    if (progressContainer) progressContainer.style.display = 'none';
+    const steps = document.querySelectorAll('.quest-step');
+    steps[index].querySelector('button').disabled = true;
+    steps[index].querySelector('span').style.textDecoration = 'line-through';
+    playSound(successSound, 0.4);
 }
