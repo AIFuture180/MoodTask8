@@ -108,15 +108,11 @@ function openPopup(tool) {
     if (tool === 'punching') startPunching();
     if (tool === 'stretch') startStretch();
     if (tool === 'doodle') startDoodle();
-    if (tool === 'stressball') startStressBall();
     if (tool === 'worry') startWorry();
     if (tool === 'color') startColorFocus();
     if (tool === 'sudoku') startSudoku();
-    if (tool === 'moodflinger') startMoodFlinger();
     if (tool === 'asmr') startASMR();
     if (tool === 'gratitude') startGratitude();
-    if (tool === 'stressjar') startStressJar();
-    if (tool === 'moodquest') startMoodQuest();
     gtag('event', 'Tool Opened', { 'event_category': 'Tool', 'event_label': tool });
 }
 
@@ -131,30 +127,17 @@ function closePopup(tool) {
     if (tool === 'punching') clearInterval(window.punchingInterval);
     if (tool === 'stretch') clearInterval(window.stretchInterval);
     if (tool === 'doodle') clearInterval(window.doodleInterval);
-    if (tool === 'stressball') clearInterval(window.stressballInterval);
     if (tool === 'worry') {
         document.getElementById('worry-text').value = '';
         document.getElementById('paper-strips-container').innerHTML = '';
     }
     if (tool === 'color') clearInterval(window.colorInterval);
     if (tool === 'sudoku') clearInterval(window.sudokuInterval);
-    if (tool === 'moodflinger') clearInterval(window.moodflingerInterval);
     if (tool === 'asmr') {
         clearInterval(window.asmrInterval);
         if (currentSound) currentSound.pause();
     }
     if (tool === 'gratitude') document.getElementById('gratitude-text').value = '';
-    if (tool === 'stressjar') {
-        clearInterval(window.stressjarInterval);
-        document.getElementById('stressjar-text').value = '';
-        document.getElementById('stressjar-container').innerHTML = '';
-    }
-    if (tool === 'moodquest') {
-        clearInterval(window.moodquestInterval);
-        document.getElementById('quest-goal').value = '';
-        document.getElementById('quest-steps').innerHTML = '';
-        document.getElementById('quest-progress-map').innerHTML = '';
-    }
 }
 
 function updateProgress(elementId, total, current) {
@@ -165,11 +148,13 @@ function updateProgress(elementId, total, current) {
 
 function startBreathing() {
     let time = 60;
-    let step = 0;
+    let cycleTime = 0; // Tracks time within a cycle (0 to 12 seconds)
+    const cycleDuration = 13; // 4s inhale + 4s hold + 4s exhale + 1s pause
     const steps = [
-        { text: "Inhale", instruction: "Breathe in slowly through your nose...", class: "inhale" },
-        { text: "Hold", instruction: "Hold your breath...", class: "hold" },
-        { text: "Exhale", instruction: "Breathe out slowly through your mouth...", class: "exhale" }
+        { text: "Inhale", instruction: "Breathe in slowly through your nose...", class: "inhale", duration: 4 },
+        { text: "Hold", instruction: "Hold your breath...", class: "hold", duration: 4 },
+        { text: "Exhale", instruction: "Breathe out slowly through your mouth...", class: "exhale", duration: 4 },
+        { text: "Pause", instruction: "Relax for a moment...", class: "pause", duration: 1 }
     ];
     const stepElement = document.getElementById('breathing-step');
     const instructionElement = document.getElementById('breathing-instruction');
@@ -177,30 +162,37 @@ function startBreathing() {
     const circle = document.getElementById('breathing-circle');
     circle.className = '';
     updateProgress('breathing-progress', 60, 0);
+
     function updateBreathing() {
-        if (time % 4 === 0) {
-            step = (step % 3);
-            stepElement.textContent = steps[step].text;
-            instructionElement.textContent = steps[step].instruction;
-            circle.className = steps[step].class;
-            step++;
-        }
+        const currentStepIndex = Math.floor(cycleTime / 4) % 4; // Determines step based on cycle time
+        const currentStep = steps[currentStepIndex];
+
+        // Update text, instruction, and animation class
+        stepElement.textContent = currentStep.text;
+        instructionElement.textContent = currentStep.instruction;
+        circle.className = currentStep.class;
+
+        // Increment timers
+        cycleTime = (cycleTime + 1) % cycleDuration; // Reset cycleTime after 13 seconds
         time--;
         timerElement.textContent = `Time remaining: ${time}s`;
         updateProgress('breathing-progress', 60, time);
+
+        // End after 60 seconds
         if (time <= 0) {
             clearInterval(window.breathingInterval);
             playSound(successSound, 0.4);
             setTimeout(() => closePopup('breathing'), 1500);
         }
     }
-    updateBreathing();
+
+    updateBreathing(); // Initial call to set starting state
     window.breathingInterval = setInterval(updateBreathing, 1000);
 }
 
 function startSoundscape() {
     let time = 90;
-    const timerElement =  document.getElementById('soundscape-timer');
+    const timerElement = document.getElementById('soundscape-timer');
     const selectElement = document.getElementById('soundscape-select');
     const playButton = document.getElementById('play-btn');
     const volumeSlider = document.getElementById('volume-slider');
@@ -328,38 +320,10 @@ function startDoodle() {
     }, 1000);
 }
 
-function clearDoodle() {
+function clearCanvas() {
     const canvas = document.getElementById('doodle-canvas');
     const ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-}
-
-function startStressBall() {
-    let time = 30;
-    let count = 0;
-    const ball = document.getElementById('stress-ball');
-    const timerElement = document.getElementById('stressball-timer');
-    ball.textContent = '0';
-    ball.style.transform = 'scale(1)';
-    updateProgress('stressball-progress', 30, 0);
-    ball.onclick = () => {
-        count++;
-        ball.textContent = count;
-        playSound(punchSound, 0.3);
-        ball.style.transform = 'scale(0.9)';
-        setTimeout(() => ball.style.transform = 'scale(1)', 100);
-    };
-    window.stressballInterval = setInterval(() => {
-        time--;
-        timerElement.textContent = `Time remaining: ${time}s`;
-        updateProgress('stressball-progress', 30, time);
-        if (time <= 0) {
-            clearInterval(window.stressballInterval);
-            playSound(successSound, 0.4);
-            ball.innerHTML = `Great job! ${count} squeezes!`;
-            setTimeout(() => closePopup('stressball'), 1500);
-        }
-    }, 1000);
 }
 
 function startWorry() {
@@ -382,7 +346,7 @@ function startWorry() {
 
 function shredWorry() {
     const worryText = document.getElementById('worry-text');
-    const container = document.getElementById('paper-strips');
+    const container = document.getElementById('paper-strips-container');
     if (!worryText.value.trim()) {
         alert('Please enter a worry to shred.');
         return;
@@ -406,7 +370,7 @@ function shredWorry() {
 function startColorFocus() {
     let time = 60;
     const colors = ['#ff6347', '#4682b4', '#32cd32'];
-    const colorBox = document.getElementById('color-box');
+    const colorBox = document.getElementById('color-square');
     const timerElement = document.getElementById('color-timer');
     colorBox.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
     updateProgress('color-progress', 60, 0);
@@ -496,203 +460,51 @@ function saveGratitude() {
     gratitudeText.value = '';
 }
 
-function startStressJar() {
-    let time = 30;
-    const stressText = document.getElementById('stressjar-text');
-    const timerElement = document.getElementById('stressjar-timer');
-    const container = document.getElementById('stressjar-container');
-    stressText.value = '';
-    container.innerHTML = '';
-    updateProgress('stressjar-progress', 30, 0);
-    window.stressjarInterval = setInterval(() => {
-        time--;
-        timerElement.textContent = `Time remaining: ${time}s`;
-        updateProgress('stressjar-progress', bres30, time);
-        if (time <= 0) {
-            clearInterval(window.stressjarInterval);
-            playSound(successSound, 0.4);
-            setTimeout(() => closePopup('stressjar'), 1500);
-        }
-    }, 1000);
-}
-
-function sealStress() {
-    const stressText = document.getElementById('stressjar-text');
-    const container = document.getElementById('stressjar-container');
-    if (!stressText.value.trim()) {
-        alert('Please enter a stress to seal.');
-        return;
-    }
-    container.innerHTML = '<div class="sparkle">✨</div>';
-    playSound(successSound, 0.5);
-    let stresses = JSON.parse(localStorage.getItem('stresses') || '[]');
-    stresses.push({ text: stressText.value, date: new Date().toLocaleString() });
-    localStorage.setItem('stresses', JSON.stringify(stresses));
-    gtag('event', 'Seal Stress', { 'event_category': 'StressJar', 'event_label': 'Stress Sealed' });
-    setTimeout(() => {
-        stressText.value = '';
-        container.innerHTML = '';
-        alert('Stress sealed!');
-    }, 1000);
-}
-
-function viewStresses() {
-    const container = document.getElementById('stressjar-container');
-    let stresses = JSON.parse(localStorage.getItem('stresses') || '[]');
-    container.innerHTML = '';
-    if (stresses.length === 0) {
-        container.innerHTML = '<p>No stresses saved.</p>';
-        return;
-    }
-    stresses.forEach((stress, index) => {
-        const div = document.createElement('div');
-        div.className = 'stress-item';
-        div.innerHTML = `
-            <p>${stress.date}: ${stress.text}</p>
-            <button onclick="deleteStress(${index})">Delete</button>
-        `;
-        container.appendChild(div);
-    });
-    gtag('event', 'View Stresses', { 'event_category': 'StressJar', 'event_label': 'Stresses Viewed' });
-}
-
-function deleteStress(index) {
-    let stresses = JSON.parse(localStorage.getItem('stresses') || '[]');
-    stresses.splice(index, 1);
-    localStorage.setItem('stresses', JSON.stringify(stresses));
-    viewStresses();
-    playSound(clickSound, 0.3);
-}
-
-function startMoodQuest() {
+function startASMR() {
     let time = 90;
-    const goalInput = document.getElementById('quest-goal');
-    const stepsContainer = document.getElementById('quest-steps');
-    const progressMap = document.getElementById('quest-progress-map');
-    const timerElement = document.getElementById('moodquest-timer');
-    goalInput.value = '';
-    stepsContainer.innerHTML = '';
-    progressMap.innerHTML = '<div id="progress-marker" style="left: 0;"></div>';
-    updateProgress('moodquest-progress', 90, 0);
-    window.moodquestInterval = setInterval(() => {
+    const timerElement = document.getElementById('asmr-timer');
+    const selectElement = document.getElementById('asmr-select');
+    const playButton = document.getElementById('asmr-play-btn');
+    const volumeSlider = document.getElementById('asmr-volume-slider');
+    updateProgress('asmr-progress', 90, 0);
+    playButton.innerHTML = '<i class="fas fa-play"></i>';
+    selectElement.onchange = function() {
+        if (currentSound) {
+            currentSound.pause();
+            currentSound.currentTime = 0;
+            playButton.innerHTML = '<i class="fas fa-play"></i>';
+        }
+    };
+    playButton.onclick = function() {
+        const soundType = selectElement.value;
+        if (currentSound && currentSound !== asmrSounds[soundType]) {
+            currentSound.pause();
+            currentSound.currentTime = 0;
+        }
+        currentSound = asmrSounds[soundType];
+        if (currentSound.paused) {
+            currentSound.play().then(() => {
+                currentSound.volume = volumeSlider.value;
+                playButton.innerHTML = '<i class="fas fa-pause"></i>';
+            }).catch(err => console.error('ASMR playback failed:', err));
+        } else {
+            currentSound.pause();
+            currentSound.currentTime = 0;
+            playButton.innerHTML = '<i class="fas fa-play"></i>';
+        }
+    };
+    volumeSlider.oninput = function() {
+        if (currentSound) currentSound.volume = this.value;
+    };
+    window.asmrInterval = setInterval(() => {
         time--;
         timerElement.textContent = `Time remaining: ${time}s`;
-        updateProgress('moodquest-progress', 90, time);
+        updateProgress('asmr-progress', 90, time);
         if (time <= 0) {
-            clearInterval(window.moodquestInterval);
+            clearInterval(window.asmrInterval);
+            if (currentSound) currentSound.pause();
             playSound(successSound, 0.4);
-            setTimeout(() => closePopup('moodquest'), 1500);
+            setTimeout(() => closePopup('asmr'), 1500);
         }
     }, 1000);
-}
-
-function generateQuest() {
-    const goalInput = document.getElementById('quest-goal');
-    const stepsContainer = document.getElementById('quest-steps');
-    const progressMap = document.getElementById('quest-progress-map');
-    if (!goalInput.value.trim()) {
-        alert('Please enter a quest goal.');
-        return;
-    }
-    const steps = [
-        { task: "Take 5 deep breaths", xp: 1 },
-        { task: "Write down 3 things you're grateful for", xp: 2 },
-        { task: "Do a quick stretch", xp: 1 },
-        { task: "Drink a glass of water", xp: 1 },
-        { task: "Listen to a favorite song", xp: 2 },
-        { task: "Take a 5-minute walk", xp: 3 }
-    ];
-    const questSteps = [];
-    const stepCount = Math.floor(Math.random() * 3) + 3;
-    for (let i = 0; i < stepCount; i++) {
-        const randomStep = steps[Math.floor(Math.random() * steps.length)];
-        questSteps.push(randomStep);
-        steps.splice(steps.indexOf(randomStep), 1);
-    }
-    stepsContainer.innerHTML = '';
-    let totalXP = 0;
-    questSteps.forEach((step, index) => {
-        const div = document.createElement('div');
-        div.className = 'quest-step';
-        div.innerHTML = `
-            <input type="checkbox" id="step-${index}" onchange="updateQuestProgress(${index}, ${step.xp})">
-            <label for="step-${index}">${step.task} (+${step.xp} XP)</label>
-        `;
-        stepsContainer.appendChild(div);
-        totalXP += step.xp;
-    });
-    let quests = JSON.parse(localStorage.getItem('quests') || '[]');
-    quests.push({
-        goal: goalInput.value,
-        steps: questSteps,
-        date: new Date().toLocaleString()
-    });
-    localStorage.setItem('quests', JSON.stringify(quests));
-    gtag('event', 'Generate Quest', { 'event_category': 'MoodQuest', 'event_label': goalInput.value });
-}
-
-function updateQuestProgress(stepIndex, xp) {
-    const progressMap = document.getElementById('quest-progress-map');
-    const marker = document.getElementById('progress-marker');
-    const checkboxes = document.querySelectorAll('#quest-steps input[type="checkbox"]');
-    let completed = 0;
-    checkboxes.forEach(checkbox => {
-        if (checkbox.checked) completed++;
-    });
-    const progress = (completed / checkboxes.length) * 100;
-    marker.style.left = `${progress}%`;
-    let totalXP = JSON.parse(localStorage.getItem('totalXP') || '0');
-    totalXP = parseInt(totalXP) + xp;
-    localStorage.setItem('totalXP', totalXP);
-    checkBadges(totalXP);
-    gtag('event', 'Complete Quest Step', { 'event_category': 'MoodQuest', 'event_label': `Step ${stepIndex}` });
-}
-
-function checkBadges(totalXP) {
-    const badgesContainer = document.getElementById('quest-badges');
-    let badges = JSON.parse(localStorage.getItem('badges') || '[]');
-    const badgeLevels = [
-        { xp: 10, name: 'Quest Starter' },
-        { xp: 25, name: 'Task Champion' },
-        { xp: 50, name: 'Mood Master' }
-    ];
-    badgeLevels.forEach(level => {
-        if (totalXP >= level.xp && !badges.includes(level.name)) {
-            badges.push(level.name);
-            alert(`New badge earned: ${level.name}!`);
-        }
-    });
-    localStorage.setItem('badges', JSON.stringify(badges));
-    badgesContainer.innerHTML = badges.length ? `Badges: ${badges.join(', ')}` : 'No badges yet';
-}
-
-function viewQuests() {
-    const stepsContainer = document.getElementById('quest-steps');
-    let quests = JSON.parse(localStorage.getItem('quests') || '[]');
-    stepsContainer.innerHTML = '';
-    if (quests.length === 0) {
-        stepsContainer.innerHTML = '<p>No quests saved.</p>';
-        return;
-    }
-    quests.forEach((quest, index) => {
-        const div = document.createElement('div');
-        div.className = 'quest-item';
-        div.innerHTML = `
-            <p><strong>Goal:</strong> ${quest.goal}</p>
-            <p><strong>Date:</strong> ${quest.date}</p>
-            <p><strong>Steps:</strong></p>
-            <ul>${quest.steps.map(step => `<li>${step.task} (+${step.xp} XP)</li>`).join('')}</ul>
-            <button onclick="deleteQuest(${index})">Delete</button>
-        `;
-        stepsContainer.appendChild(div);
-    });
-    gtag('event', 'View Quests', { 'event_category': 'MoodQuest', 'event_label': 'Quests Viewed' });
-}
-
-function deleteQuest(index) {
-    let quests = JSON.parse(localStorage.getItem('quests') || '[]');
-    quests.splice(index, 1);
-    localStorage.setItem('quests', JSON.stringify(quests));
-    viewQuests();
-    playSound(clickSound, 0.3);
 }
