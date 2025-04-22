@@ -1156,7 +1156,6 @@
 
             let moodInput = moodText.value.trim();
             if (!moodInput) {
-                // If no mood is entered, default to a generic mood (e.g., "happy")
                 moodInput = "happy";
             }
             const moodInputLower = moodInput.toLowerCase();
@@ -1188,10 +1187,9 @@
                         }
                     }
                 }
-                matchedMood = closestMood || "happy"; // Default to "happy" if no close match is found
+                matchedMood = closestMood || "happy";
             }
 
-            // Display recommendations with the matched mood and show the user's input
             activitiesHeader.textContent = `Recommendations for ${matchedMood.charAt(0).toUpperCase() + matchedMood.slice(1)} Mood:`;
             userMoodDisplay.textContent = `You entered '${moodInput}'`;
             activityCards.innerHTML = '<ul>' + moodTasks[matchedMood].map((task, index) => `
@@ -1209,7 +1207,13 @@
             toolsContainer.style.display = 'grid';
             moodText.value = '';
 
-            gtag('event', 'mood_submitted', { mood: matchedMood, user_input: moodInput });
+            // Debugging log to confirm execution
+            console.log('submitMood executed successfully', { mood: matchedMood, user_input: moodInput });
+
+            // Safely call gtag if defined
+            if (typeof gtag === 'function') {
+                gtag('event', 'mood_submitted', { mood: matchedMood, user_input: moodInput });
+            }
         }
 
         // Toggle explanation visibility
@@ -1241,7 +1245,10 @@
             if (tool === 'color') startColorFocus();
             if (tool === 'worry') shredWorry();
 
-            gtag('event', 'tool_opened', { tool: tool });
+            // Safely call gtag if defined
+            if (typeof gtag === 'function') {
+                gtag('event', 'tool_opened', { tool: tool });
+            }
         }
 
         // Close popup
@@ -1617,7 +1624,7 @@
                     timerText.style.display = 'none';
                     progressBar.style.display = 'none';
                     prompt.style.display = 'none';
-                    document.querySelector('#dance-popup .affirmation').style.display = 'block';
+                    document.querySelector('#舞-popup .affirmation').style.display = 'block';
                 }
             }, 1000);
         }
@@ -1633,8 +1640,8 @@
             for (let i = 0; i < 5; i++) {
                 const strip = document.createElement('div');
                 strip.style.position = 'absolute';
-                strip.style.width: '10px';
-                strip.style.height: '50px';
+                strip.style.width = '10px';
+                strip.style.height = '50px';
                 strip.style.background = '#ddd';
                 strip.style.left = `${i * 15 + 50}px`;
                 strip.style.animation = `shred 0.5s forwards ${i * 0.1}s`;
