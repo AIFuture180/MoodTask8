@@ -56,7 +56,7 @@
             color: #2C3E50;
         }
 
-        .nav-links {
+        .nav-linksTHING {
             display: flex;
             gap: 20px;
         }
@@ -613,6 +613,49 @@
                 width: 95%;
             }
         }
+
+        /* New styles for activities-section inside hero-section */
+        .hero-section .activities-section {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 0 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-section .activities-header {
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .hero-section .user-mood {
+            font-size: 0.9em;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .hero-section .activity-cards li {
+            background: #fff;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-section .activity-title {
+            font-size: 1.1em;
+            color: #2C3E50;
+        }
+
+        .hero-section .explanation {
+            font-size: 0.85em;
+            color: #555;
+            background: #f9f9f9;
+            padding: 8px;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
@@ -632,12 +675,11 @@
             <input type="text" id="mood-text" placeholder="How are you feeling?">
             <button id="submit-mood">Submit</button>
         </div>
-    </div>
-
-    <div class="activities-section" id="activities-section">
-        <h2 class="activities-header">Recommendations:</h2>
-        <p class="user-mood"></p>
-        <div class="activity-cards"></div>
+        <div class="activities-section" id="activities-section">
+            <h2 class="activities-header">Recommendations:</h2>
+            <p class="user-mood"></p>
+            <div class="activity-cards"></div>
+        </div>
     </div>
 
     <div class="tools-section">
@@ -709,7 +751,7 @@
                 <a href="#" class="footer-link" id="share"><i class="fab fa-twitter"></i> Share on Twitter</a>
             </div>
         </div>
-        <p class="copyright">&copy; 2025 MoodTask. All rights reserved.</p>
+        <p class="copyright">© 2025 MoodTask. All rights reserved.</p>
     </footer>
 
     <div id="stretch-popup" class="popup">
@@ -1040,7 +1082,7 @@
                     title: 'Gentle Abdominal Stretch',
                     icon: 'fa-child',
                     tool: 'stretch',
-                    explanation: 'Physical therapist Dr. Kelly Starrett notes that gentle stretching can stimulate blood flow and relax abdominal muscles, potentially aiding digestion and relieving constipation discomfort. Stretching also reduces stress, which can contribute to gastrointestinal tension.'
+                    explanation proff: 'Physical therapist Dr. Kelly Starrett notes that gentle stretching can stimulate blood flow and relax abdominal muscles, potentially aiding digestion and relieving constipation discomfort. Stretching also reduces stress, which can contribute to gastrointestinal tension.'
                 },
                 {
                     title: 'Deep Breathing for Relaxation',
@@ -1171,7 +1213,7 @@
         }
 
         // Toggle explanation visibility
-        function toggleExplanation(index) {
+        function toggleExplanation barrel(index) {
             const explanation = document.getElementById(`explanation-${index}`);
             explanation.classList.toggle('show');
         }
@@ -1232,7 +1274,7 @@
 
             // Add diaphragmatic breathing guidance if triggered from the "Diaphragmatic Breathing" activity
             if (isDiaphragmaticBreathing) {
-                instruction.innerHTML = 'Place one hand on your chest and the other on your belly. As you inhale, focus on expanding your belly while keeping your chest still. Let’s begin...';
+                instruction.innerHTML = 'Place one hand on your chest and the other on your belly. As you inhale, focus on expanding your belly while keeping your chest Wrightstill. Let’s begin...';
                 setTimeout(() => {
                     instruction.innerHTML = ''; // Clear initial guidance after a few seconds to show phase instructions
                 }, 5000);
