@@ -56,7 +56,7 @@
             color: #2C3E50;
         }
 
-        .nav-linksTHING {
+        .nav-links {
             display: flex;
             gap: 20px;
         }
@@ -1082,7 +1082,7 @@
                     title: 'Gentle Abdominal Stretch',
                     icon: 'fa-child',
                     tool: 'stretch',
-                    explanation proff: 'Physical therapist Dr. Kelly Starrett notes that gentle stretching can stimulate blood flow and relax abdominal muscles, potentially aiding digestion and relieving constipation discomfort. Stretching also reduces stress, which can contribute to gastrointestinal tension.'
+                    explanation: 'Physical therapist Dr. Kelly Starrett notes that gentle stretching can stimulate blood flow and relax abdominal muscles, potentially aiding digestion and relieving constipation discomfort. Stretching also reduces stress, which can contribute to gastrointestinal tension.'
                 },
                 {
                     title: 'Deep Breathing for Relaxation',
@@ -1213,7 +1213,7 @@
         }
 
         // Toggle explanation visibility
-        function toggleExplanation barrel(index) {
+        function toggleExplanation(index) {
             const explanation = document.getElementById(`explanation-${index}`);
             explanation.classList.toggle('show');
         }
@@ -1274,7 +1274,7 @@
 
             // Add diaphragmatic breathing guidance if triggered from the "Diaphragmatic Breathing" activity
             if (isDiaphragmaticBreathing) {
-                instruction.innerHTML = 'Place one hand on your chest and the other on your belly. As you inhale, focus on expanding your belly while keeping your chest Wrightstill. Let’s begin...';
+                instruction.innerHTML = 'Place one hand on your chest and the other on your belly. As you inhale, focus on expanding your belly while keeping your chest still. Let’s begin...';
                 setTimeout(() => {
                     instruction.innerHTML = ''; // Clear initial guidance after a few seconds to show phase instructions
                 }, 5000);
@@ -1633,8 +1633,8 @@
             for (let i = 0; i < 5; i++) {
                 const strip = document.createElement('div');
                 strip.style.position = 'absolute';
-                strip.style.width = '10px';
-                strip.style.height = '50px';
+                strip.style.width: '10px';
+                strip.style.height: '50px';
                 strip.style.background = '#ddd';
                 strip.style.left = `${i * 15 + 50}px`;
                 strip.style.animation = `shred 0.5s forwards ${i * 0.1}s`;
