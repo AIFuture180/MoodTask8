@@ -8,7 +8,7 @@
     <meta name="robots" content="index, follow">
     <title>MoodTask | Transform Your Mood</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4985X51W1J"></script>
     <script>
@@ -18,8 +18,6 @@
         gtag('config', 'G-4985X51W1J');
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1511837633001567" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r167/three.min.js"></script>
-    <script src="visualBackground.js"></script>
     <style>
         * {
             margin: 0;
@@ -192,6 +190,8 @@
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 0.5s, transform 0.5s;
+            background: #fff;
+            border-radius: 10px;
         }
 
         .activities-section.show {
@@ -348,10 +348,10 @@
             justify-content: center;
             align-items: center;
             margin: 0 auto 20px;
-            transition: all 2s ease;
+            transition: all 1s ease;
         }
 
-        #breathing-circle.inhale, #breathing-circle.inhale1, #breathing-circle.inhale2 {
+        #breathing-circle.inhale {
             background: #A3BFFA;
             transform: scale(1.2);
         }
@@ -490,40 +490,6 @@
             margin-top: 10px;
         }
 
-        #gratitude-text, #gratitude-notes {
-            width: 100%;
-            min-height: 100px;
-            padding: 15px;
-            font-size: 1em;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            background: url('https://www.transparenttextures.com/patterns/paper-fibers.png'), #fff;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            font-family: 'Caveat', cursive;
-            margin-bottom: 15px;
-            resize: vertical;
-        }
-
-        #gratitude-notes {
-            max-height: 200px;
-            overflow-y: auto;
-            font-size: 0.9em;
-        }
-
-        .gratitude-note {
-            padding: 10px;
-            border-bottom: 1px solid #eee;
-        }
-
-        .gratitude-note:last-child {
-            border-bottom: none;
-        }
-
-        .gratitude-note span {
-            font-weight: bold;
-            color: #2C3E50;
-        }
-
         footer {
             background: #333;
             color: #fff;
@@ -598,22 +564,6 @@
             background: #2C3E50;
         }
 
-        .gratitude-link, .breathing-link, .soundscape-link, .punching-link, .stretch-link, .doodle-link, .dance-link, .color-link, .worry-link {
-            display: inline-block;
-            margin: 10px 5px;
-            padding: 8px 15px;
-            background: #4A90E2;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 20px;
-            font-size: 0.9em;
-            transition: background 0.3s;
-        }
-
-        .gratitude-link:hover, .breathing-link:hover, .soundscape-link:hover, .punching-link:hover, .stretch-link:hover, .doodle-link:hover, .dance-link:hover, .color-link:hover, .worry-link:hover {
-            background: #2C3E50;
-        }
-
         .disclaimer {
             text-align: center;
             font-size: 0.8em;
@@ -625,93 +575,193 @@
         @media (max-width: 600px) {
             nav {
                 flex-direction: column;
-                gap: 10px;
+                gap: 15px; /* Increased gap for better spacing */
                 padding: 15px 20px;
             }
 
             .nav-links {
                 flex-direction: column;
-                gap: 10px;
+                gap: 15px; /* Increased gap for touch usability */
                 align-items: center;
+            }
+
+            .nav-button {
+                padding: 10px 20px; /* Larger touch target */
             }
 
             .hero-section {
                 height: auto;
-                padding: 100px 20px;
+                padding: 120px 20px 40px; /* More top padding to account for fixed nav, less bottom padding */
             }
 
             .hero-section h1 {
-                font-size: 2em;
+                font-size: 2.2em; /* Slightly larger for readability */
+                margin-bottom: 25px;
+            }
+
+            .hero-section p {
+                font-size: 1.1em; /* Slightly larger for readability */
+                margin-bottom: 40px;
+            }
+
+            .mood-input {
+                flex-direction: column;
+                gap: 20px; /* More spacing between elements */
+            }
+
+            #mood-text {
+                width: 90%; /* Slightly less than 100% to avoid stretching */
+                max-width: 300px; /* Prevent it from getting too wide */
+                padding: 14px; /* Larger padding for touch */
+                font-size: 1.1em; /* Better readability */
+            }
+
+            #submit-mood {
+                padding: 14px 40px; /* Larger touch target */
+                font-size: 1.1em;
+            }
+
+            .activities-section {
+                margin: 30px 10px; /* Reduced side margins for more content width */
+                padding: 20px; /* Consistent padding */
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+            }
+
+            .activities-header {
+                font-size: 1.8em; /* Slightly smaller but still prominent */
+                margin-bottom: 15px;
+            }
+
+            .user-mood {
+                font-size: 1.1em; /* Larger for readability */
+                color: #555; /* Darker for better contrast */
+            }
+
+            .activity-cards li {
+                padding: 15px; /* Reduced padding to prevent overflow */
+                margin-bottom: 10px;
+            }
+
+            .activity-item {
+                gap: 10px; /* Reduced gap to fit content */
+            }
+
+            .activity-title {
+                font-size: 1.1em; /* Slightly smaller to fit */
+            }
+
+            .activity-button {
+                padding: 10px 20px; /* Larger touch target */
+                font-size: 0.95em;
+                min-width: 100px; /* Ensure touch-friendly size */
+            }
+
+            .explanation {
+                font-size: 0.95em;
+            }
+
+            .tools-section {
+                padding: 30px 15px; /* Reduced padding for more content space */
+            }
+
+            .tools-section h2 {
+                font-size: 1.8em; /* Slightly smaller */
+                margin-bottom: 25px;
+            }
+
+            .tools-container {
+                grid-template-columns: 1fr;
+                gap: 15px; /* More spacing between buttons */
+                padding: 0 10px;
+            }
+
+            .tool-button {
+                padding: 15px; /* Smaller padding for better fit */
+            }
+
+            .tool-button i {
+                font-size: 1.8em; /* Slightly smaller icon */
+            }
+
+            .tool-button p {
+                font-size: 1em; /* Larger for readability */
+            }
+
+            .popup-content {
+                width: 95%;
+                padding: 15px;
+            }
+
+            .popup-content h4 {
+                font-size: 1.4em;
+            }
+
+            #breathing-circle {
+                width: 120px; /* Smaller for mobile */
+                height: 120px;
+            }
+
+            #breathing-step {
+                font-size: 1.1em;
+            }
+
+            #doodle-canvas {
+                width: 300px; /* Smaller canvas for mobile */
+                height: 200px;
+            }
+
+            #color-square {
+                width: 120px; /* Smaller for mobile */
+                height: 120px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .hero-section h1 {
+                font-size: 1.8em; /* Even smaller for tiny screens */
             }
 
             .hero-section p {
                 font-size: 1em;
             }
 
-            .mood-input {
-                flex-direction: column;
-                gap: 10px;
+            #mood-text, #submit-mood {
+                font-size: 1em; /* Slightly smaller */
+                padding: 12px;
             }
 
-            #mood-text {
-                width: 100%;
+            .activities-header {
+                font-size: 1.6em;
             }
 
-            .tools-container {
-                grid-template-columns: 1fr;
+            .activity-title {
+                font-size: 1em;
             }
 
-            .popup-content {
-                width: 95%;
+            .activity-button {
+                padding: 8px 15px;
+                font-size: 0.9em;
             }
-        }
 
-        .hero-section .activities-section {
-            max-width: 600px;
-            margin: 20px auto;
-            padding: 0 20px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
+            .tools-section h2 {
+                font-size: 1.6em;
+            }
 
-        .hero-section .activities-header {
-            font-size: 1.8em;
-            color: #333;
-            margin-bottom: 10px;
-        }
+            .tool-button i {
+                font-size: 1.5em;
+            }
 
-        .hero-section .user-mood {
-            font-size: 0.9em;
-            color: #555;
-            margin-bottom: 15px;
-        }
+            .tool-button p {
+                font-size: 0.9em;
+            }
 
-        .hero-section .activity-cards li {
-            background: #fff;
-            padding: 15px;
-            margin-bottom: 10px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .hero-section .activity-title {
-            font-size: 1.1em;
-            color: #2C3E50;
-        }
-
-        .hero-section .explanation {
-            font-size: 0.85em;
-            color: #555;
-            background: #f9f9f9;
-            padding: 8px;
-            border-radius: 5px;
+            .popup-content h4 {
+                font-size: 1.2em;
+            }
         }
     </style>
 </head>
 <body>
-    <div id="visualContainer" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;"></div>
-
     <nav id="nav">
         <div class="logo">MoodTask</div>
         <div class="nav-links">
@@ -802,14 +852,8 @@
             <div class="footer-column">
                 <h4>Connect</h4>
                 <a href="#" class="footer-link" id="share"><i class="fab fa-twitter"></i> Share on Twitter</a>
-                <div style="padding-top: 10px;">
-                    <a href="https://www.buymeacoffee.com/moodtask" target="_blank">
-                        <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;">
-                    </a>
-                </div>
             </div>
         </div>
-        <p class="disclaimer"><em>Affiliate Disclosure: Some links on this site are affiliate links. We may earn a commission on purchases at no extra cost to you.</em></p>
         <p class="copyright">© 2025 MoodTask. All rights reserved.</p>
     </footer>
 
@@ -817,8 +861,6 @@
         <div class="popup-content">
             <h4>Stretch</h4>
             <p id="stretch-prompt">Follow these gentle stretches to relax your body:</p>
-            <a href="https://amzn.to/3GzDmfJ" target="_blank" rel="noopener noreferrer nofollow" class="affiliate-link stretch-link" onclick="trackAffiliateClick('yoga_mat')">Yoga Mat for Stretching</a>
-            <a href="https://amzn.to/4jnjTh6" target="_blank" rel="noopener noreferrer nofollow" class="affiliate-link stretch-link" onclick="trackAffiliateClick('massage_gun')">Hypervolt Massage Gun</a>
             <p class="affirmation" style="display: none;">Your body appreciates this care.</p>
             <button class="close-button" onclick="closePopup('stretch')"><i class="fas fa-times"></i></button>
         </div>
@@ -831,7 +873,6 @@
             <p id="breathing-instruction">Breathe in deeply...</p>
             <div class="progress-container"><div id="breathing-progress" class="progress-bar"></div></div>
             <p id="breathing-timer">Time remaining: 60s</p>
-            <a href="https://amzn.to/3GgvP5F" target="_blank" rel="noopener noreferrer nofollow" class="affiliate-link breathing-link" onclick="trackAffiliateClick('breathing_necklace')">Mindfulness Breathing Necklace</a>
             <p class="affirmation">Well done completing the breathing exercise.</p>
             <button class="close-button" onclick="closePopup('breathing')"><i class="fas fa-times"></i></button>
         </div>
@@ -841,15 +882,14 @@
         <div class="popup-content">
             <h4>Soundscape</h4>
             <select id="soundscape-select" class="sound-select">
-                <option value="lightrain">Light Rain.mp3</option>
-                <option value="chinese">Chinese music.mp3</option>
-                <option value="forest">Spring Day Forest.mp3</option>
-                <option value="waves">Waves Crashing on Rocky Beach.mp3</option>
-                <option value="temple">In the Temple Garden - Aaron Kenny.mp3</option>
+                <option value="lightrain">Light Rain</option>
+                <option value="chinese">Chinese Music</option>
+                <option value="forest">Forest Sounds</option>
+                <option value="waves">Ocean Waves</option>
+                <option value="temple">Temple Garden</option>
             </select>
             <button id="play-btn"><i class="fas fa-play"></i></button>
             <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.5">
-            <a href="https://amzn.to/4jpn5sz" target="_blank" rel="noopener noreferrer nofollow" class="affiliate-link soundscape-link" onclick="trackAffiliateClick('headphones')">Beats Studio Pro Headphones</a>
             <p id="soundscape-error">No sounds are available at this time.</p>
             <p id="soundscape-specific-error"></p>
             <p class="affirmation">Hope you enjoyed the soundscape!</p>
@@ -863,7 +903,6 @@
             <div id="punching-bag">0</div>
             <div class="progress-container"><div id="punching-progress" class="progress-bar"></div></div>
             <p id="punching-timer">Time remaining: 30s</p>
-            <a href="https://amzn.to/4jH8hVE" target="_blank" rel="noopener noreferrer nofollow" class="affiliate-link punching-link" onclick="trackAffiliateClick('punching_bag')">Desktop Punching Bag</a>
             <p class="affirmation">Great job letting out that energy!</p>
             <button class="close-button" onclick="closePopup('punching')"><i class="fas fa-times"></i></button>
         </div>
@@ -879,7 +918,6 @@
                 <button onclick="clearCanvas()">Clear</button>
                 <button onclick="saveDoodle()">Save</button>
             </div>
-            <a href="https://amzn.to/4iMlvzX" target="_blank" rel="noopener noreferrer nofollow" class="affiliate-link doodle-link" onclick="trackAffiliateClick('drawing_pad')">Charcoal Pencils & Drawing Pad</a>
             <div class="progress-container"><div id="doodle-progress" class="progress-bar"></div></div>
             <p id="doodle-timer">Time remaining: 90s</p>
             <p class="affirmation">Nice doodle! Creativity helps lift your mood.</p>
@@ -893,7 +931,6 @@
             <p id="dance-prompt">Do a little twirl!</p>
             <div class="progress-container"><div id="dance-progress" class="progress-bar"></div></div>
             <p id="dance-timer">Time remaining: 30s</p>
-            <a href="https://amzn.to/4cI5QAd" target="_blank" rel="noopener noreferrer nofollow" class="affiliate-link dance-link" onclick="trackAffiliateClick('bluetooth_speaker')">Portable Bluetooth Speaker</a>
             <p class="affirmation">Great moves! Dancing uplifts your spirit.</p>
             <button class="close-button" onclick="closePopup('dance')"><i class="fas fa-times"></i></button>
         </div>
@@ -906,7 +943,6 @@
             <p id="color-prompt">Focus on this color...</p>
             <div class="progress-container"><div id="color-progress" class="progress-bar"></div></div>
             <p id="color-timer">Time remaining: 60s</p>
-            <a href="https://amzn.to/3GjTyBI" target="_blank" rel="noopener noreferrer nofollow" class="affiliate-link color-link" onclick="trackAffiliateClick('aromatherapy_diffuser')">Aromatherapy Diffuser</a>
             <p class="affirmation">Focusing on colors can be so calming!</p>
             <button class="close-button" onclick="closePopup('color')"><i class="fas fa-times"></i></button>
         </div>
@@ -917,7 +953,6 @@
             <h4>Worry Shredder</h4>
             <textarea id="worry-text" placeholder="Write down your worry..."></textarea>
             <button onclick="shredWorry()">Shred It</button>
-            <a href="https://amzn.to/44673in" target="_blank" rel="noopener noreferrer nofollow" class="affiliate-link worry-link" onclick="trackAffiliateClick('heated_lap_pad')">Bearaby Heated Lap Pad</a>
             <div id="paper-strips-container"></div>
             <p class="affirmation">Your worry has been shredded. Let it go!</p>
             <button class="close-button" onclick="closePopup('worry')"><i class="fas fa-times"></i></button>
@@ -927,11 +962,9 @@
     <div id="gratitude-popup" class="popup">
         <div class="popup-content">
             <h4>Gratitude Note</h4>
-            <textarea id="gratitude-text" placeholder="What are you grateful for today?"></textarea>
-            <button onclick="saveGratitude()">Save Note</button>
-            <a href="https://amzn.to/4jmN8AH" target="_blank" rel="noopener noreferrer nofollow" class="affiliate-link gratitude-link" onclick="trackAffiliateClick('gratitude_journal')">Gratitude Journal</a>
-            <div id="gratitude-notes"></div>
-            <p class="affirmation">Gratitude saved! Reflecting on the positive lifts your mood.</p>
+            <textarea id="gratitude-text" placeholder="What are you grateful for?"></textarea>
+            <button onclick="saveGratitude()">Save</button>
+            <p class="affirmation">Gratitude saved! Reflecting on the positive can lift your mood.</p>
             <button class="close-button" onclick="closePopup('gratitude')"><i class="fas fa-times"></i></button>
         </div>
     </div>
@@ -962,7 +995,7 @@
             return matrix[b.length][a.length];
         }
 
-        // Flag to track if the breathing exercise is for physiological sigh
+        // Flag to track if the breathing exercise is for diaphragmatic breathing
         let isDiaphragmaticBreathing = false;
 
         // Mood to task mappings
@@ -984,7 +1017,7 @@
                     title: 'Gentle Movement for Energy',
                     icon: 'fa-child',
                     tool: 'stretch',
-                    explanation: 'Neuroscientist Lisa Feldman Barrett highlights that bodily movement can shift emotional states. A short stretch increases blood flow and endorphins, helping to counteract the low-energy state of tiredness by signaling alertness to the brain.'
+                    explanation considere: 'Neuroscientist Lisa Feldman Barrett highlights that bodily movement can shift emotional states. A short stretch increases blood flow and endorphins, helping to counteract the low-energy state of tiredness by signaling alertness to the brain.'
                 }
             ],
             stressed: [
@@ -1166,6 +1199,206 @@
                     tool: null,
                     explanation: 'Gastroenterologist Dr. Anthony Lembo emphasizes that adequate hydration softens stool and supports bowel movements. Setting a reminder to drink water can address constipation directly while improving overall well-being.'
                 }
+            ],
+            lonely: [
+                {
+                    title: 'Write a Letter to Yourself',
+                    icon: 'fa-heart',
+                    tool: 'gratitude',
+                    explanation: 'Brené Brown, an expert on vulnerability, suggests self-connection to combat loneliness. Writing a compassionate letter to yourself fosters a sense of self-worth, reducing feelings of isolation by boosting oxytocin.'
+                },
+                {
+                    title: 'Engage in Creative Expression',
+                    icon: 'fa-pencil-alt',
+                    tool: 'doodle',
+                    explanation: 'Psychologist Mihaly Csikszentmihalyi notes that creative activities can create a flow state, reducing loneliness. Doodling engages your mind, providing a sense of companionship through self-expression.'
+                },
+                {
+                    title: 'Mindful Movement',
+                    icon: 'fa-music',
+                    tool: 'dance',
+                    explanation: 'Kelly McGonigal highlights that movement can shift emotional states. Dancing alone can release endorphins, helping you feel more connected to your body and reducing the emotional weight of loneliness.'
+                }
+            ],
+            frustrated: [
+                {
+                    title: 'Pause and Reflect',
+                    icon: 'fa-spa',
+                    tool: 'breathing',
+                    explanation: 'Daniel Goleman, an expert in emotional intelligence, suggests taking a mindful pause to manage frustration. Focusing on your breath helps regulate the amygdala, allowing you to respond rather than react impulsively.'
+                },
+                {
+                    title: 'Channel Energy Physically',
+                    icon: 'fa-fist-raised',
+                    tool: 'punching',
+                    explanation: 'Andrew Huberman notes that physical activity can release pent-up frustration. Punching a virtual bag provides a safe outlet, reducing emotional intensity by channeling energy outward.'
+                },
+                {
+                    title: 'Reframe the Situation',
+                    icon: 'fa-brain',
+                    tool: null,
+                    explanation: 'Lisa Feldman Barrett’s work on emotional construction suggests reframing frustration as a challenge. This cognitive shift engages the prefrontal cortex, reducing emotional reactivity and fostering problem-solving.'
+                }
+            ],
+            excited: [
+                {
+                    title: 'Savor the Moment',
+                    icon: 'fa-heart',
+                    tool: 'gratitude',
+                    explanation: 'Barbara Fredrickson, a positive psychology expert, recommends savoring excitement to amplify it. Writing down what excites you reinforces positive neural pathways, making the feeling more lasting.'
+                },
+                {
+                    title: 'Celebrate with Movement',
+                    icon: 'fa-music',
+                    tool: 'dance',
+                    explanation: 'Kelly McGonigal suggests that movement can enhance positive emotions. Dancing to a lively beat channels your excitement, boosting endorphins and making the moment more memorable.'
+                },
+                {
+                    title: 'Share Your Joy',
+                    icon: 'fa-smile',
+                    tool: null,
+                    explanation: 'Sonja Lyubomirsky’s research shows that sharing positive emotions amplifies them. Tell a friend or loved one about your excitement to foster connection and increase your joy through social bonding.'
+                }
+            ],
+            confused: [
+                {
+                    title: 'Mindful Breathing Break',
+                    icon: 'fa-wind',
+                    tool: 'breathing',
+                    explanation: 'Jon Kabat-Zinn suggests mindfulness to clear mental fog. A short breathing exercise calms the mind, reducing the overwhelm of confusion by engaging the parasympathetic nervous system.'
+                },
+                {
+                    title: 'Organize Your Thoughts',
+                    icon: 'fa-list',
+                    tool: null,
+                    explanation: 'David Allen, creator of the Getting Things Done method, recommends writing down thoughts to reduce confusion. Listing what’s on your mind helps clarify priorities and reduces cognitive overload.'
+                },
+                {
+                    title: 'Visual Grounding',
+                    icon: 'fa-palette',
+                    tool: 'color',
+                    explanation: 'Andrew Huberman notes that focusing on sensory input can ground you. Concentrating on a calming color shifts your focus away from confusion, helping you regain mental clarity.'
+                }
+            ],
+            guilty: [
+                {
+                    title: 'Self-Forgiveness Practice',
+                    icon: 'fa-heart',
+                    tool: 'gratitude',
+                    explanation: 'Brené Brown emphasizes self-forgiveness to address guilt. Writing a compassionate note to yourself fosters self-acceptance, reducing the emotional burden of guilt by promoting emotional healing.'
+                },
+                {
+                    title: 'Mindful Reflection',
+                    icon: 'fa-spa',
+                    tool: 'breathing',
+                    explanation: 'Jon Kabat-Zinn suggests mindfulness to process guilt. Focusing on your breath while reflecting on your actions helps you approach guilt with curiosity rather than self-judgment.'
+                },
+                {
+                    title: 'Make Amends Mindfully',
+                    icon: 'fa-hands-helping',
+                    tool: null,
+                    explanation: 'Kristin Neff recommends taking responsibility with self-compassion. Consider a small action to make amends, which can alleviate guilt by fostering a sense of resolution and self-growth.'
+                }
+            ],
+            hopeful: [
+                {
+                    title: 'Visualize Your Goals',
+                    icon: 'fa-star',
+                    tool: null,
+                    explanation: 'Psychologist Barbara Fredrickson suggests that visualizing positive outcomes can amplify hopeful feelings. Imagining your goals reinforces optimism, strengthening neural pathways for motivation.'
+                },
+                {
+                    title: 'Celebrate with Movement',
+                    icon: 'fa-music',
+                    tool: 'dance',
+                    explanation: 'Kelly McGonigal notes that movement can enhance positive emotions. Dancing to an upbeat rhythm channels your hopeful energy, boosting endorphins and making the moment more vibrant.'
+                },
+                {
+                    title: 'Reflect on Progress',
+                    icon: 'fa-heart',
+                    tool: 'gratitude',
+                    explanation: 'Sonja Lyubomirsky’s research shows that reflecting on past achievements can sustain hope. Writing down a small win fosters a sense of momentum, reinforcing your belief in future possibilities.'
+                }
+            ],
+            jealous: [
+                {
+                    title: 'Mindful Awareness',
+                    icon: 'fa-spa',
+                    tool: 'breathing',
+                    explanation: 'Jon Kabat-Zinn suggests observing jealousy mindfully without judgment. Focusing on your breath while noting the feeling helps you detach, reducing its emotional grip by calming the amygdala.'
+                },
+                {
+                    title: 'Gratitude Practice',
+                    icon: 'fa-heart',
+                    tool: 'gratitude',
+                    explanation: 'Andrew Huberman notes that gratitude can shift focus from scarcity to abundance. Writing down things you’re thankful for redirects attention from jealousy to appreciation, boosting dopamine.'
+                },
+                {
+                    title: 'Reframe the Feeling',
+                    icon: 'fa-brain',
+                    tool: null,
+                    explanation: 'Lisa Feldman Barrett’s work on emotional construction suggests reframing jealousy as inspiration. This cognitive shift can turn the emotion into motivation, reducing its negative impact.'
+                }
+            ],
+            restless: [
+                {
+                    title: 'Grounding Breath',
+                    icon: 'fa-wind',
+                    tool: 'breathing',
+                    explanation: 'Andrew Huberman recommends slow, deep breathing to calm restlessness. This activates the parasympathetic nervous system, reducing physical agitation and helping you feel more centered.'
+                },
+                {
+                    title: 'Light Movement',
+                    icon: 'fa-child',
+                    tool: 'stretch',
+                    explanation: 'Kelly McGonigal suggests that gentle stretching can release pent-up energy. Moving your body mindfully helps channel restlessness into calm focus, grounding you through physical awareness.'
+                },
+                {
+                    title: 'Creative Outlet',
+                    icon: 'fa-pencil-alt',
+                    tool: 'doodle',
+                    explanation: 'Mihaly Csikszentmihalyi’s research on flow states shows that creative tasks can reduce restlessness. Doodling engages your mind, providing a focused outlet for restless energy.'
+                }
+            ],
+            grateful: [
+                {
+                    title: 'Deepen Gratitude',
+                    icon: 'fa-heart',
+                    tool: 'gratitude',
+                    explanation: 'Barbara Fredrickson suggests savoring gratitude to amplify it. Writing a detailed note about what you’re thankful for reinforces positive emotions, strengthening neural reward pathways.'
+                },
+                {
+                    title: 'Share Positivity',
+                    icon: 'fa-smile',
+                    tool: null,
+                    explanation: 'Sonja Lyubomirsky’s research shows that sharing gratitude enhances it. Telling someone you appreciate them fosters connection, amplifying your grateful feelings through social bonding.'
+                },
+                {
+                    title: 'Celebrate with Movement',
+                    icon: 'fa-music',
+                    tool: 'dance',
+                    explanation: 'Kelly McGonigal notes that movement can enhance positive emotions. Dancing to a joyful tune channels your gratitude into physical expression, boosting endorphins.'
+                }
+            ],
+            numb: [
+                {
+                    title: 'Gentle Sensory Focus',
+                    icon: 'fa-palette',
+                    tool: 'color',
+                    explanation: 'Andrew Huberman suggests that sensory focus can awaken emotional connection. Focusing on a calming color engages your senses, helping you reconnect with your emotions gradually.'
+                },
+                {
+                    title: 'Mindful Movement',
+                    icon: 'fa-child',
+                    tool: 'stretch',
+                    explanation: 'Lisa Feldman Barrett’s research shows that movement can shift emotional states. Gentle stretching increases body awareness, helping you move out of numbness by grounding you in the present.'
+                },
+                {
+                    title: 'Self-Compassion Note',
+                    icon: 'fa-heart',
+                    tool: 'gratitude',
+                    explanation: 'Kristin Neff recommends self-compassion to address emotional numbness. Writing a kind note to yourself fosters warmth, helping you reconnect with your emotions through self-kindness.'
+                }
             ]
         };
 
@@ -1180,7 +1413,17 @@
             happy: ['joyful', 'cheerful', 'content', 'pleased', 'delighted', 'ecstatic', 'overjoyed'],
             worried: ['concerned', 'anxious', 'nervous', 'uneasy', 'apprehensive', 'fretful', 'alarmed'],
             overwhelmed: ['swamped', 'burdened', 'stressed', 'flooded', 'inundated', 'snowed-under'],
-            constipated: ['blocked', 'backed-up']
+            constipated: ['blocked', 'backed-up'],
+            lonely: ['isolated', 'alone', 'lonesome', 'forlorn', 'desolate'],
+            frustrated: ['irritated', 'annoyed', 'vexed', 'disgruntled', 'exasperated'],
+            excited: ['thrilled', 'eager', 'enthusiastic', 'pumped', 'elated'],
+            confused: ['bewildered', 'perplexed', 'disoriented', 'baffled', 'puzzled'],
+            guilty: ['ashamed', 'remorseful', 'regretful', 'sorry', 'culpable'],
+            hopeful: ['optimistic', 'encouraged', 'buoyant', 'upbeat', 'expectant'],
+            jealous: ['envious', 'covetous', 'resentful', 'grudging'],
+            restless: ['agitated', 'fidgety', 'uneasy', 'antsy', 'jittery'],
+            grateful: ['thankful', 'appreciative', 'obliged', 'indebted', 'pleased'],
+            numb: ['disconnected', 'apathetic', 'emotionless', 'detached', 'unfeeling']
         };
 
         // Initialize event listeners
@@ -1277,11 +1520,7 @@
             toolsContainer.style.display = 'grid';
             moodText.value = '';
 
-            console.log('submitMood executed successfully', { mood: matchedMood, user_input: moodInput });
-
-            if (typeof gtag === 'function') {
-                gtag('event', 'mood_submitted', { mood: matchedMood, user_input: moodInput });
-            }
+            gtag('event', 'mood_submitted', { mood: matchedMood, user_input: moodInput });
         }
 
         // Toggle explanation visibility
@@ -1298,7 +1537,7 @@
             isDiaphragmaticBreathing = false;
 
             const callerActivity = event && event.target.closest('li')?.querySelector('.activity-title')?.textContent;
-            if (tool === 'breathing' && (callerActivity === 'Physiological Sigh' || callerActivity === 'Physiological Sigh for Calm')) {
+            if (tool === 'breathing' && callerActivity === 'Diaphragmatic Breathing') {
                 isDiaphragmaticBreathing = true;
             }
 
@@ -1310,11 +1549,8 @@
             if (tool === 'dance') startDance();
             if (tool === 'color') startColorFocus();
             if (tool === 'worry') shredWorry();
-            if (tool === 'gratitude') displayGratitudeNotes();
 
-            if (typeof gtag === 'function') {
-                gtag('event', 'tool_opened', { tool: tool });
-            }
+            gtag('event', 'tool_opened', { tool: tool });
         }
 
         // Close popup
@@ -1336,26 +1572,20 @@
             const timerText = document.getElementById('breathing-timer');
             const progressBar = document.getElementById('breathing-progress');
             let timeLeft = 60;
-            let phase = 'inhale1';
+            let phase = 'inhale';
             let phaseTime = 0;
 
-            const standardPhases = [
+            const phases = [
                 { name: 'inhale', duration: 4, text: 'Inhale', instruction: 'Breathe in deeply...' },
                 { name: 'hold', duration: 4, text: 'Hold', instruction: 'Hold your breath...' },
                 { name: 'exhale', duration: 6, text: 'Exhale', instruction: 'Exhale slowly...' }
             ];
 
-            const sighPhases = [
-                { name: 'inhale1', duration: 1, text: 'Inhale', instruction: 'Gently inhale through your nose...' },
-                { name: 'inhale2', duration: 1, text: 'Inhale Again', instruction: 'Take another quick inhale...' },
-                { name: 'exhale', duration: 5, text: 'Exhale', instruction: 'Exhale slowly through your mouth, letting tension melt away...' }
-            ];
-
-            const phases = isDiaphragmaticBreathing ? sighPhases : standardPhases;
-
             if (isDiaphragmaticBreathing) {
-                instruction.innerHTML = 'Find a comfortable position. We’ll do a Physiological Sigh to calm your mind. Gently inhale twice through your nose, then exhale slowly through your mouth. Let’s begin...';
-                setTimeout(() => instruction.innerHTML = '', 5000);
+                instruction.innerHTML = 'Place one hand on your chest and the other on your belly. As you inhale, focus on expanding your belly while keeping your chest still. Let’s begin...';
+                setTimeout(() => {
+                    instruction.innerHTML = '';
+                }, 5000);
             }
 
             const breathingInterval = setInterval(() => {
@@ -1368,9 +1598,20 @@
                 }
 
                 const phaseData = phases.find(p => p.name === phase);
-                circle.className = 'circle ' + (phaseData.name.includes('inhale') ? 'inhale' : phaseData.name);
+                circle.className = 'circle ' + phase;
                 stepText.textContent = phaseData.text;
-                instruction.textContent = phaseData.instruction;
+
+                if (isDiaphragmaticBreathing) {
+                    if (phase === 'inhale') {
+                        instruction.textContent = 'Inhale deeply through your nose, expanding your belly...';
+                    } else if (phase === 'hold') {
+                        instruction.textContent = 'Hold your breath, keeping your belly expanded...';
+                    } else if (phase === 'exhale') {
+                        instruction.textContent = 'Exhale slowly through your mouth, letting your belly fall...';
+                    }
+                } else {
+                    instruction.textContent = phaseData.instruction;
+                }
 
                 timeLeft--;
                 timerText.textContent = `Time remaining: ${timeLeft}s`;
@@ -1398,19 +1639,19 @@
             const specificErrorMessage = document.getElementById('soundscape-specific-error');
 
             const sounds = {
-                lightrain: 'Light Rain.mp3',
-                chinese: 'Chinese music.mp3',
-                forest: 'Spring Day Forest.mp3',
-                waves: 'Waves Crashing on Rocky Beach.mp3',
-                temple: 'In the Temple Garden - Aaron Kenny.mp3'
+                lightrain: 'https://raw.githubusercontent.com/AIFuture180/MoodTask9/main/lightrain.mp3',
+                chinese: 'https://raw.githubusercontent.com/AIFuture180/MoodTask9/main/chinese.mp3',
+                forest: 'https://raw.githubusercontent.com/AIFuture180/MoodTask9/main/forest.mp3',
+                waves: 'https://raw.githubusercontent.com/AIFuture180/MoodTask9/main/waves.mp3',
+                temple: 'https://raw.githubusercontent.com/AIFuture180/MoodTask9/main/temple.mp3'
             };
 
             const soundNames = {
-                lightrain: 'Light Rain.mp3',
-                chinese: 'Chinese music.mp3',
-                forest: 'Spring Day Forest.mp3',
-                waves: 'Waves Crashing on Rocky Beach.mp3',
-                temple: 'In the Temple Garden - Aaron Kenny.mp3'
+                lightrain: 'Light Rain',
+                chinese: 'Chinese Music',
+                forest: 'Forest Sounds',
+                waves: 'Ocean Waves',
+                temple: 'Temple Garden'
             };
 
             const soundKeys = Object.keys(sounds);
@@ -1419,14 +1660,6 @@
             errorMessage.style.display = 'none';
             specificErrorMessage.style.display = 'none';
             playBtn.disabled = true;
-
-            let meditationVisual = null;
-            function initializeVisual() {
-                if (!meditationVisual && audio) {
-                    meditationVisual = new MeditationVisual('visualContainer', audio);
-                    meditationVisual.updateTheme(select.value);
-                }
-            }
 
             function updateSoundSelect() {
                 select.innerHTML = availableSounds.map(key => `<option value="${key}">${soundNames[key]}</option>`).join('');
@@ -1440,7 +1673,7 @@
                 }
             }
 
-            async function canLoadAudio(audioUrl) {
+            function canLoadAudio(audioUrl) {
                 return new Promise((resolve) => {
                     const testAudio = new Audio(audioUrl);
                     testAudio.oncanplaythrough = () => resolve(true);
@@ -1478,6 +1711,8 @@
 
                 audio.onerror = (err) => {
                     console.error(`Error loading audio file ${audioUrl}:`, err);
+                    console.log(`Audio error code: ${audio.error ? audio.error.code : 'Unknown'}`);
+                    console.log(`Audio error message: ${audio.error ? audio.error.message : 'Unknown error'}`);
                     specificErrorMessage.textContent = `Failed to load ${soundNames[soundKey]}. Please try another sound.`;
                     specificErrorMessage.style.display = 'block';
                     availableSounds = availableSounds.filter(key => key !== soundKey);
@@ -1495,319 +1730,4 @@
                     playBtn.disabled = false;
                     audio.play().catch(err => {
                         console.error(`Playback error for ${audioUrl}:`, err);
-                        specificErrorMessage.textContent = `Error playing ${soundNames[soundKey]}. Please try again or select a different sound.`;
-                        specificErrorMessage.style.display = 'block';
-                    });
-                    playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-                    initializeVisual();
-                    if (meditationVisual) meditationVisual.updateTheme(select.value);
-                };
-
-                audio.onloadstart = () => {
-                    console.log(`Started loading audio: ${audioUrl}`);
-                };
-
-                return true;
-            }
-
-            loadAudio(select.value);
-
-            playBtn.onclick = () => {
-                if (!audio) return;
-                if (audio.paused) {
-                    audio.play().catch(err => {
-                        console.error('Playback error:', err);
-                        specificErrorMessage.textContent = `Error playing ${soundNames[select.value]}. Please try again.`;
-                        specificErrorMessage.style.display = 'block';
-                    });
-                    playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-                    initializeVisual();
-                    if (meditationVisual) meditationVisual.updateTheme(select.value);
-                } else {
-                    audio.pause();
-                    playBtn.innerHTML = '<i class="fas fa-play"></i>';
-                }
-            };
-
-            volumeSlider.oninput = () => {
-                if (audio) audio.volume = volumeSlider.value;
-            };
-
-            select.onchange = () => {
-                specificErrorMessage.style.display = 'none';
-                loadAudio(select.value);
-            };
-        }
-
-        function pauseSoundscape() {
-            if (audio) {
-                audio.pause();
-                audio = null;
-            }
-        }
-
-        // Punching bag
-        function initPunchingBag() {
-            const bag = document.getElementById('punching-bag');
-            const timerText = document.getElementById('punching-timer');
-            const progressBar = document.getElementById('punching-progress');
-            let count = 0;
-            let timeLeft = 30;
-
-            bag.onclick = () => {
-                count++;
-                bag.textContent = count;
-                bag.style.transform = 'rotate(5deg)';
-                setTimeout(() => bag.style.transform = 'rotate(-5deg)', 150);
-            };
-
-            const punchingInterval = setInterval(() => {
-                timeLeft--;
-                timerText.textContent = `Time remaining: ${timeLeft}s`;
-                progressBar.style.width = `${(30 - timeLeft) / 30 * 100}%`;
-
-                if (timeLeft <= 0) {
-                    clearInterval(punchingInterval);
-                    bag.onclick = null;
-                    timerText.style.display = 'none';
-                    progressBar.style.display = 'none';
-                    document.querySelector('#punching-popup .affirmation').style.display = 'block';
-                }
-            }, 1000);
-        }
-
-        // Stretch
-        function startStretch() {
-            const prompt = document.getElementById('stretch-prompt');
-            const stretches = [
-                '<strong>Neck Stretch:</strong> Gently tilt your head towards your right shoulder to stretch the left side of your neck. Hold for 15 seconds, then switch to the left side for 15 seconds.',
-                '<strong>Shoulder Roll:</strong> Roll your shoulders forward in a circular motion for 20 seconds, then roll them backward for 20 seconds.',
-                '<strong>Side Stretch:</strong> Stand or sit tall, raise your right arm overhead, and gently lean to the left to stretch your right side. Hold for 15 seconds, then switch to the left side for 15 seconds.',
-                '<strong>Seated Forward Stretch:</strong> Sit with your legs extended, reach forward gently towards your toes, and hold for 20 seconds. Keep your back straight to avoid strain.',
-                '<strong>Calf Stretch:</strong> Stand facing a wall, place your hands on the wall, and step one foot back. Keep your back leg straight and heel on the ground to stretch your calf. Hold for 20 seconds per leg.'
-            ];
-
-            prompt.innerHTML = '<ul>' + stretches.map(stretch => `<li>${stretch}</li>`).join('') + '</ul>';
-            document.querySelector('#stretch-popup .affirmation').style.display = 'block';
-        }
-
-        // Doodle
-        let canvas, ctx, drawing = false;
-        function initDoodle() {
-            canvas = document.getElementById('doodle-canvas');
-            ctx = canvas.getContext('2d');
-            const colorPicker = document.getElementById('color-picker');
-            const brushSize = document.getElementById('brush-size');
-            const timerText = document.getElementById('doodle-timer');
-            const progressBar = document.getElementById('doodle-progress');
-            let timeLeft = 90;
-
-            ctx.lineCap = 'round';
-            ctx.lineJoin = 'round';
-
-            canvas.onmousedown = (e) => {
-                drawing = true;
-                ctx.beginPath();
-                ctx.moveTo(e.offsetX, e.offsetY);
-            };
-            canvas.onmousemove = (e) => {
-                if (drawing) {
-                    ctx.strokeStyle = colorPicker.value;
-                    ctx.lineWidth = brushSize.value;
-                    ctx.lineTo(e.offsetX, e.offsetY);
-                    ctx.stroke();
-                }
-            };
-            canvas.onmouseup = () => drawing = false;
-            canvas.onmouseleave = () => drawing = false;
-
-            const doodleInterval = setInterval(() => {
-                timeLeft--;
-                timerText.textContent = `Time remaining: ${timeLeft}s`;
-                progressBar.style.width = `${(90 - timeLeft) / 90 * 100}%`;
-
-                if (timeLeft <= 0) {
-                    clearInterval(doodleInterval);
-                    canvas.onmousedown = null;
-                    canvas.onmousemove = null;
-                    canvas.onmouseup = null;
-                    timerText.style.display = 'none';
-                    progressBar.style.display = 'none';
-                    document.querySelector('#doodle-popup .affirmation').style.display = 'block';
-                }
-            }, 1000);
-        }
-
-        function saveDoodle() {
-            const link = document.createElement('a');
-            link.download = 'doodle.png';
-            link.href = canvas.toDataURL();
-            link.click();
-        }
-
-        function clearCanvas() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-        }
-
-        function stopDoodle() {
-            drawing = false;
-            canvas.onmousedown = null;
-            canvas.onmousemove = null;
-            canvas.onmouseup = null;
-        }
-
-        // Dance
-        function startDance() {
-            const prompt = document.getElementById('dance-prompt');
-            const timerText = document.getElementById('dance-timer');
-            const progressBar = document.getElementById('dance-progress');
-            let timeLeft = 30;
-
-            const prompts = [
-                'Do a little twirl!',
-                'Move your hips side to side!',
-                'Raise your arms and sway!'
-            ];
-
-            let promptIndex = 0;
-            prompt.textContent = prompts[promptIndex];
-
-            const danceInterval = setInterval(() => {
-                timeLeft--;
-                timerText.textContent = `Time remaining: ${timeLeft}s`;
-                progressBar.style.width = `${(30 - timeLeft) / 30 * 100}%`;
-
-                if (timeLeft % 10 === 0) {
-                    promptIndex = (promptIndex + 1) % prompts.length;
-                    prompt.textContent = prompts[promptIndex];
-                }
-
-                if (timeLeft <= 0) {
-                    clearInterval(danceInterval);
-                    timerText.style.display = 'none';
-                    progressBar.style.display = 'none';
-                    prompt.style.display = 'none';
-                    document.querySelector('#dance-popup .affirmation').style.display = 'block';
-                }
-            }, 1000);
-        }
-
-        // Worry Shredder
-        function shredWorry() {
-            const worryText = document.getElementById('worry-text');
-            const container = document.getElementById('paper-strips-container');
-            if (!worryText.value.trim()) return;
-
-            worryText.classList.add('shredding');
-            container.innerHTML = '';
-            for (let i = 0; i < 5; i++) {
-                const strip = document.createElement('div');
-                strip.style.position = 'absolute';
-                strip.style.width = '10px';
-                strip.style.height = '50px';
-                strip.style.background = '#ddd';
-                strip.style.left = `${i * 15 + 50}px`;
-                strip.style.animation = `shred 0.5s forwards ${i * 0.1}s`;
-                container.appendChild(strip);
-            }
-            setTimeout(() => {
-                worryText.value = '';
-                worryText.classList.remove('shredding');
-                document.querySelector('#worry-popup .affirmation').style.display = 'block';
-            }, 1000);
-        }
-
-        // Color Focus
-        function startColorFocus() {
-            const square = document.getElementById('color-square');
-            const prompt = document.getElementById('color-prompt');
-            const timerText = document.getElementById('color-timer');
-            const progressBar = document.getElementById('color-progress');
-            let timeLeft = 60;
-
-            const colors = [
-                { name: 'Soft Blue', hex: '#A3BFFA', prompt: 'Focus on this calming soft blue, like a clear sky.' },
-                { name: 'Gentle Green', hex: '#A8E6CF', prompt: 'Gaze at this gentle green, evoking a peaceful forest.' },
-                { name: 'Warm Lavender', hex: '#D7BDE2', prompt: 'Rest your eyes on this warm lavender, soothing like a sunset.' }
-            ];
-
-            let colorIndex = 0;
-            square.style.backgroundColor = colors[colorIndex].hex;
-            prompt.textContent = colors[colorIndex].prompt;
-
-            const colorInterval = setInterval(() => {
-                timeLeft--;
-                timerText.textContent = `Time remaining: ${timeLeft}s`;
-                progressBar.style.width = `${(60 - timeLeft) / 60 * 100}%`;
-
-                if (timeLeft % 20 === 0) {
-                    colorIndex = (colorIndex + 1) % colors.length;
-                    square.style.backgroundColor = colors[colorIndex].hex;
-                    prompt.textContent = colors[colorIndex].prompt;
-                }
-
-                if (timeLeft <= 0) {
-                    clearInterval(colorInterval);
-                    timerText.style.display = 'none';
-                    progressBar.style.display = 'none';
-                    prompt.style.display = 'none';
-                    document.querySelector('#color-popup .affirmation').style.display = 'block';
-                }
-            }, 1000);
-        }
-
-        // Gratitude Note
-        function saveGratitude() {
-            const gratitudeText = document.getElementById('gratitude-text');
-            const text = gratitudeText.value.trim();
-            if (!text) return;
-
-            const now = new Date();
-            const dateString = now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-
-            // Load existing notes
-            let notes = JSON.parse(localStorage.getItem('gratitudeNotes') || '[]');
-
-            // Check for weekly reset (Sunday)
-            const lastReset = localStorage.getItem('gratitudeLastReset');
-            const today = now.getDay(); // 0 = Sunday
-            if (today === 0 && (!lastReset || new Date(lastReset).getWeek() !== now.getWeek())) {
-                notes = [];
-                localStorage.setItem('gratitudeLastReset', now.toISOString());
-            }
-
-            // Add new note
-            notes.push({ text, date: dateString });
-            localStorage.setItem('gratitudeNotes', JSON.stringify(notes));
-
-            gratitudeText.value = '';
-            document.querySelector('#gratitude-popup .affirmation').style.display = 'block';
-            displayGratitudeNotes();
-        }
-
-        // Helper to get week number
-        Date.prototype.getWeek = function() {
-            const date = new Date(this.getTime());
-            date.setHours(0, 0, 0, 0);
-            date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
-            const week1 = new Date(date.getFullYear(), 0, 4);
-            return Math.round(((date - week1) / 86400000 + 1) / 7);
-        };
-
-        function displayGratitudeNotes() {
-            const notesContainer = document.getElementById('gratitude-notes');
-            const notes = JSON.parse(localStorage.getItem('gratitudeNotes') || '[]');
-            notesContainer.innerHTML = notes.length ? 
-                notes.map(note => `<div class="gratitude-note"><span>${note.date}:</span> ${note.text}</div>`).join('') : 
-                '<p>No gratitude notes yet.</p>';
-        }
-
-        // Track affiliate link clicks for analytics
-        function trackAffiliateClick(product) {
-            if (typeof gtag === 'function') {
-                gtag('event', 'affiliate_click', { product: product });
-            }
-        }
-    </script>
-</body>
-</html>
+                        specific
