@@ -8,7 +8,7 @@
     <meta name="robots" content="index, follow">
     <title>MoodTask | Transform Your Mood</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4985X51W1J"></script>
     <script>
@@ -18,6 +18,8 @@
         gtag('config', 'G-4985X51W1J');
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1511837633001567" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r167/three.min.js"></script>
+    <script src="visualBackground.js"></script>
     <style>
         * {
             margin: 0;
@@ -346,10 +348,10 @@
             justify-content: center;
             align-items: center;
             margin: 0 auto 20px;
-            transition: all 1s ease;
+            transition: all 2s ease;
         }
 
-        #breathing-circle.inhale {
+        #breathing-circle.inhale, #breathing-circle.inhale1, #breathing-circle.inhale2 {
             background: #A3BFFA;
             transform: scale(1.2);
         }
@@ -488,6 +490,40 @@
             margin-top: 10px;
         }
 
+        #gratitude-text, #gratitude-notes {
+            width: 100%;
+            min-height: 100px;
+            padding: 15px;
+            font-size: 1em;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background: url('https://www.transparenttextures.com/patterns/paper-fibers.png'), #fff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            font-family: 'Caveat', cursive;
+            margin-bottom: 15px;
+            resize: vertical;
+        }
+
+        #gratitude-notes {
+            max-height: 200px;
+            overflow-y: auto;
+            font-size: 0.9em;
+        }
+
+        .gratitude-note {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .gratitude-note:last-child {
+            border-bottom: none;
+        }
+
+        .gratitude-note span {
+            font-weight: bold;
+            color: #2C3E50;
+        }
+
         footer {
             background: #333;
             color: #fff;
@@ -562,6 +598,22 @@
             background: #2C3E50;
         }
 
+        .gratitude-link, .breathing-link, .soundscape-link, .punching-link, .stretch-link, .doodle-link, .dance-link, .color-link, .worry-link {
+            display: inline-block;
+            margin: 10px 5px;
+            padding: 8px 15px;
+            background: #4A90E2;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.9em;
+            transition: background 0.3s;
+        }
+
+        .gratitude-link:hover, .breathing-link:hover, .soundscape-link:hover, .punching-link:hover, .stretch-link:hover, .doodle-link:hover, .dance-link:hover, .color-link:hover, .worry-link:hover {
+            background: #2C3E50;
+        }
+
         .disclaimer {
             text-align: center;
             font-size: 0.8em;
@@ -614,7 +666,6 @@
             }
         }
 
-        /* New styles for activities-section inside hero-section */
         .hero-section .activities-section {
             max-width: 600px;
             margin: 20px auto;
@@ -659,6 +710,8 @@
     </style>
 </head>
 <body>
+    <div id="visualContainer" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;"></div>
+
     <nav id="nav">
         <div class="logo">MoodTask</div>
         <div class="nav-links">
@@ -749,8 +802,14 @@
             <div class="footer-column">
                 <h4>Connect</h4>
                 <a href="#" class="footer-link" id="share"><i class="fab fa-twitter"></i> Share on Twitter</a>
+                <div style="padding-top: 10px;">
+                    <a href="https://www.buymeacoffee.com/moodtask" target="_blank">
+                        <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;">
+                    </a>
+                </div>
             </div>
         </div>
+        <p class="disclaimer"><em>Affiliate Disclosure: Some links on this site are affiliate links. We may earn a commission on purchases at no extra cost to you.</em></p>
         <p class="copyright">© 2025 MoodTask. All rights reserved.</p>
     </footer>
 
@@ -758,6 +817,8 @@
         <div class="popup-content">
             <h4>Stretch</h4>
             <p id="stretch-prompt">Follow these gentle stretches to relax your body:</p>
+            <a href="https://amzn.to/3GzDmfJ" target="_blank" rel="noopener noreferrer nofollow" class="affiliate-link stretch-link" onclick="trackAffiliateClick('yoga_mat')">Yoga Mat for Stretching</a>
+            <a href="https://amzn.to/4jnjTh6" target="_blank" rel="noopener noreferrer nofollow" class="affiliate-link stretch-link" onclick="trackAffiliateClick('massage_gun')">Hypervolt Massage Gun</a>
             <p class="affirmation" style="display: none;">Your body appreciates this care.</p>
             <button class="close-button" onclick="closePopup('stretch')"><i class="fas fa-times"></i></button>
         </div>
@@ -770,6 +831,7 @@
             <p id="breathing-instruction">Breathe in deeply...</p>
             <div class="progress-container"><div id="breathing-progress" class="progress-bar"></div></div>
             <p id="breathing-timer">Time remaining: 60s</p>
+            <a href="https://amzn.to/3GgvP5F" target="_blank" rel="noopener noreferrer nofollow" class="affiliate-link breathing-link" onclick="trackAffiliateClick('breathing_necklace')">Mindfulness Breathing Necklace</a>
             <p class="affirmation">Well done completing the breathing exercise.</p>
             <button class="close-button" onclick="closePopup('breathing')"><i class="fas fa-times"></i></button>
         </div>
@@ -779,14 +841,15 @@
         <div class="popup-content">
             <h4>Soundscape</h4>
             <select id="soundscape-select" class="sound-select">
-                <option value="lightrain">Light Rain</option>
-                <option value="chinese">Chinese Music</option>
-                <option value="forest">Forest Sounds</option>
-                <option value="waves">Ocean Waves</option>
-                <option value="temple">Temple Garden</option>
+                <option value="lightrain">Light Rain.mp3</option>
+                <option value="chinese">Chinese music.mp3</option>
+                <option value="forest">Spring Day Forest.mp3</option>
+                <option value="waves">Waves Crashing on Rocky Beach.mp3</option>
+                <option value="temple">In the Temple Garden - Aaron Kenny.mp3</option>
             </select>
             <button id="play-btn"><i class="fas fa-play"></i></button>
             <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.5">
+            <a href="https://amzn.to/4jpn5sz" target="_blank" rel="noopener noreferrer nofollow" class="affiliate-link soundscape-link" onclick="trackAffiliateClick('headphones')">Beats Studio Pro Headphones</a>
             <p id="soundscape-error">No sounds are available at this time.</p>
             <p id="soundscape-specific-error"></p>
             <p class="affirmation">Hope you enjoyed the soundscape!</p>
@@ -800,6 +863,7 @@
             <div id="punching-bag">0</div>
             <div class="progress-container"><div id="punching-progress" class="progress-bar"></div></div>
             <p id="punching-timer">Time remaining: 30s</p>
+            <a href="https://amzn.to/4jH8hVE" target="_blank" rel="noopener noreferrer nofollow" class="affiliate-link punching-link" onclick="trackAffiliateClick('punching_bag')">Desktop Punching Bag</a>
             <p class="affirmation">Great job letting out that energy!</p>
             <button class="close-button" onclick="closePopup('punching')"><i class="fas fa-times"></i></button>
         </div>
@@ -815,6 +879,7 @@
                 <button onclick="clearCanvas()">Clear</button>
                 <button onclick="saveDoodle()">Save</button>
             </div>
+            <a href="https://amzn.to/4iMlvzX" target="_blank" rel="noopener noreferrer nofollow" class="affiliate-link doodle-link" onclick="trackAffiliateClick('drawing_pad')">Charcoal Pencils & Drawing Pad</a>
             <div class="progress-container"><div id="doodle-progress" class="progress-bar"></div></div>
             <p id="doodle-timer">Time remaining: 90s</p>
             <p class="affirmation">Nice doodle! Creativity helps lift your mood.</p>
@@ -828,6 +893,7 @@
             <p id="dance-prompt">Do a little twirl!</p>
             <div class="progress-container"><div id="dance-progress" class="progress-bar"></div></div>
             <p id="dance-timer">Time remaining: 30s</p>
+            <a href="https://amzn.to/4cI5QAd" target="_blank" rel="noopener noreferrer nofollow" class="affiliate-link dance-link" onclick="trackAffiliateClick('bluetooth_speaker')">Portable Bluetooth Speaker</a>
             <p class="affirmation">Great moves! Dancing uplifts your spirit.</p>
             <button class="close-button" onclick="closePopup('dance')"><i class="fas fa-times"></i></button>
         </div>
@@ -840,6 +906,7 @@
             <p id="color-prompt">Focus on this color...</p>
             <div class="progress-container"><div id="color-progress" class="progress-bar"></div></div>
             <p id="color-timer">Time remaining: 60s</p>
+            <a href="https://amzn.to/3GjTyBI" target="_blank" rel="noopener noreferrer nofollow" class="affiliate-link color-link" onclick="trackAffiliateClick('aromatherapy_diffuser')">Aromatherapy Diffuser</a>
             <p class="affirmation">Focusing on colors can be so calming!</p>
             <button class="close-button" onclick="closePopup('color')"><i class="fas fa-times"></i></button>
         </div>
@@ -850,6 +917,7 @@
             <h4>Worry Shredder</h4>
             <textarea id="worry-text" placeholder="Write down your worry..."></textarea>
             <button onclick="shredWorry()">Shred It</button>
+            <a href="https://amzn.to/44673in" target="_blank" rel="noopener noreferrer nofollow" class="affiliate-link worry-link" onclick="trackAffiliateClick('heated_lap_pad')">Bearaby Heated Lap Pad</a>
             <div id="paper-strips-container"></div>
             <p class="affirmation">Your worry has been shredded. Let it go!</p>
             <button class="close-button" onclick="closePopup('worry')"><i class="fas fa-times"></i></button>
@@ -859,9 +927,11 @@
     <div id="gratitude-popup" class="popup">
         <div class="popup-content">
             <h4>Gratitude Note</h4>
-            <textarea id="gratitude-text" placeholder="What are you grateful for?"></textarea>
-            <button onclick="saveGratitude()">Save</button>
-            <p class="affirmation">Gratitude saved! Reflecting on the positive can lift your mood.</p>
+            <textarea id="gratitude-text" placeholder="What are you grateful for today?"></textarea>
+            <button onclick="saveGratitude()">Save Note</button>
+            <a href="https://amzn.to/4jmN8AH" target="_blank" rel="noopener noreferrer nofollow" class="affiliate-link gratitude-link" onclick="trackAffiliateClick('gratitude_journal')">Gratitude Journal</a>
+            <div id="gratitude-notes"></div>
+            <p class="affirmation">Gratitude saved! Reflecting on the positive lifts your mood.</p>
             <button class="close-button" onclick="closePopup('gratitude')"><i class="fas fa-times"></i></button>
         </div>
     </div>
@@ -892,7 +962,7 @@
             return matrix[b.length][a.length];
         }
 
-        // Flag to track if the breathing exercise is for diaphragmatic breathing
+        // Flag to track if the breathing exercise is for physiological sigh
         let isDiaphragmaticBreathing = false;
 
         // Mood to task mappings
@@ -1207,10 +1277,8 @@
             toolsContainer.style.display = 'grid';
             moodText.value = '';
 
-            // Debugging log to confirm execution
             console.log('submitMood executed successfully', { mood: matchedMood, user_input: moodInput });
 
-            // Safely call gtag if defined
             if (typeof gtag === 'function') {
                 gtag('event', 'mood_submitted', { mood: matchedMood, user_input: moodInput });
             }
@@ -1227,12 +1295,10 @@
             const popup = document.getElementById(`${tool}-popup`);
             popup.style.display = 'flex';
 
-            // Reset the flag for breathing exercises
             isDiaphragmaticBreathing = false;
 
-            // Check if the breathing popup is being opened from the "Diaphragmatic Breathing" activity
             const callerActivity = event && event.target.closest('li')?.querySelector('.activity-title')?.textContent;
-            if (tool === 'breathing' && callerActivity === 'Diaphragmatic Breathing') {
+            if (tool === 'breathing' && (callerActivity === 'Physiological Sigh' || callerActivity === 'Physiological Sigh for Calm')) {
                 isDiaphragmaticBreathing = true;
             }
 
@@ -1244,8 +1310,8 @@
             if (tool === 'dance') startDance();
             if (tool === 'color') startColorFocus();
             if (tool === 'worry') shredWorry();
+            if (tool === 'gratitude') displayGratitudeNotes();
 
-            // Safely call gtag if defined
             if (typeof gtag === 'function') {
                 gtag('event', 'tool_opened', { tool: tool });
             }
@@ -1270,21 +1336,26 @@
             const timerText = document.getElementById('breathing-timer');
             const progressBar = document.getElementById('breathing-progress');
             let timeLeft = 60;
-            let phase = 'inhale';
+            let phase = 'inhale1';
             let phaseTime = 0;
 
-            const phases = [
+            const standardPhases = [
                 { name: 'inhale', duration: 4, text: 'Inhale', instruction: 'Breathe in deeply...' },
                 { name: 'hold', duration: 4, text: 'Hold', instruction: 'Hold your breath...' },
                 { name: 'exhale', duration: 6, text: 'Exhale', instruction: 'Exhale slowly...' }
             ];
 
-            // Add diaphragmatic breathing guidance if triggered from the "Diaphragmatic Breathing" activity
+            const sighPhases = [
+                { name: 'inhale1', duration: 1, text: 'Inhale', instruction: 'Gently inhale through your nose...' },
+                { name: 'inhale2', duration: 1, text: 'Inhale Again', instruction: 'Take another quick inhale...' },
+                { name: 'exhale', duration: 5, text: 'Exhale', instruction: 'Exhale slowly through your mouth, letting tension melt away...' }
+            ];
+
+            const phases = isDiaphragmaticBreathing ? sighPhases : standardPhases;
+
             if (isDiaphragmaticBreathing) {
-                instruction.innerHTML = 'Place one hand on your chest and the other on your belly. As you inhale, focus on expanding your belly while keeping your chest still. Let’s begin...';
-                setTimeout(() => {
-                    instruction.innerHTML = ''; // Clear initial guidance after a few seconds to show phase instructions
-                }, 5000);
+                instruction.innerHTML = 'Find a comfortable position. We’ll do a Physiological Sigh to calm your mind. Gently inhale twice through your nose, then exhale slowly through your mouth. Let’s begin...';
+                setTimeout(() => instruction.innerHTML = '', 5000);
             }
 
             const breathingInterval = setInterval(() => {
@@ -1297,21 +1368,9 @@
                 }
 
                 const phaseData = phases.find(p => p.name === phase);
-                circle.className = 'circle ' + phase;
+                circle.className = 'circle ' + (phaseData.name.includes('inhale') ? 'inhale' : phaseData.name);
                 stepText.textContent = phaseData.text;
-
-                // Update instructions based on phase, with diaphragmatic focus if applicable
-                if (isDiaphragmaticBreathing) {
-                    if (phase === 'inhale') {
-                        instruction.textContent = 'Inhale deeply through your nose, expanding your belly...';
-                    } else if (phase === 'hold') {
-                        instruction.textContent = 'Hold your breath, keeping your belly expanded...';
-                    } else if (phase === 'exhale') {
-                        instruction.textContent = 'Exhale slowly through your mouth, letting your belly fall...';
-                    }
-                } else {
-                    instruction.textContent = phaseData.instruction;
-                }
+                instruction.textContent = phaseData.instruction;
 
                 timeLeft--;
                 timerText.textContent = `Time remaining: ${timeLeft}s`;
@@ -1347,21 +1406,28 @@
             };
 
             const soundNames = {
-                lightrain: 'Light Rain',
-                chinese: 'Chinese Music',
-                forest: 'Forest Sounds',
-                waves: 'Ocean Waves',
-                temple: 'Temple Garden'
+                lightrain: 'Light Rain.mp3',
+                chinese: 'Chinese music.mp3',
+                forest: 'Spring Day Forest.mp3',
+                waves: 'Waves Crashing on Rocky Beach.mp3',
+                temple: 'In the Temple Garden - Aaron Kenny.mp3'
             };
 
             const soundKeys = Object.keys(sounds);
-            let availableSounds = [...soundKeys]; // Track available sounds
+            let availableSounds = [...soundKeys];
             affirmation.style.display = 'none';
             errorMessage.style.display = 'none';
             specificErrorMessage.style.display = 'none';
-            playBtn.disabled = true; // Disable play button until a sound is loaded
+            playBtn.disabled = true;
 
-            // Update the dropdown to only show available sounds
+            let meditationVisual = null;
+            function initializeVisual() {
+                if (!meditationVisual && audio) {
+                    meditationVisual = new MeditationVisual('visualContainer', audio);
+                    meditationVisual.updateTheme(select.value);
+                }
+            }
+
             function updateSoundSelect() {
                 select.innerHTML = availableSounds.map(key => `<option value="${key}">${soundNames[key]}</option>`).join('');
                 if (availableSounds.length === 0) {
@@ -1374,8 +1440,7 @@
                 }
             }
 
-            // Test if an audio file can be loaded
-            function canLoadAudio(audioUrl) {
+            async function canLoadAudio(audioUrl) {
                 return new Promise((resolve) => {
                     const testAudio = new Audio(audioUrl);
                     testAudio.oncanplaythrough = () => resolve(true);
@@ -1384,7 +1449,6 @@
                 });
             }
 
-            // Load an audio file
             async function loadAudio(soundKey) {
                 if (audio) {
                     audio.pause();
@@ -1393,7 +1457,6 @@
                 const audioUrl = sounds[soundKey];
                 console.log(`Attempting to load audio: ${audioUrl}`);
 
-                // Check if the file can be loaded
                 const canLoad = await canLoadAudio(audioUrl);
                 if (!canLoad) {
                     console.error(`Cannot load audio file: ${audioUrl}`);
@@ -1415,8 +1478,6 @@
 
                 audio.onerror = (err) => {
                     console.error(`Error loading audio file ${audioUrl}:`, err);
-                    console.log(`Audio error code: ${audio.error ? audio.error.code : 'Unknown'}`);
-                    console.log(`Audio error message: ${audio.error ? audio.error.message : 'Unknown error'}`);
                     specificErrorMessage.textContent = `Failed to load ${soundNames[soundKey]}. Please try another sound.`;
                     specificErrorMessage.style.display = 'block';
                     availableSounds = availableSounds.filter(key => key !== soundKey);
@@ -1438,6 +1499,8 @@
                         specificErrorMessage.style.display = 'block';
                     });
                     playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                    initializeVisual();
+                    if (meditationVisual) meditationVisual.updateTheme(select.value);
                 };
 
                 audio.onloadstart = () => {
@@ -1447,7 +1510,6 @@
                 return true;
             }
 
-            // Initialize by loading the first available sound
             loadAudio(select.value);
 
             playBtn.onclick = () => {
@@ -1459,6 +1521,8 @@
                         specificErrorMessage.style.display = 'block';
                     });
                     playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                    initializeVisual();
+                    if (meditationVisual) meditationVisual.updateTheme(select.value);
                 } else {
                     audio.pause();
                     playBtn.innerHTML = '<i class="fas fa-play"></i>';
@@ -1515,7 +1579,6 @@
         // Stretch
         function startStretch() {
             const prompt = document.getElementById('stretch-prompt');
-            
             const stretches = [
                 '<strong>Neck Stretch:</strong> Gently tilt your head towards your right shoulder to stretch the left side of your neck. Hold for 15 seconds, then switch to the left side for 15 seconds.',
                 '<strong>Shoulder Roll:</strong> Roll your shoulders forward in a circular motion for 20 seconds, then roll them backward for 20 seconds.',
@@ -1624,7 +1687,7 @@
                     timerText.style.display = 'none';
                     progressBar.style.display = 'none';
                     prompt.style.display = 'none';
-                    document.querySelector('#舞-popup .affirmation').style.display = 'block';
+                    document.querySelector('#dance-popup .affirmation').style.display = 'block';
                 }
             }, 1000);
         }
@@ -1663,14 +1726,14 @@
             let timeLeft = 60;
 
             const colors = [
-                { name: 'Soft Blue', hex: '#A3BFFA', message: 'Focus on this soft blue to calm your mind...' },
-                { name: 'Gentle Green', hex: '#B2F5EA', message: 'Focus on this gentle green to feel refreshed...' },
-                { name: 'Warm Yellow', hex: '#FEF9C3', message: 'Focus on this warm yellow to feel uplifted...' }
+                { name: 'Soft Blue', hex: '#A3BFFA', prompt: 'Focus on this calming soft blue, like a clear sky.' },
+                { name: 'Gentle Green', hex: '#A8E6CF', prompt: 'Gaze at this gentle green, evoking a peaceful forest.' },
+                { name: 'Warm Lavender', hex: '#D7BDE2', prompt: 'Rest your eyes on this warm lavender, soothing like a sunset.' }
             ];
 
             let colorIndex = 0;
             square.style.backgroundColor = colors[colorIndex].hex;
-            prompt.textContent = colors[colorIndex].message;
+            prompt.textContent = colors[colorIndex].prompt;
 
             const colorInterval = setInterval(() => {
                 timeLeft--;
@@ -1680,7 +1743,7 @@
                 if (timeLeft % 20 === 0) {
                     colorIndex = (colorIndex + 1) % colors.length;
                     square.style.backgroundColor = colors[colorIndex].hex;
-                    prompt.textContent = colors[colorIndex].message;
+                    prompt.textContent = colors[colorIndex].prompt;
                 }
 
                 if (timeLeft <= 0) {
@@ -1688,7 +1751,6 @@
                     timerText.style.display = 'none';
                     progressBar.style.display = 'none';
                     prompt.style.display = 'none';
-                    square.style.display = 'none';
                     document.querySelector('#color-popup .affirmation').style.display = 'block';
                 }
             }, 1000);
@@ -1697,10 +1759,53 @@
         // Gratitude Note
         function saveGratitude() {
             const gratitudeText = document.getElementById('gratitude-text');
-            if (gratitudeText.value.trim()) {
-                localStorage.setItem('gratitude-' + Date.now(), gratitudeText.value);
-                gratitudeText.value = '';
-                document.querySelector('#gratitude-popup .affirmation').style.display = 'block';
+            const text = gratitudeText.value.trim();
+            if (!text) return;
+
+            const now = new Date();
+            const dateString = now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
+            // Load existing notes
+            let notes = JSON.parse(localStorage.getItem('gratitudeNotes') || '[]');
+
+            // Check for weekly reset (Sunday)
+            const lastReset = localStorage.getItem('gratitudeLastReset');
+            const today = now.getDay(); // 0 = Sunday
+            if (today === 0 && (!lastReset || new Date(lastReset).getWeek() !== now.getWeek())) {
+                notes = [];
+                localStorage.setItem('gratitudeLastReset', now.toISOString());
+            }
+
+            // Add new note
+            notes.push({ text, date: dateString });
+            localStorage.setItem('gratitudeNotes', JSON.stringify(notes));
+
+            gratitudeText.value = '';
+            document.querySelector('#gratitude-popup .affirmation').style.display = 'block';
+            displayGratitudeNotes();
+        }
+
+        // Helper to get week number
+        Date.prototype.getWeek = function() {
+            const date = new Date(this.getTime());
+            date.setHours(0, 0, 0, 0);
+            date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
+            const week1 = new Date(date.getFullYear(), 0, 4);
+            return Math.round(((date - week1) / 86400000 + 1) / 7);
+        };
+
+        function displayGratitudeNotes() {
+            const notesContainer = document.getElementById('gratitude-notes');
+            const notes = JSON.parse(localStorage.getItem('gratitudeNotes') || '[]');
+            notesContainer.innerHTML = notes.length ? 
+                notes.map(note => `<div class="gratitude-note"><span>${note.date}:</span> ${note.text}</div>`).join('') : 
+                '<p>No gratitude notes yet.</p>';
+        }
+
+        // Track affiliate link clicks for analytics
+        function trackAffiliateClick(product) {
+            if (typeof gtag === 'function') {
+                gtag('event', 'affiliate_click', { product: product });
             }
         }
     </script>
